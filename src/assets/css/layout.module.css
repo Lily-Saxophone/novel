@@ -1,0 +1,21 @@
+.Layout {
+    min-height: 100vh;
+    font-size: calc(10px + 2vmin);
+    display: grid;
+    grid-template-rows: 5vh 1fr;
+    grid-template-columns: 1fr;
+    background-color: hotpink;
+    color: white;
+}
+
+.header {
+    grid-row: 1;
+    grid-column: 1;
+    background-color: aquamarine;
+}
+
+.container {
+    grid-row: 2;
+    grid-column: 1;
+    background-color: skyblue;
+}
