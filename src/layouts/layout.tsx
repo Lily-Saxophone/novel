@@ -1,10 +1,8 @@
-import { Route, RouteDefinition, Routes, useRoutes } from 'solid-app-router';
-import { Component, For, lazy, Show } from 'solid-js';
-import { Dynamic } from 'solid-js/web';
+import { RouteDefinition, useRoutes } from 'solid-app-router';
+import { Component } from 'solid-js';
 
 import styles from '../assets/css/layout.module.css';
 import appRoutes from '../routes';
-
 
 const layoutRoutes = (): RouteDefinition[] => {
   let routes: RouteDefinition[] = [];

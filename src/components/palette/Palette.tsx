@@ -1,13 +1,15 @@
-import { children, Component, ComponentProps, JSX } from 'solid-js';
+import { Component, JSX, ParentProps } from 'solid-js';
 import { css } from "solid-styled-components";
 
-
-type Palette = ComponentProps<Component>;
+export type PalletType = ParentProps & {
+  title?: string,
+  content?: JSX.Element,
+  width: number | string,
+  height: number | string
+}
 
 const PaletteClass = css`
   top: 0;
-  width: 100%;
-  height: 100%;
   border-radius: 6px;
   background-color: #404040;
 
@@ -17,9 +19,9 @@ const PaletteClass = css`
     0 0 4px 4px rgba(0, 0, 0, .1);
 `;
 
-const Palette: ComponentProps<any> = (props: ComponentProps<any>) => {
+const Palette: Component<PalletType> = (props: PalletType) => {
   return (
-    <div class={PaletteClass}>
+    <div class={PaletteClass} style={`width: ${props.width}; height: ${props.height};`}>
       {props.children}
     </div>
   );
