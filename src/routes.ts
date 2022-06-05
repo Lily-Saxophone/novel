@@ -1,4 +1,4 @@
-import Scene from './pages/Scene';
+import Scene from './pages/scene/Scene';
 
 const appRoutes = [
   {

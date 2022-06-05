@@ -1,7 +1,7 @@
 import type { Component } from 'solid-js';
 import Masonry from "solid-masonry";
 
-import styles from '../../assets/css/scene/index.module.css';
+import styles from '../../assets/css/scene/scene.module.css';
 import Palette, { PalletType } from '../../components/palette/Palette';
 
 const data: PalletType[] = [
