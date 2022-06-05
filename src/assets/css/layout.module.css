@@ -13,6 +13,14 @@
     background-color: #404040;
 }
 
+.header img {
+    max-width: 60%;
+    max-height: 60%;
+    padding: 15px;
+    height: auto;
+    width: auto;
+}
+
 .container {
     grid-row: 2;
     grid-column: 1;

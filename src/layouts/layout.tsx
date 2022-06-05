@@ -3,6 +3,7 @@ import { Component } from 'solid-js';
 
 import styles from '../assets/css/layout.module.css';
 import appRoutes from '../routes';
+import TitleLogo from '../assets/image/AppName.svg';
 
 const layoutRoutes = (): RouteDefinition[] => {
   let routes: RouteDefinition[] = [];
@@ -17,7 +18,9 @@ const Layout: Component = () => {
   const Routes = useRoutes(layoutRoutes());
   return (
     <div class={styles.Layout}>
-      <header class={styles.header}></header>
+      <header class={styles.header}>
+        <img src={TitleLogo}></img>
+      </header>
       <div class={styles.container}>
         <Routes />
       </div>
