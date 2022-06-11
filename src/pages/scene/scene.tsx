@@ -34,13 +34,11 @@ const sceneList: Array<SceneModel> = [
   }
 ]
 
-const idx: number = 0;
+let idx: number = 0;
 const [scene, setScene]: Signal<SceneModel> = createSignal(sceneList[idx]);
 const handleSetScene = () => {
-  console.log('click!')
-  let nextIndex = idx === 0 ? 1 : 0;
-  setScene(sceneList[nextIndex]);
-  console.log(scene);
+  idx === 0 ? 1 : 0;
+  setScene(sceneList[idx]);
 }
 
 

@@ -1,10 +1,9 @@
-import { Accessor, children, Component, createEffect, JSX, ParentProps } from 'solid-js';
-import { ResolvedChildren } from 'solid-js/types/reactive/signal';
+import { Component, JSX, ParentProps } from 'solid-js';
 import { css } from "solid-styled-components";
 
 export type PalletType = ParentProps & {
   title?: string,
-  content: JSX.Element,
+  content?: JSX.Element,
   width: number | string,
   height: number | string
 }
@@ -21,16 +20,10 @@ const PaletteClass = css`
 `;
 
 const Palette: Component<PalletType> = (props: PalletType) => {
-  const child: Accessor<any> = children(() => props.children);
-  createEffect(() => child()?.forEach(element => {
-    element.style.width = props.width;
-    element.style.height = props.height;
-    element.style.minWidth = props.width;
-    element.style.minHeight = props.height;
-  }));
+
   return (
     <div class={PaletteClass} style={`width: ${props.width}; height: ${props.height}; min-height: ${props.height}; max-height: ${props.height};`}>
-      {child()}
+      {props.children}
     </div>
   );
 };

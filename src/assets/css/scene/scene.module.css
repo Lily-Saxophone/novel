@@ -58,6 +58,7 @@
   padding: 1px 0;
   margin: .5em var(--space-size_1);
 }
+
 .flow_item_text span {
   margin: .8em 1em;
   display: block;
