@@ -15,12 +15,15 @@ const SceneRendererClass = css`
 
 export type SceneRendererType = ParentProps & {
   scene: SceneModel,
+  onClick?: JSX.EventHandlerUnion<HTMLDivElement, MouseEvent>,
   content?: JSX.Element
 }
 
 const SceneRenderer: Component<SceneRendererType> = (props: SceneRendererType) => {
   return (
-    <div class={SceneRendererClass}>
+    <div
+      class={SceneRendererClass}
+      onClick={props.onClick}>
       <Render
         backGroundImage={props.scene.backGroundImage}
         characterList={props.scene.characterList}
