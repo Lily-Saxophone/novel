@@ -18,7 +18,6 @@
 
 
 .my_masonry_grid_column>div {
-  background: grey;
   margin-bottom: 10px;
   display: flex;
   justify-content: center;
