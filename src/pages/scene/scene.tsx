@@ -1,5 +1,5 @@
 import SceneRenderer from '../../components/sceneRenderer/SceneRenderer';
-import type { Component, JSX } from 'solid-js';
+import type { Component } from 'solid-js';
 import Masonry from "solid-masonry";
 
 import styles from '../../assets/css/scene/scene.module.css';
@@ -7,14 +7,6 @@ import Palette, { PalletType } from '../../components/palette/Palette';
 import type { SceneModel } from '../../models/SceneModel';
 import { SceneText } from '../../models/SceneText';
 import SceneFlow from '../../components/scene/SceneFlow';
-
-const flow: JSX.Element = (
-  <>
-    <div>
-
-    </div>
-  </>
-)
 
 const scene: SceneModel = {
   backGroundImage: "/src/assets/project/image/background/cg1.png",
