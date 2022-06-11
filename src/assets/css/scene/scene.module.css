@@ -67,24 +67,27 @@
   width: calc(100% - var(--space-size_1) * 2);
   height: 40px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   margin: .5em var(--space-size_1);
 }
 
 .flow_item_action_btn {
-  width: 15%;
+  width: 12%;
   height: 100%;
-  display: flex;
-  justify-content: center;
 }
 
 .flow_item_action_btn>img {
   height: 100%;
+  transition: .6s;
+}
+
+.flow_item_action_btn>img:hover {
+  transform: rotate(360deg);
 }
 
 .flow_item {
-  width: 85%;
-  max-width: 350px;
+  width: 88%;
+  /* max-width: 350px; */
   height: 100%;
   display: flex;
 }
