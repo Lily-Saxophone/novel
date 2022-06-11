@@ -4,7 +4,7 @@
     display: grid;
     grid-template-rows: 5vh 1fr;
     grid-template-columns: 1fr;
-    color: white;
+    color: #cccccc;
 }
 
 .header {

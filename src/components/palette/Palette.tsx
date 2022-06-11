@@ -21,7 +21,7 @@ const PaletteClass = css`
 
 const Palette: Component<PalletType> = (props: PalletType) => {
   return (
-    <div class={PaletteClass} style={`width: ${props.width}; min-height: ${props.height}; max-height: ${props.height};`}>
+    <div class={PaletteClass} style={`width: ${props.width}; height: ${props.height}; min-height: ${props.height}; max-height: ${props.height};`}>
       {props.children}
     </div>
   );
