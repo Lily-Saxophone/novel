@@ -2,6 +2,6 @@ import { SceneText } from './SceneText';
 
 export type SceneModel = {
   backGroundImage: string,
-  characterList: Array<Map<string, string>>,
+  characterList: Array<string>,
   sceneText: SceneText
 }

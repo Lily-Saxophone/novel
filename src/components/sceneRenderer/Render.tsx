@@ -3,6 +3,7 @@ import { css } from "solid-styled-components";
 import BackGroundLayer from './BackGroundLayer';
 import TextLayer from './TextLayer';
 import type { SceneText } from '../../models/SceneText';
+import CharacterLayer from './CharacterLayer';
 
 const RenderClass = css`
 position: relative;
@@ -15,7 +16,7 @@ position: relative;
 
 export type RenderType = ParentProps & {
   backGroundImage?: string,
-  characterList?: Array<Map<string, string>>,
+  characterList: Array<string>,
   sceneText: SceneText
 }
 
@@ -26,6 +27,7 @@ const Render: Component<RenderType> = (props: RenderType) => {
         characterName={props.sceneText.characterName}
         textList={props.sceneText.textList}
       />
+      <CharacterLayer characterList={props.characterList} />
       <BackGroundLayer backGroundImage={props.backGroundImage} />
     </div>
   );

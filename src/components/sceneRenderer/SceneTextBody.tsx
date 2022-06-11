@@ -21,7 +21,7 @@ const SceneTextBody: Component<SceneTextBodyType> = (props: SceneTextBodyType) =
   return (
     <div class={SceneTextBodyClass}>
       <For each={props.textList} fallback={<div>Loading...</div>}>
-        {(item, index) => (
+        {(item) => (
           <>
             {item}<br />
           </>

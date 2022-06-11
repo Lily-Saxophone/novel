@@ -4,8 +4,8 @@ import SceneTextBody from './SceneTextBody';
 import SceneTextHeader from './SceneTextHeader';
 
 const TextLayerClass = css`
-position: absolute;
-  z-index: 10;
+  position: absolute;
+  z-index: 20;
   background-color: #e5dfdc;
   border: solid 2px #514d48;
   border-radius: 8px;
@@ -17,7 +17,7 @@ position: absolute;
   width: 90%;
   height: 25%;
   margin: auto;
-  margin-bottom: 6px;;
+  margin-bottom: 6px;
 `;
 
 export type TextLayerType = ParentProps & {

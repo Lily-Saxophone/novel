@@ -20,7 +20,7 @@ export type BackGroundLayerType = ParentProps & {
 
 const BackGroundLayer: Component<BackGroundLayerType> = (props: BackGroundLayerType) => {
   return (
-    <img class={BackGroundLayerClass} src={props.backGroundImage}></img>
+    <img class={BackGroundLayerClass} src={props.backGroundImage} />
   );
 };
 

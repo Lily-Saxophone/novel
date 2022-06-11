@@ -17,14 +17,15 @@ const flow: JSX.Element = (
 )
 
 const scene: SceneModel = {
-  backGroundImage: "/src/assets/project/image/background/cg1.png",
-  characterList: [new Map([["木村圭祐", ""]])],
+  backGroundImage: "/src/assets/project/image/background/背景（和）.jpg",
+  characterList: [
+    "/src/assets/project/image/character/星野・ニャー/シガレット喫煙背景なし.png"
+  ],
   sceneText: {
-    characterName: "山本侑弥",
+    characterName: "？？？？？",
     textList: [
-      "サンプルテキスト1行目",
-      "サンプルテキスト2行目",
-      "サンプルテキスト折り返しサンプルテキスト折り返しサンプルテキスト折り返しサンプルテキスト折り返しサンプルテキスト折り返し"
+      "ちょっと、あんた！",
+      "せっかく私が声を掛けてあげてるんだからすぐに反応しなさいよ！"
     ]
   }
 }
