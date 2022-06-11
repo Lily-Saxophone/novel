@@ -37,7 +37,7 @@ const sceneList: Array<SceneModel> = [
 let idx: number = 0;
 const [scene, setScene]: Signal<SceneModel> = createSignal(sceneList[idx]);
 const handleSetScene = () => {
-  idx === 0 ? 1 : 0;
+  idx = idx === 0 ? 1 : 0;
   setScene(sceneList[idx]);
 }
 
