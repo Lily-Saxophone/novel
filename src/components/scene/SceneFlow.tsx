@@ -6,6 +6,7 @@ const SceneFlow: Component = () => {
   return (
     <>
       <div class={styles.flow_container}>
+        <div class={styles.flow_line}></div>
 
         {/* パネル1 */}
         <div class={styles.flow_item_stage}>
