@@ -20,28 +20,55 @@
   width: auto !important;
 }
 
-
 .my_masonry_grid_column>div {
   margin-bottom: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
 
 .flow_container {
   width: 100%;
-  height: auto;
+  height: 100%;
   display: flex;
   flex-direction: column;
+  position: relative;
+}
+
+.flow_line {
+  width: 5px;
+  height: 85%;
+  background-color: #cbcbcb;
+  position: absolute;
+  left: calc(100% / 2);
+  right: calc(100% / 2);
+  z-index: 0;
+  box-shadow: -3px 0 4px 2px rgb(0 0 0 / 10%);
+}
+
+.flow_line::after {
+  width: 55px;
+  height: 55px;
+  border-radius: 200px;
+  background-color: #cbcbcb;
+  content: '+';
+  position: absolute;
+  bottom: -55px;
+  left: -26px;
+  color: grey;
+  font-size: 7rem;
+  text-align: center;
+  line-height: 55%;
 }
 
 .flow_item_stage {
   width: 100%;
   height: auto;
   background-color: #808080;
-  margin: 1rem 0;
+  margin: 1.4rem 0;
   padding: calc(var(--space-size_1) / 2) 0;
+  box-shadow: -3px 0 4px 2px rgb(0 0 0 / 10%);
+  z-index: 1;
 }
 
 .flow_item_stage[data-stage-active="true"] {
@@ -57,6 +84,7 @@
   font-size: 1.2rem;
   padding: 1px 0;
   margin: .5em var(--space-size_1);
+  box-shadow: -3px 0 4px 2px rgb(0 0 0 / 10%);
 }
 
 .flow_item_text span {
@@ -88,7 +116,6 @@
 
 .flow_item {
   width: 88%;
-  /* max-width: 350px; */
   height: 100%;
   display: flex;
 }
@@ -98,7 +125,6 @@
   height: 100%;
   border-radius: 6px 0 0 6px;
   box-shadow: -3px 0 4px 2px rgb(0 0 0 / 10%);
-  z-index: 99;
   background-color: #c05f4c;
   display: flex;
   justify-content: center;
