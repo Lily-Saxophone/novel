@@ -1,3 +1,7 @@
+:root {
+  --space-size_1: 13px;
+}
+
 .my_masonry_grid {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -24,11 +28,46 @@
   align-items: center;
 }
 
-.flow_item_asset {
+.flow_container {
   width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.flow_item_stage {
+  width: 100%;
+  height: auto;
+  background-color: #808080;
+  margin: 1rem 0;
+}
+
+.flow_item_stage[data-stage-active="true"] {
+  background-color: #55706d;
+  padding: calc(var(--space-size_1) / 2) 0;
+}
+
+.flow_item_text {
+  width: calc(100% - var(--space-size_1) * 2);
+  height: auto;
+  background-color: #404040;
+  border-radius: 6px;
+  font-family: 'ヒラギノ角ゴ ProN W3';
+  font-size: .8rem;
+  padding: 1px 0;
+  margin: .5em var(--space-size_1);
+}
+.flow_item_text span {
+  margin: .8em 1em;
+  display: block;
+}
+
+.flow_item_asset {
+  width: calc(100% - var(--space-size_1) * 2);
   height: 40px;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  margin: .5em var(--space-size_1);
 }
 
 .flow_item_action_btn {
