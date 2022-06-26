@@ -2,7 +2,6 @@ import { Component, createEffect, createSignal, JSX, JSXElement, ParentProps, Si
 import { css } from "solid-styled-components";
 import Render from './Render';
 import RenderNavigationBar from './RenderNavigationBar';
-import type { SceneModel } from '../../models/scene/SceneModel';
 import TextLayer from './TextLayer';
 import CharacterLayer from './CharacterLayer';
 import BackGroundLayer from './BackGroundLayer';
@@ -10,6 +9,11 @@ import SceneTextHeader from './SceneTextHeader';
 import SceneTextBody from './SceneTextBody';
 import Character from './Character';
 import { SceneText } from '../../models/scene/SceneText';
+import SceneChoices from './sceneChoices';
+import type { SceneModel } from '../../models/scene/SceneModel';
+import type { ChoicesEvent } from '../../models/scene/ChoicesEvent';
+import type { EndEvent } from '../../models/scene/EndEvent';
+import { Portal } from 'solid-js/web';
 
 const SceneRendererClass = css`
   width: inherit;
@@ -21,8 +25,9 @@ const SceneRendererClass = css`
 `;
 
 export type SceneRendererType = ParentProps & {
-  scene: SceneModel,
-  onClick?: JSX.EventHandlerUnion<HTMLDivElement, MouseEvent>,
+  scene: SceneModel | ChoicesEvent | EndEvent,
+  onSceneClick?: JSX.EventHandlerUnion<HTMLDivElement, MouseEvent>,
+  onChoicesClick?: JSX.EventHandlerUnion<HTMLDivElement, MouseEvent>,
   content?: JSX.Element
 }
 
@@ -30,12 +35,32 @@ const [sceneText, setSceneText]: Signal<SceneText> = createSignal({ speaker: "",
 const [characterList, setCharacterList]: Signal<Array<string>> = createSignal([]);
 const [backGroundImage, setBackGroundImage]: Signal<string> = createSignal("");
 const [backGroundMusic, setBackGroundMusic]: Signal<string> = createSignal("");
+const [choicesList, setChoicesList]: Signal<Map<string, string>> = createSignal(new Map([]));
 
-const handleSetScene = (scene: SceneModel) => {
-  setSceneText(scene.sceneText);
-  setCharacterList(scene.characterList);
-  setBackGroundImage(scene.backGroundImage);
-  setBackGroundMusic(scene.backGroundMusic);
+const isSceneModel = (obj: any): obj is SceneModel =>
+  typeof obj === "object"
+  && obj !== null
+  && typeof (obj as SceneModel).backGroundImage === "string"
+  && typeof (obj as SceneModel).backGroundMusic === "string";
+
+const isEndEvent = (obj: any): obj is EndEvent =>
+  typeof obj === "object"
+  && obj !== null
+  && typeof (obj as EndEvent).nextScenario === "string";
+
+const handleSetScene = (scene: SceneModel | ChoicesEvent | EndEvent) => {
+  if (isSceneModel(scene)) {
+    setSceneText(scene.sceneText);
+    setCharacterList(scene.characterList);
+    setBackGroundImage(scene.backGroundImage);
+    setBackGroundMusic(scene.backGroundMusic);
+
+  } else if (isEndEvent(scene)) {
+    // none
+
+  } else {
+    setChoicesList(scene.choicesList);
+  }
 }
 
 const SceneRenderer: Component<SceneRendererType> = (props: SceneRendererType) => {
@@ -43,9 +68,9 @@ const SceneRenderer: Component<SceneRendererType> = (props: SceneRendererType) =
 
   return (
     <div
-      class={SceneRendererClass}
-      onClick={props.onClick}>
-      <Render>
+      class={SceneRendererClass}>
+      <Render
+        onSceneClick={props.onSceneClick}>
         <TextLayer>
           <SceneTextHeader speaker={sceneText().speaker} />
           <SceneTextBody textList={sceneText().textList} />
@@ -57,7 +82,9 @@ const SceneRenderer: Component<SceneRendererType> = (props: SceneRendererType) =
           <Character characterImage={characterList()[2]} />
         </CharacterLayer>
 
-        <BackGroundLayer backGroundImage={backGroundImage()} />
+        <BackGroundLayer
+          backGroundImage={backGroundImage()}
+          onSceneClick={props.onSceneClick} />
         <audio
           autoplay
           loop
@@ -65,7 +92,12 @@ const SceneRenderer: Component<SceneRendererType> = (props: SceneRendererType) =
           style="display: hidden;">
         </audio>
 
+        <SceneChoices
+          choicesList={choicesList()}
+          onClick={props.onChoicesClick} />
+
       </Render>
+
       <RenderNavigationBar />
     </div>
   );

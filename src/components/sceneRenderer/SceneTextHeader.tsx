@@ -13,7 +13,7 @@ const SceneTextHeaderClass = css`
   width: 36%;
   height: 25%;
   margin: auto;
-  font-size: 1.2rem;
+  font-size: 1rem;
   text-indent: 1rem;
   vertical-align: middle;
   color: #efefef;

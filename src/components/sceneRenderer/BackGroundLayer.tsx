@@ -14,6 +14,7 @@ const BackGroundLayerClass = css`
 `;
 
 export type BackGroundLayerType = ParentProps & {
+  onSceneClick?: JSX.EventHandlerUnion<HTMLDivElement, MouseEvent>,
   backGroundImage?: string,
   content?: JSX.Element
 }

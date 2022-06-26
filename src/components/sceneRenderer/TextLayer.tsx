@@ -26,7 +26,8 @@ export type TextLayerType = ParentProps & {
 
 const TextLayer: Component<TextLayerType> = (props: TextLayerType) => {
   return (
-    <div class={TextLayerClass}>
+    <div
+      class={TextLayerClass}>
       {props.children}
     </div>
   );
