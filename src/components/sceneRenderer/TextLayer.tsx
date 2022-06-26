@@ -21,15 +21,13 @@ const TextLayerClass = css`
 `;
 
 export type TextLayerType = ParentProps & {
-  characterName: string,
-  textList: Array<string>
+  // some props
 }
 
 const TextLayer: Component<TextLayerType> = (props: TextLayerType) => {
   return (
     <div class={TextLayerClass}>
-      <SceneTextHeader speaker={props.characterName} />
-      <SceneTextBody textList={props.textList} />
+      {props.children}
     </div>
   );
 };

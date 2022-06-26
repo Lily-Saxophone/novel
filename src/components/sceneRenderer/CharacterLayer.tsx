@@ -13,16 +13,13 @@ const CharacterLayerClass = css`
 `;
 
 export type CharacterLayerType = ParentProps & {
-  characterList: Array<string>,
-  content?: JSX.Element
+  // some props
 }
 
 const CharacterLayer: Component<CharacterLayerType> = (props: CharacterLayerType) => {
   return (
     <div class={CharacterLayerClass}>
-      <Character characterImage={props.characterList[0]} />
-      <Character characterImage={props.characterList[1]} />
-      <Character characterImage={props.characterList[2]} />
+      {props.children}
     </div>
   );
 };
