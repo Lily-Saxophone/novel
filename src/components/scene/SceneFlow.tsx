@@ -1,4 +1,4 @@
-import { Component, For, Match, Switch } from 'solid-js';
+import { Component, For, Match, Show, Switch } from 'solid-js';
 import styles from '../../assets/css/scene/scene.module.css';
 import { SceneChild } from 'models/scene/SceneChild';
 import { SceneEvent } from 'models/scene/SceneEvent';
@@ -8,8 +8,8 @@ const sceneChilds: SceneChild[] = [
     sceneEvent: [
       {
         sceneObject: {
-          speaker: 'ヤマモ',
-          textList: ['ぽんぬ', 'こいたん']
+          speaker: '？？？？？',
+          textList: ['ちょっと、あんた！', 'せっかく私が声を掛けてあげてるんだからすぐに反応しなさいよ！']
         },
         sceneType: 'Text'
       },
@@ -27,8 +27,8 @@ const sceneChilds: SceneChild[] = [
     sceneEvent: [
       {
         sceneObject: {
-          speaker: 'ヤマモ',
-          textList: ['ぽんぬ、', 'ぽんぬぽんぬ、', 'ぽんぬぽんぬぽんぬ。']
+          speaker: 'ニャー',
+          textList: ['なになに、けいちゃん。', 'もしかして興奮しちゃったのかな？']
         },
         sceneType: 'Text'
       },
@@ -100,7 +100,7 @@ const SceneFlow: Component = () => {
                         <div class={styles.flow_item}>
                           <div class={styles.flow_item_left}>
                             {/* <img src={PoppoIcon} alt="" /> */}
-                            <span class="material-symbols-outlined">person</span>
+                            <span class="material-symbols-outlined">wallpaper</span>
                           </div>
                           <div class={styles.flow_item_right}>{events.sceneObject.backGroundImage?.split('/').slice(-1)[0]}</div>
                         </div>
@@ -125,7 +125,7 @@ const SceneFlow: Component = () => {
                         <div class={styles.flow_item}>
                           <div class={styles.flow_item_left}>
                             {/* <img src={PoppoIcon} alt="" /> */}
-                            <span class="material-symbols-outlined">person</span>
+                            <span class="material-symbols-outlined">music_note</span>
                           </div>
                           <div class={styles.flow_item_right}>{events.sceneObject.backGroundMusic?.split('/').slice(-1)[0]}</div>
                         </div>
@@ -163,6 +163,11 @@ const SceneFlow: Component = () => {
                   </Switch>
                 )}
               </For>
+              <Show when={child.isActive}>
+                <div class={styles.flow_item_add_stage_btn}>
+                  <span class="material-symbols-outlined" data-action-type={'add'}>add</span>
+                </div>
+              </Show>
             </div>
           )}
           </For>

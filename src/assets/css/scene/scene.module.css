@@ -37,7 +37,7 @@
 
 .flow_line {
   width: 5px;
-  height: 85%;
+  height: 65%;
   background-color: #cbcbcb;
   position: absolute;
   left: calc(100% / 2);
@@ -78,7 +78,7 @@
 .flow_item_text {
   width: calc(100% - var(--space-size_1) * 2);
   height: auto;
-  background-color: #404040;
+  background-color: #404040bf;
   border-radius: 6px;
   font-family: 'ヒラギノ角ゴ ProN W3';
   font-size: .8rem;
@@ -110,10 +110,10 @@
 }
 
 .flow_item_action_btn>span {
-  padding: 3px;
+  padding: 2px;
   transition: .6s;
   border-radius: 25px;
-  color: #404040;
+  color: #404040bf;
 }
 
 .flow_item_action_btn>span[data-action-type="add"] {
@@ -164,4 +164,23 @@
   font-size: .9rem;
   line-height: 275%;
   padding-left: 8px;
+}
+
+.flow_item_add_stage_btn {
+  width: 25%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flow_item_add_stage_btn > span {
+  padding: 4px;
+  margin-left: 4px;
+  margin-bottom: 4px;
+  font-size: 2rem;
+  font-weight: 600;
+  border-radius: 25px;
+  color: #404040bf;
+  background-color: #5bce7c;
 }
