@@ -1,41 +1,7 @@
 import { Component, For, Match, Switch } from 'solid-js';
-import PoppoIcon from '../../assets/image/Poppo.webp'
 import styles from '../../assets/css/scene/scene.module.css';
 import { SceneChild } from 'models/scene/SceneChild';
 import { SceneEvent } from 'models/scene/SceneEvent';
-import { SceneText } from 'models/scene/SceneText';
-import { SceneController } from 'models/scene/SceneController';
-import { Actions } from 'models/scene/SceneActions';
-
-const sceneController: SceneController = {
-  backGroundImage: "/src/assets/project/image/background/背景（和）.jpg",
-  backGroundMusic: "/src/assets/project/audio/background/2-0005684112.flac",
-  characterList: [
-    "/src/assets/project/image/character/星野・ニャー/シガレット喫煙背景なし.png"
-  ]
-}
-
-const sceneText: SceneText = {
-  speaker: 'ヤマモ',
-  textList: ['ぽんぬ', 'こいたん']
-}
-
-// const sceneActions: SceneActions = 
-
-const sceneEvents: SceneEvent[] = [
-  {
-    sceneAction: 'NEXT',
-    sceneObject: sceneController
-  },
-  {
-    sceneAction: 'NEXT',
-    sceneObject: sceneText
-  },
-]
-
-const sceneChild: SceneChild = {
-  sceneEvent: sceneEvents
-}
 
 const sceneChilds: SceneChild[] = [
   {
