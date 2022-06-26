@@ -1,6 +1,4 @@
-const Actions = {
-  NEXT: 'next',
-  PREVIOUS: 'previous',
+export const Actions = {
   ADD: 'add',
   CHANGE: 'change',
   REMOVE: 'remove',

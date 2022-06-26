@@ -103,14 +103,32 @@
 .flow_item_action_btn {
   width: 12%;
   height: 100%;
+  margin-left: -10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.flow_item_action_btn>img {
-  height: 100%;
+.flow_item_action_btn>span {
+  padding: 3px;
   transition: .6s;
+  border-radius: 25px;
+  color: #404040;
 }
 
-.flow_item_action_btn>img:hover {
+.flow_item_action_btn>span[data-action-type="add"] {
+  background-color: #5bce7c;
+}
+
+.flow_item_action_btn>span[data-action-type="remove"] {
+  background-color: #d33d51;
+}
+
+.flow_item_action_btn>span[data-action-type="change"] {
+  background-color: #d2a07b;
+}
+
+.flow_item_action_btn>span:hover {
   transform: rotate(360deg);
 }
 
@@ -128,11 +146,12 @@
   background-color: #c05f4c;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
-.flow_item_left>img {
-  height: 100%;
+.flow_item_left>span {
   display: block;
+  font-size: 2rem;
 }
 
 .flow_item_right {
