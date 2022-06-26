@@ -40,8 +40,8 @@ import { SceneChild } from '../../models/scene/SceneChild';
 const sceneList: Array<SceneModel> = [
   {
     backGroundImage: "/src/assets/project/image/background/背景（和）.jpg",
-    // backGroundMusic: "",
-    backGroundMusic: "/src/assets/project/audio/background/2-0005684112.flac",
+    backGroundMusic: "",
+    // backGroundMusic: "/src/assets/project/audio/background/2-0005684112.flac",
     characterList: [
       "/src/assets/project/image/character/星野・ニャー/シガレット喫煙背景なし.png"
     ],
@@ -55,8 +55,8 @@ const sceneList: Array<SceneModel> = [
   },
   {
     backGroundImage: "/src/assets/project/image/character/星野・ニャー/風呂絵.png",
-    // backGroundMusic: "",
-    backGroundMusic: "/src/assets/project/audio/background/2-0005684112.flac",
+    backGroundMusic: "",
+    // backGroundMusic: "/src/assets/project/audio/background/2-0005684112.flac",
     characterList: [],
     sceneText: {
       speaker: "ニャー",
