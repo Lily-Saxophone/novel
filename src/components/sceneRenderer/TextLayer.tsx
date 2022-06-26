@@ -28,7 +28,7 @@ export type TextLayerType = ParentProps & {
 const TextLayer: Component<TextLayerType> = (props: TextLayerType) => {
   return (
     <div class={TextLayerClass}>
-      <SceneTextHeader characterName={props.characterName} />
+      <SceneTextHeader speaker={props.characterName} />
       <SceneTextBody textList={props.textList} />
     </div>
   );

@@ -7,7 +7,7 @@ const CharacterClass = css`
 `;
 
 export type CharacterType = ParentProps & {
-  characterImage?: string,
+  characterImage: string,
   content?: JSX.Element
 }
 

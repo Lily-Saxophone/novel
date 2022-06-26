@@ -2,7 +2,7 @@ import { Component, JSX, JSXElement, ParentProps } from 'solid-js';
 import { css } from "solid-styled-components";
 import Render from './Render';
 import RenderNavigationBar from './RenderNavigationBar';
-import type { SceneModel } from '../../models/SceneModel';
+import type { SceneModel } from '../../models/scene/SceneModel';
 
 const SceneRendererClass = css`
   width: inherit;
@@ -26,6 +26,7 @@ const SceneRenderer: Component<SceneRendererType> = (props: SceneRendererType) =
       onClick={props.onClick}>
       <Render
         backGroundImage={props.scene.backGroundImage}
+        backGroundMusic={props.scene.backGroundMusic}
         characterList={props.scene.characterList}
         sceneText={props.scene.sceneText}>
 

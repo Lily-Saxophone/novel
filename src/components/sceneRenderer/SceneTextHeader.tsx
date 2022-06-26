@@ -23,13 +23,13 @@ const SceneTextHeaderClass = css`
 `;
 
 export type SceneTextHeaderType = ParentProps & {
-  characterName: string
+  speaker: string
 }
 
 const SceneTextHeader: Component<SceneTextHeaderType> = (props: SceneTextHeaderType) => {
   return (
     <div class={SceneTextHeaderClass}>
-      <span style={'display: table-cell; vertical-align: middle'}>{props.characterName}</span>
+      <span style={'display: table-cell; vertical-align: middle'}>{props.speaker}</span>
     </div>
   );
 };

@@ -3,18 +3,50 @@ import { Component, createEffect, createSignal, Signal } from 'solid-js';
 import Masonry from "solid-masonry";
 
 import styles from '../../assets/css/scene/scene.module.css';
-import Palette, { PalletType } from '../../components/palette/Palette';
-import type { SceneModel } from '../../models/SceneModel';
-import SceneFlow from '../../components/scene/SceneFlow';
 
+import Palette, { PalletType } from '../../components/palette/Palette';
+import SceneFlow from '../../components/scene/SceneFlow';
+import type { SceneModel } from '../../models/scene/SceneModel';
+import { SceneChild } from '../../models/scene/SceneChild';
+
+// // 差分で更新してくパターン
+// const sceneList: Array<SceneChild> = [
+//   {
+//     sceneEvent: [
+//       {
+//         sceneAction: "add",
+//         sceneObject: {
+//           backGroundImage: "/src/assets/project/image/background/背景（和）.jpg",
+//           characterList: [
+//             "/src/assets/project/image/character/星野・ニャー/シガレット喫煙背景なし.png"
+//           ]
+//         }
+//       },
+//       {
+//         sceneAction: 'next',
+//         sceneObject: {
+//           speaker: "？？？？？",
+//           textList: [
+//             "ちょっと、あんた！",
+//             "せっかく私が声を掛けてあげてるんだからすぐに反応しなさいよ！"
+//           ]
+//         }
+//       },
+//     ]
+//   },
+// ]
+
+// 毎シーン全ての情報を保存しておくパターン
 const sceneList: Array<SceneModel> = [
   {
     backGroundImage: "/src/assets/project/image/background/背景（和）.jpg",
+    // backGroundMusic: "",
+    backGroundMusic: "/src/assets/project/audio/background/2-0005684112.flac",
     characterList: [
       "/src/assets/project/image/character/星野・ニャー/シガレット喫煙背景なし.png"
     ],
     sceneText: {
-      characterName: "？？？？？",
+      speaker: "？？？？？",
       textList: [
         "ちょっと、あんた！",
         "せっかく私が声を掛けてあげてるんだからすぐに反応しなさいよ！"
@@ -23,9 +55,11 @@ const sceneList: Array<SceneModel> = [
   },
   {
     backGroundImage: "/src/assets/project/image/character/星野・ニャー/風呂絵.png",
+    // backGroundMusic: "",
+    backGroundMusic: "/src/assets/project/audio/background/2-0005684112.flac",
     characterList: [],
     sceneText: {
-      characterName: "ニャー",
+      speaker: "ニャー",
       textList: [
         "なになに、けいちゃん。",
         "もしかして興奮しちゃったのかな？"
@@ -44,11 +78,11 @@ const handleSetScene = () => {
 
 
 const [data, setData]: Signal<PalletType[]> = createSignal([
-  { title: "Motion", content: <></>, width: "22.5vw", height: "calc(45.5vh - 10px - 13px)" },
-  { title: "Main", content: <SceneRenderer scene={scene()} onClick={handleSetScene} />, width: "50vw", height: "calc(50vh - 10px  - 13px)" },
-  { title: "Flow", content: <SceneFlow />, width: "25vw", height: "calc(91vh - 13px)" },
-  { title: "Media", content: <></>, width: "22.5vw", height: "45.5vh" },
-  { title: "Mitei", content: <></>, width: "50vw", height: "41vh" },
+  { title: "Motion", content: <></>, width: "calc(22.5vw - 10px)", height: "calc(46.5vh - 10px - 13px)" },
+  { title: "Main", content: <SceneRenderer scene={scene()} onClick={handleSetScene} />, width: "calc(51vw - 10px)", height: "calc(58vh - 10px  - 13px)" },
+  { title: "Flow", content: <SceneFlow />, width: "calc(25vw - 10px)", height: "calc(93vh - 13px)" },
+  { title: "Media", content: <></>, width: "calc(22.5vw - 10px)", height: "46.5vh" },
+  { title: "Mitei", content: <></>, width: "calc(51vw - 10px)", height: "35vh" },
 ]);
 
 const Scene: Component = () => {
