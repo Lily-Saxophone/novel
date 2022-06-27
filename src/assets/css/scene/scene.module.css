@@ -37,7 +37,7 @@
 
 .flow_line {
   width: 5px;
-  height: 65%;
+  height: 75%;
   background-color: #cbcbcb;
   position: absolute;
   left: calc(100% / 2);

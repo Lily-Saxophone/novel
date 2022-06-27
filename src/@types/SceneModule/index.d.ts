@@ -9,4 +9,24 @@ declare module SceneModule {
     characterList: Array<Map<string, string>>,
     textList: SceneText
   }
+
+  export type SceneChild = {
+    childId: string,
+    sceneEvent: Array<SceneEvent>,
+    isActive?: boolean
+  }
+
+  export type SceneEvent = {
+    sceneAction?: SceneActions,
+    sceneObject: SceneController | SceneText,
+    sceneType: 'Image' | 'Music' | 'Character' | 'Text'
+  }
+
+  export type SceneActions = string
+
+  export type SceneController = {
+    backGroundImage?: string,
+    backGroundMusic?: string,
+    characterList?: Array<string>,
+  }
 }
