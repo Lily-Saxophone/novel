@@ -42,19 +42,20 @@ const backGroundClass = css`
 `;
 
 export type SceneChoicesType = ParentProps & {
-  choicesList: Map<string, string>
+  choicesList: Array<Array<string>>
   onClick?: JSX.EventHandlerUnion<HTMLDivElement, MouseEvent>,
 }
 
 const SceneChoices: Component<SceneChoicesType> = (props: SceneChoicesType) => {
+  console.log(props.choicesList.length)
   return (
     <Show
-      when={props.choicesList.size !== 0}
+      when={props.choicesList.length !== 0 && props.choicesList[0].length !== 0}
       fallback={() => <></>}>
 
       <div class={SceneChoicesClass}>
         <div class={ChoicesContainerClass}>
-          <For each={Array.from(props.choicesList)} fallback={<div>Loading Failed.</div>}>
+          <For each={props.choicesList} fallback={<div>Loading Failed.</div>}>
             {(item) => (
               <div class={ChoicesItemClass} data-key={item[0]} onClick={props.onClick}>
                 {item[1]}
@@ -62,7 +63,7 @@ const SceneChoices: Component<SceneChoicesType> = (props: SceneChoicesType) => {
             )}
           </For>
         </div>
-        <div class={backGroundClass} onClick={() => { return false }}></div>
+        <div class={backGroundClass} onClick={() => { console.log("ooooooo"); }}></div>
       </div>
     </Show>
   );

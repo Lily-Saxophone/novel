@@ -1,3 +1,3 @@
 export type ChoicesEvent = {
-  choicesList: Map<string, string>
+  choicesList: Array<Array<string>>
 }

@@ -4,5 +4,6 @@ import { SceneModel } from "./SceneModel";
 
 
 export type SceneList = {
-  sceneList: Array<SceneModel | ChoicesEvent | EndEvent>
+  sceneKey: string,
+  scene: Array<SceneModel | ChoicesEvent | EndEvent>
 }

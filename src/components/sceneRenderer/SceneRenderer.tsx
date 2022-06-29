@@ -35,7 +35,7 @@ const [sceneText, setSceneText]: Signal<SceneText> = createSignal({ speaker: "",
 const [characterList, setCharacterList]: Signal<Array<string>> = createSignal([]);
 const [backGroundImage, setBackGroundImage]: Signal<string> = createSignal("");
 const [backGroundMusic, setBackGroundMusic]: Signal<string> = createSignal("");
-const [choicesList, setChoicesList]: Signal<Map<string, string>> = createSignal(new Map([]));
+const [choicesList, setChoicesList]: Signal<Array<Array<string>>> = createSignal([]);
 
 const isSceneModel = (obj: any): obj is SceneModel =>
   typeof obj === "object"

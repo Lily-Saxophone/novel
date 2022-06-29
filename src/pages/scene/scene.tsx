@@ -11,90 +11,225 @@ import { SceneChild } from '../../models/scene/SceneChild';
 import { SceneList } from '../../models/scene/SceneList';
 import { ChoicesEvent } from '../../models/scene/ChoicesEvent';
 import { EndEvent } from '../../models/scene/EndEvent';
+import { ScenarioList } from '../../models/scenario/ScenarioList';
 
-// // 差分で更新してくパターン
-// const sceneList: Array<SceneChild> = [
-//   {
-//     sceneEvent: [
-//       {
-//         sceneAction: "add",
-//         sceneObject: {
-//           backGroundImage: "/src/assets/project/image/background/背景（和）.jpg",
-//           characterList: [
-//             "/src/assets/project/image/character/星野・ニャー/シガレット喫煙背景なし.png"
-//           ]
-//         }
-//       },
-//       {
-//         sceneAction: 'next',
-//         sceneObject: {
-//           speaker: "？？？？？",
-//           textList: [
-//             "ちょっと、あんた！",
-//             "せっかく私が声を掛けてあげてるんだからすぐに反応しなさいよ！"
-//           ]
-//         }
-//       },
-//     ]
-//   },
-// ]
+// ストーリー（物語全体）
+const story: ScenarioList = {
+  scenarioList: [
+    {
+      scenarioKey: "first",
+      scenario: [
+        {
+          sceneKey: "a",
+          // シーン１（初期読み込み）
+          scene: [
+            {
+              backGroundImage: "/src/assets/project/image/background/背景（和）.jpg",
+              backGroundMusic: "",
+              characterList: [
+                "/src/assets/project/image/character/星野・ニャー/シガレット喫煙背景なし.png"
+              ],
+              sceneText: {
+                speaker: "？？？？？",
+                textList: [
+                  "ちょっと、あんた！",
+                  "せっかく私が声を掛けてあげてるんだからすぐに反応しなさいよ！"
+                ]
+              }
+            },
+            {
+              backGroundImage: "/src/assets/project/image/character/星野・ニャー/風呂絵.png",
+              backGroundMusic: "",
+              // backGroundMusic: "/src/assets/project/audio/background/2-0005684112.flac",
+              characterList: [],
+              sceneText: {
+                speaker: "ニャー",
+                textList: [
+                  "なになに、けいちゃん。",
+                  "もしかして興奮しちゃったのかな？"
+                ]
+              }
+            },
+            {
+              choicesList: [["b", "シナリオsecond、scene未選択ルート"], ["c", "シナリオsecond、シーンbルート"], ["b", "ダイナミック琉球"]]
+            }
+          ]
+        },
 
-// 毎シーン全ての情報を保存しておくパターン
-const scenario: SceneList = {
-  sceneList: [
-    {
-      backGroundImage: "/src/assets/project/image/background/背景（和）.jpg",
-      backGroundMusic: "",
-      // backGroundMusic: "/src/assets/project/audio/background/2-0005684112.flac",
-      characterList: [
-        "/src/assets/project/image/character/星野・ニャー/シガレット喫煙背景なし.png"
-      ],
-      sceneText: {
-        speaker: "？？？？？",
-        textList: [
-          "ちょっと、あんた！",
-          "せっかく私が声を掛けてあげてるんだからすぐに反応しなさいよ！"
-        ]
-      }
+        // シーン２（選択肢１、３）
+        {
+          sceneKey: "b",
+          scene: [
+            {
+              backGroundImage: "/src/assets/project/image/background/背景（和）.jpg",
+              backGroundMusic: "",
+              characterList: [
+                "/src/assets/project/image/character/星野・ニャー/シガレット喫煙背景なし.png"
+              ],
+              sceneText: {
+                speaker: "？？？？？",
+                textList: [
+                  "シナリオsecond、シーン未選択ルートへ遷移します"
+                ]
+              }
+            },
+            {
+              nextScenario: "second",
+              nextScene: ""
+            }
+          ]
+        },
+
+        // シーン３（選択肢２、４）
+        {
+          sceneKey: "c",
+          scene: [
+            {
+              backGroundImage: "/src/assets/project/image/background/背景（和）.jpg",
+              backGroundMusic: "",
+              characterList: [
+                "/src/assets/project/image/character/星野・ニャー/シガレット喫煙背景なし.png"
+              ],
+              sceneText: {
+                speaker: "？？？？？",
+                textList: [
+                  "シナリオsecond、シーンbルートへ遷移します"
+                ]
+              }
+            },
+            {
+              nextScenario: "second",
+              nextScene: "b"
+            }
+          ]
+        }
+      ]
     },
+    // シナリオ２
     {
-      backGroundImage: "/src/assets/project/image/character/星野・ニャー/風呂絵.png",
-      backGroundMusic: "",
-      // backGroundMusic: "/src/assets/project/audio/background/2-0005684112.flac",
-      characterList: [],
-      sceneText: {
-        speaker: "ニャー",
-        textList: [
-          "なになに、けいちゃん。",
-          "もしかして興奮しちゃったのかな？"
-        ]
-      }
-    },
-    {
-      choicesList: new Map([["シナリオA", "木村が好き"], ["シナリオC", "木村が変態"], ["シナリオC", "ダイナミック琉球"]])
-    },
-    {
-      nextScenario: ""
+      scenarioKey: "second",
+      scenario: [
+        {
+          sceneKey: "a",
+          scene: [
+            {
+              backGroundImage: "/src/assets/project/image/character/星野・ニャー/風呂絵.png",
+              backGroundMusic: "",
+              characterList: [
+                ""
+              ],
+              sceneText: {
+                speaker: "？？？？？",
+                textList: [
+                  "シナリオsecond、シーンaです"
+                ]
+              }
+            },
+            {
+              nextScenario: "first",
+              nextScene: "a"
+            }
+          ]
+        },
+        {
+          sceneKey: "b",
+          scene: [
+            {
+              backGroundImage: "/src/assets/project/image/background/背景（和）.jpg",
+              backGroundMusic: "",
+              characterList: [
+                "/src/assets/project/image/character/星野・ニャー/シガレット喫煙背景なし.png"
+              ],
+              sceneText: {
+                speaker: "？？？？？",
+                textList: [
+                  "シナリオsecond、シーンbです"
+                ]
+              }
+            },
+            {
+              nextScenario: "first",
+              nextScene: "b"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
 
+// シナリオ
+let scenario = story.scenarioList[0].scenario;
+
 let idx: number = 0;
-const [scene, setScene]: Signal<SceneModel | ChoicesEvent | EndEvent> = createSignal(scenario.sceneList[idx]);
+
+// シーン
+const [sceneList, setSceneList]: Signal<SceneList> = createSignal(scenario[0]);
+
+// １コマ
+const [scene, setScene]: Signal<SceneModel | ChoicesEvent | EndEvent> = createSignal(sceneList().scene[0]);
+
+const isSceneModel = (obj: any): obj is SceneModel =>
+  typeof obj === "object"
+  && obj !== null
+  && typeof (obj as SceneModel).backGroundImage === "string"
+  && typeof (obj as SceneModel).backGroundMusic === "string";
+
+const isEndEvent = (obj: any): obj is EndEvent =>
+  typeof obj === "object"
+  && obj !== null
+  && typeof (obj as EndEvent).nextScenario === "string";
+
 const handleSetScene = () => {
-  console.log(scenario.sceneList.length);
-  if (scenario.sceneList.length > (idx + 1)) {
+  if (sceneList().scene.length > (idx + 1)) {
     idx++;
   } else {
     idx = 0;
+    console.log('click2')
   }
-  console.log(idx);
-  setScene(scenario.sceneList[idx]);
+
+  setScene(sceneList().scene[idx]);
+
+  if (isEndEvent(scene())) {
+    nextScenario((scene() as EndEvent).nextScenario, (scene() as EndEvent).nextScene);
+    console.log('click3')
+
+  }
 }
 
+// 選択肢クリック時イベント（選択肢のキーから該当のシーンへ遷移）
 const handleChoicesClick = (event: any) => {
-  console.log((event.currentTarget as HTMLDivElement).dataset);
-  setScene({ choicesList: new Map<string, string>([]) });
+  let wkSceneList = getSceneList((event.currentTarget as HTMLDivElement).dataset.key);
+  if (wkSceneList !== undefined) {
+    idx = 0;
+    setSceneList(wkSceneList);
+    setScene({ choicesList: [] });
+    setScene(sceneList().scene[idx]);
+  }
+}
+
+// keyからシーン取得
+const getSceneList = (sceneKey: string | undefined): SceneList | undefined => {
+  if (sceneKey !== "") {
+    return scenario.find(element => element.sceneKey === sceneKey);
+  } else {
+    return scenario[0];
+  }
+}
+
+// 次のシナリオへ遷移
+const nextScenario = (scenarioKey: string, sceneKey: string) => {
+  let wkScenario: SceneList[] | undefined = story.scenarioList.find(element => element.scenarioKey === scenarioKey)?.scenario;
+  if (wkScenario !== undefined) {
+    scenario = wkScenario;
+
+    let wkSceneList = getSceneList(sceneKey);
+    if (wkSceneList !== undefined) {
+      idx = 0;
+      setSceneList(wkSceneList);
+      setScene(sceneList().scene[idx]);
+    }
+  }
 }
 
 
