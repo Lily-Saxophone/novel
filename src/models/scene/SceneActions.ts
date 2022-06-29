@@ -1,4 +1,4 @@
-export const Actions = {
+const Actions = {
   ADD: 'add',
   CHANGE: 'change',
   REMOVE: 'remove',
