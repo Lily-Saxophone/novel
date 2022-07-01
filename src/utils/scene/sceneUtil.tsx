@@ -21,25 +21,23 @@ const SceneUtil: SceneUtilType = {
             && typeof (obj as SceneModel).backGroundMusic === "string";
 
         const sceneChilds: SceneChild[] = []
-        _.forEach(scenario.sceneList, (s: SceneModel | ChoicesEvent | EndEvent, index: number) => {
+        _.forEach(scenario.scene, (s: SceneModel | ChoicesEvent | EndEvent, index: number) => {
             if (isSceneModel(s)) {
                 const sceneEvents: SceneEvent[] = []
-                const base: SceneModel = (index !== 0 ? scenario.sceneList[index - 1] : {}) as SceneModel
+                const base: SceneModel = (index !== 0 ? scenario.scene[index - 1] : {}) as SceneModel
 
                 if (s.backGroundImage !== base.backGroundImage) {
-                const sceneEvent: SceneEvent = {} as SceneEvent
-                sceneEvent.sceneObject = { backGroundImage: s.backGroundImage }
-                sceneEvent.sceneType = 'Image'
-                if (_.isEmpty(base.backGroundImage) && !_.isEmpty(s.backGroundImage))
-                    sceneEvent.sceneAction = 'add'
-                else if (!_.isEmpty(base.backGroundImage) && !_.isEmpty(s.backGroundImage))
-                    sceneEvent.sceneAction = 'change'
-                else if (!_.isEmpty(base.backGroundImage) && _.isEmpty(s.backGroundImage)) 
-                    sceneEvent.sceneAction = 'remove'
-                else
-                    sceneEvent.sceneAction = undefined
+                    const sceneEvent: SceneEvent = {} as SceneEvent
+                    sceneEvent.sceneObject = { backGroundImage: s.backGroundImage }
+                    sceneEvent.sceneType = 'Image'
+                    if (_.isEmpty(base.backGroundImage) && !_.isEmpty(s.backGroundImage))
+                        sceneEvent.sceneAction = 'add'
+                    else if (!_.isEmpty(base.backGroundImage) && !_.isEmpty(s.backGroundImage))
+                        sceneEvent.sceneAction = 'change'
+                    else if (!_.isEmpty(base.backGroundImage) && _.isEmpty(s.backGroundImage)) 
+                        sceneEvent.sceneAction = 'remove'
 
-                sceneEvents.push(sceneEvent)
+                    sceneEvents.push(sceneEvent)
                 }
                 
                 if (s.backGroundMusic !== base.backGroundMusic) {
@@ -52,8 +50,6 @@ const SceneUtil: SceneUtilType = {
                         sceneEvent.sceneAction = 'change'
                     else if (!_.isEmpty(base.backGroundMusic) && _.isEmpty(s.backGroundMusic)) 
                         sceneEvent.sceneAction = 'remove'
-                    else
-                        sceneEvent.sceneAction = undefined
                         
                     sceneEvents.push(sceneEvent)
                 }
