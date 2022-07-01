@@ -1,16 +1,16 @@
 import SceneRenderer from '../../components/sceneRenderer/SceneRenderer';
 import { Component, createEffect, createSignal, JSX, Signal } from 'solid-js';
 import Masonry from "solid-masonry";
-
 import styles from '../../assets/css/scene/scene.module.css';
-
 import Palette, { PalletType } from '../../components/palette/Palette';
 import SceneFlow from '../../components/scene/SceneFlow';
 import type { SceneModel } from '../../models/scene/SceneModel';
-import { SceneChild } from '../../models/scene/SceneChild';
 import { SceneList } from '../../models/scene/SceneList';
 import { ChoicesEvent } from '../../models/scene/ChoicesEvent';
 import { EndEvent } from '../../models/scene/EndEvent';
+import _ from 'lodash';
+
+import SceneUtil from '../../utils/scene/sceneUtil'
 
 // // 差分で更新してくパターン
 // const sceneList: Array<SceneChild> = [
@@ -79,7 +79,10 @@ const scenario: SceneList = {
   ]
 }
 
+const sceneChilds = SceneUtil.generateFlowDiff(scenario)
+
 let idx: number = 0;
+let previousScene: SceneModel | ChoicesEvent | EndEvent = scenario.sceneList[idx]
 const [scene, setScene]: Signal<SceneModel | ChoicesEvent | EndEvent> = createSignal(scenario.sceneList[idx]);
 const handleSetScene = () => {
   console.log(scenario.sceneList.length);
@@ -90,6 +93,7 @@ const handleSetScene = () => {
   }
   console.log(idx);
   setScene(scenario.sceneList[idx]);
+  previousScene = scenario.sceneList[idx]
 }
 
 const handleChoicesClick = (event: any) => {
@@ -97,12 +101,19 @@ const handleChoicesClick = (event: any) => {
   setScene({ choicesList: new Map<string, string>([]) });
 }
 
+const handleSceneIndexChange = (index: number) => {
+  setSceneIndex(index)
+  idx = index;
+  setScene(scenario.sceneList[idx]);
+  previousScene = scenario.sceneList[idx]
+}
 
+const [sceneIndex, setSceneIndex]: Signal<number> = createSignal(0);
 
 const [data, setData]: Signal<PalletType[]> = createSignal([
   { title: "Motion", content: <></>, width: "calc(22.5vw - 10px)", height: "calc(46.5vh - 10px - 13px)" },
   { title: "Main", content: <SceneRenderer scene={scene()} onSceneClick={handleSetScene} onChoicesClick={handleChoicesClick} />, width: "calc(51vw - 10px)", height: "calc(58vh - 10px  - 13px)" },
-  { title: "Flow", content: <SceneFlow />, width: "calc(25vw - 10px)", height: "calc(93vh - 13px)" },
+  { title: "Flow", content: <SceneFlow onSceneIndexChange={handleSceneIndexChange} selectedSceneIndex={sceneIndex()} flowItems={sceneChilds} />, width: "calc(25vw - 10px)", height: "calc(93vh - 13px)" },
   { title: "Media", content: <></>, width: "calc(22.5vw - 10px)", height: "46.5vh" },
   { title: "Mitei", content: <></>, width: "calc(51vw - 10px)", height: "35vh" },
 ]);

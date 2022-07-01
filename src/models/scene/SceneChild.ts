@@ -1,7 +1,7 @@
 import { SceneEvent } from "./SceneEvent";
 
 export type SceneChild = {
-  childId: string,
+  sceneIndex: number,
   sceneEvent: Array<SceneEvent>,
   isActive?: boolean
 }
