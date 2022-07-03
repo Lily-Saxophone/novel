@@ -1,18 +1,32 @@
-import { Component, For, Match, ParentProps, Show, Switch } from 'solid-js';
+import { Component, createEffect, For, Match, ParentProps, Show, Switch } from 'solid-js';
 import { createStore, Store } from "solid-js/store"; 
 import styles from '../../assets/css/scene/scene.module.css';
 import type { SceneChild } from 'models/scene/SceneChild';
 import type { SceneEvent } from 'models/scene/SceneEvent';
+import { SceneList } from 'models/scene/SceneList';
+import SceneUtil from '../../utils/scene/sceneUtil';
 
 export type SceneFlowPropType = ParentProps & {
   onSceneIndexChange: (idx: number) => void,
   selectedSceneIndex: number,
-  flowItems: SceneChild[]
+  flowItems: SceneList
+}
+
+const [sceneChilds, setSceneChilds]: Store<SceneList> = createStore([]);
+
+const handleChageScene = (items: SceneList) => {
+  console.log(items)
+
+  // シーンからFlow描写用の差分を生成
+  setSceneChilds(SceneUtil.generateFlowDiff(items))
 }
 
 const SceneFlow: Component<SceneFlowPropType> = (props: SceneFlowPropType) => {
+  createEffect(() => handleChageScene(props.flowItems));
 
-  const [sceneChilds, setSceneChilds]: Store<SceneChild[]> = createStore(props.flowItems);
+  
+
+      
 
   const handleClickStage = (e: MouseEvent, arg: SceneChild) => {
     const selectedIndex = sceneChilds.findIndex((x: SceneChild) => x.sceneIndex === arg.sceneIndex)
