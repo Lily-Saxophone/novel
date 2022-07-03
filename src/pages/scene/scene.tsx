@@ -23,7 +23,7 @@ const story: ScenarioList = {
           scene: [
             {
               backGroundImage: "/src/assets/project/image/background/背景（和）.jpg",
-              backGroundMusic: "ponnu.wav",
+              backGroundMusic: "",
               characterList: [
                 "/src/assets/project/image/character/星野・ニャー/シガレット喫煙背景なし.png"
               ],
@@ -50,7 +50,7 @@ const story: ScenarioList = {
             },
             {
               backGroundImage: "/src/assets/project/image/background/背景（和）.jpg",
-              backGroundMusic: "ponnu.wav",
+              backGroundMusic: "",
               characterList: [
                 "/src/assets/project/image/character/星野・ニャー/シガレット喫煙背景なし.png"
               ],
