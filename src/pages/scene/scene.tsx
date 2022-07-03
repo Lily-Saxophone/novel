@@ -1,5 +1,5 @@
 import SceneRenderer from '../../components/sceneRenderer/SceneRenderer';
-import { Component, createEffect, createSignal, JSX, Signal } from 'solid-js';
+import { Component, createSignal, Signal } from 'solid-js';
 import Masonry from "solid-masonry";
 import styles from '../../assets/css/scene/scene.module.css';
 import Palette, { PalletType } from '../../components/palette/Palette';
@@ -8,7 +8,6 @@ import type { SceneModel } from '../../models/scene/SceneModel';
 import { SceneList } from '../../models/scene/SceneList';
 import { ChoicesEvent } from '../../models/scene/ChoicesEvent';
 import { EndEvent } from '../../models/scene/EndEvent';
-import SceneUtil from '../../utils/scene/sceneUtil'
 import { ScenarioList } from '../../models/scenario/ScenarioList';
 import _ from 'lodash';
 
@@ -24,7 +23,34 @@ const story: ScenarioList = {
           scene: [
             {
               backGroundImage: "/src/assets/project/image/background/背景（和）.jpg",
-              backGroundMusic: "ponnu.wav",
+              backGroundMusic: "",
+              characterList: [
+                "/src/assets/project/image/character/星野・ニャー/シガレット喫煙背景なし.png"
+              ],
+              sceneText: {
+                speaker: "？？？？？",
+                textList: [
+                  "ちょっと、あんた！",
+                  "せっかく私が声を掛けてあげてるんだからすぐに反応しなさいよ！"
+                ]
+              }
+            },
+            {
+              backGroundImage: "/src/assets/project/image/character/星野・ニャー/風呂絵.png",
+              backGroundMusic: "",
+              // backGroundMusic: "/src/assets/project/audio/background/2-0005684112.flac",
+              characterList: [],
+              sceneText: {
+                speaker: "ニャー",
+                textList: [
+                  "なになに、けいちゃん。",
+                  "もしかして興奮しちゃったのかな？"
+                ]
+              }
+            },
+            {
+              backGroundImage: "/src/assets/project/image/background/背景（和）.jpg",
+              backGroundMusic: "",
               characterList: [
                 "/src/assets/project/image/character/星野・ニャー/シガレット喫煙背景なし.png"
               ],
@@ -114,9 +140,7 @@ const story: ScenarioList = {
             {
               backGroundImage: "/src/assets/project/image/character/星野・ニャー/風呂絵.png",
               backGroundMusic: "",
-              characterList: [
-                ""
-              ],
+              characterList: [],
               sceneText: {
                 speaker: "？？？？？",
                 textList: [
@@ -157,7 +181,6 @@ const story: ScenarioList = {
   ]
 }
 
-
 // シナリオ
 let scenario = story.scenarioList[0].scenario;
 
@@ -169,9 +192,8 @@ const [sceneList, setSceneList]: Signal<SceneList> = createSignal(scenario[0]);
 // １コマ
 const [scene, setScene]: Signal<SceneModel | ChoicesEvent | EndEvent> = createSignal(sceneList().scene[0]);
 
-// シーンからFlow描写用の差分を生成
-const sceneChilds = SceneUtil.generateFlowDiff(sceneList())
-console.log(sceneChilds)
+const [sceneIndex, setSceneIndex]: Signal<number> = createSignal(0)
+
 const isSceneModel = (obj: any): obj is SceneModel =>
   typeof obj === "object"
   && obj !== null
@@ -183,23 +205,22 @@ const isEndEvent = (obj: any): obj is EndEvent =>
   && obj !== null
   && typeof (obj as EndEvent).nextScenario === "string";
 
+const handleSceneIndexChange = (index: number) => {
+  setSceneIndex(index)
+  idx = index;
+  setScene(sceneList().scene[idx]);
+}
+
 const handleSetScene = () => {
-  if (sceneList().scene.length > (idx + 1)) {
-    idx++;
-  } else {
-    idx = 0;
-    console.log('click2')
-  }
+  idx += sceneList().scene.length > (idx + 1) ? 1 : 0
 
   setScene(sceneList().scene[idx]);
 
   if (isEndEvent(scene())) {
     nextScenario((scene() as EndEvent).nextScenario, (scene() as EndEvent).nextScene);
-    console.log('click3')
-
   }
-  console.log(idx);
-  setScene(sceneList().scene[idx]);
+
+  handleSceneIndexChange(idx)
 }
 
 // 選択肢クリック時イベント（選択肢のキーから該当のシーンへ遷移）
@@ -210,6 +231,8 @@ const handleChoicesClick = (event: any) => {
     setSceneList(wkSceneList);
     setScene({ choicesList: [] });
     setScene(sceneList().scene[idx]);
+    
+    handleSceneIndexChange(idx)
   }
 }
 
@@ -237,18 +260,10 @@ const nextScenario = (scenarioKey: string, sceneKey: string) => {
   }
 }
 
-const handleSceneIndexChange = (index: number) => {
-  setSceneIndex(index)
-  idx = index;
-  setScene(sceneList().scene[idx]);
-}
-
-const [sceneIndex, setSceneIndex]: Signal<number> = createSignal(0);
-
 const [data, setData]: Signal<PalletType[]> = createSignal([
   { title: "Motion", content: <></>, width: "calc(22.5vw - 10px)", height: "calc(46.5vh - 10px - 13px)" },
   { title: "Main", content: <SceneRenderer scene={scene()} onSceneClick={handleSetScene} onChoicesClick={handleChoicesClick} />, width: "calc(51vw - 10px)", height: "calc(58vh - 10px  - 13px)" },
-  { title: "Flow", content: <SceneFlow onSceneIndexChange={handleSceneIndexChange} selectedSceneIndex={sceneIndex()} flowItems={sceneChilds} />, width: "calc(25vw - 10px)", height: "calc(93vh - 13px)" },
+  { title: "Flow", content: <SceneFlow onSceneIndexChange={handleSceneIndexChange} selectedSceneIndex={sceneIndex()} flowItems={sceneList()} />, width: "calc(25vw - 10px)", height: "calc(93vh - 13px)" },
   { title: "Media", content: <></>, width: "calc(22.5vw - 10px)", height: "46.5vh" },
   { title: "Mitei", content: <></>, width: "calc(51vw - 10px)", height: "35vh" },
 ]);

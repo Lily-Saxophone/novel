@@ -33,11 +33,18 @@
   display: flex;
   flex-direction: column;
   position: relative;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.flow_container::-webkit-scrollbar {  
+  display: none;
 }
 
 .flow_line {
   width: 5px;
-  height: 75%;
+  height: calc(75%);
   background-color: #cbcbcb;
   position: absolute;
   left: calc(100% / 2);
@@ -69,6 +76,16 @@
   padding: calc(var(--space-size_1) / 2) 0;
   box-shadow: -3px 0 4px 2px rgb(0 0 0 / 10%);
   z-index: 1;
+}
+
+.flow_item_stage_dummy {
+  width: 100%;
+  min-height: 200px;
+  margin: 1.4rem 0;
+  padding: calc(var(--space-size_1) / 2) 0;
+  box-shadow: -3px 0 4px 2px rgb(0 0 0 / 10%);
+  z-index: 1;
+  visibility: hidden;
 }
 
 .flow_item_stage[data-stage-active="true"] {

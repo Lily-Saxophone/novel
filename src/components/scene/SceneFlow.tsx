@@ -1,32 +1,51 @@
-import { Component, For, Match, ParentProps, Show, Switch } from 'solid-js';
+import { Component, createEffect, For, Match, ParentProps, Show, Switch } from 'solid-js';
 import { createStore, Store } from "solid-js/store"; 
 import styles from '../../assets/css/scene/scene.module.css';
 import type { SceneChild } from 'models/scene/SceneChild';
 import type { SceneEvent } from 'models/scene/SceneEvent';
+import { SceneList } from 'models/scene/SceneList';
+import SceneUtil from '../../utils/scene/sceneUtil';
 
 export type SceneFlowPropType = ParentProps & {
   onSceneIndexChange: (idx: number) => void,
   selectedSceneIndex: number,
-  flowItems: SceneChild[]
+  flowItems: SceneList
+}
+
+const [sceneChilds, setSceneChilds]: Store<SceneList> = createStore([]);
+
+const handleChageScene = (items: SceneList) => {
+  // シーンからFlow描写用の差分を生成
+  setSceneChilds(SceneUtil.generateFlowDiff(items))
+}
+
+const handleSceneIndexChange = (index: number) => {
+  // 選択した要素を中央にスクロール
+  const container = document.getElementById("js-flow_container");
+  const target = container?.querySelectorAll("[data-stage-active]")[index];
+  target?.scrollIntoView({behavior: 'smooth', block: 'center'});
 }
 
 const SceneFlow: Component<SceneFlowPropType> = (props: SceneFlowPropType) => {
-
-  const [sceneChilds, setSceneChilds]: Store<SceneChild[]> = createStore(props.flowItems);
+  createEffect(() => handleChageScene(props.flowItems));
+  createEffect(() => handleSceneIndexChange(props.selectedSceneIndex));
 
   const handleClickStage = (e: MouseEvent, arg: SceneChild) => {
     const selectedIndex = sceneChilds.findIndex((x: SceneChild) => x.sceneIndex === arg.sceneIndex)
-    props.onSceneIndexChange(selectedIndex)
+    props.onSceneIndexChange(selectedIndex);
+    handleSceneIndexChange(selectedIndex);
   }
 
   return (
     <>
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-      <div class={styles.flow_container}>
+      <div class={styles.flow_container} id="js-flow_container">
         <div class={styles.flow_line}></div>
+        {[...Array(1)].map(() => (<div class={styles.flow_item_stage_dummy}></div>))}
+
         <For each={sceneChilds} fallback={<div>Loading...</div>}>
           {(child: SceneChild) => (
-            <div class={styles.flow_item_stage}  data-stage-active={child.sceneIndex === props.selectedSceneIndex} onClick={(e) => handleClickStage(e, child)}>
+            <div class={styles.flow_item_stage} data-stage-active={child.sceneIndex === props.selectedSceneIndex} onClick={(e) => handleClickStage(e, child)}>
               
               <For each={child.sceneEvent} fallback={<div>Loading...</div>}>
                 {(events: SceneEvent) => (
@@ -130,7 +149,7 @@ const SceneFlow: Component<SceneFlowPropType> = (props: SceneFlowPropType) => {
             </div>
           )}
           </For>
-
+          {[...Array(2)].map(() => (<div class={styles.flow_item_stage_dummy}></div>))}
       </div>
     </>
   );

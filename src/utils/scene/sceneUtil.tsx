@@ -32,17 +32,16 @@ const SceneUtil: SceneUtilType = {
                     if (_.isEmpty(base.backGroundImage) && !_.isEmpty(s.backGroundImage)) {
                         sceneEvent.sceneAction = 'add'
                         sceneEvent.sceneObject = { backGroundImage: s.backGroundImage }
-                    }
-                    else if (!_.isEmpty(base.backGroundImage) && !_.isEmpty(s.backGroundImage)) {
+                        sceneEvents.push(sceneEvent)
+                    } else if (!_.isEmpty(base.backGroundImage) && !_.isEmpty(s.backGroundImage)) {
                         sceneEvent.sceneAction = 'change'
                         sceneEvent.sceneObject = { backGroundImage: s.backGroundImage }
-                    }
-                    else if (!_.isEmpty(base.backGroundImage) && _.isEmpty(s.backGroundImage)) {
+                        sceneEvents.push(sceneEvent)
+                    } else if (!_.isEmpty(base.backGroundImage) && _.isEmpty(s.backGroundImage)) {
                         sceneEvent.sceneAction = 'remove'
                         sceneEvent.sceneObject = { backGroundImage: base.backGroundImage }
+                        sceneEvents.push(sceneEvent)
                     }
-
-                    sceneEvents.push(sceneEvent)
                 }
                 
                 if (s.backGroundMusic !== base.backGroundMusic) {
@@ -51,17 +50,17 @@ const SceneUtil: SceneUtilType = {
                     if (_.isEmpty(base.backGroundMusic) && !_.isEmpty(s.backGroundMusic)) {
                         sceneEvent.sceneAction = 'add'
                         sceneEvent.sceneObject = { backGroundMusic: s.backGroundMusic }
-                    }
-                    else if (!_.isEmpty(base.backGroundMusic) && !_.isEmpty(s.backGroundMusic)) {
+                        sceneEvents.push(sceneEvent)
+                    } else if (!_.isEmpty(base.backGroundMusic) && !_.isEmpty(s.backGroundMusic)) {
                         sceneEvent.sceneAction = 'change'
                         sceneEvent.sceneObject = { backGroundMusic: s.backGroundMusic }
-                    }
-                    else if (!_.isEmpty(base.backGroundMusic) && _.isEmpty(s.backGroundMusic)) {
+                        sceneEvents.push(sceneEvent)
+                    } else if (!_.isEmpty(base.backGroundMusic) && _.isEmpty(s.backGroundMusic)) {
                         sceneEvent.sceneAction = 'remove'
                         sceneEvent.sceneObject = { backGroundMusic: base.backGroundMusic }
+                        sceneEvents.push(sceneEvent)
                     }
                         
-                    sceneEvents.push(sceneEvent)
                 }
 
                 if (s.characterList !== base.characterList) {
