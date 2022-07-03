@@ -1,5 +1,5 @@
 import SceneRenderer from '../../components/sceneRenderer/SceneRenderer';
-import { Component, createEffect, createMemo, createSignal, JSX, Signal } from 'solid-js';
+import { Component, createSignal, Signal } from 'solid-js';
 import Masonry from "solid-masonry";
 import styles from '../../assets/css/scene/scene.module.css';
 import Palette, { PalletType } from '../../components/palette/Palette';
@@ -8,9 +8,7 @@ import type { SceneModel } from '../../models/scene/SceneModel';
 import { SceneList } from '../../models/scene/SceneList';
 import { ChoicesEvent } from '../../models/scene/ChoicesEvent';
 import { EndEvent } from '../../models/scene/EndEvent';
-import SceneUtil from '../../utils/scene/sceneUtil'
 import { ScenarioList } from '../../models/scenario/ScenarioList';
-import { SceneChild } from '../../models/scene/SceneChild';
 import _ from 'lodash';
 
 // ストーリー（物語全体）
@@ -23,6 +21,33 @@ const story: ScenarioList = {
           sceneKey: "a",
           // シーン１（初期読み込み）
           scene: [
+            {
+              backGroundImage: "/src/assets/project/image/background/背景（和）.jpg",
+              backGroundMusic: "ponnu.wav",
+              characterList: [
+                "/src/assets/project/image/character/星野・ニャー/シガレット喫煙背景なし.png"
+              ],
+              sceneText: {
+                speaker: "？？？？？",
+                textList: [
+                  "ちょっと、あんた！",
+                  "せっかく私が声を掛けてあげてるんだからすぐに反応しなさいよ！"
+                ]
+              }
+            },
+            {
+              backGroundImage: "/src/assets/project/image/character/星野・ニャー/風呂絵.png",
+              backGroundMusic: "",
+              // backGroundMusic: "/src/assets/project/audio/background/2-0005684112.flac",
+              characterList: [],
+              sceneText: {
+                speaker: "ニャー",
+                textList: [
+                  "なになに、けいちゃん。",
+                  "もしかして興奮しちゃったのかな？"
+                ]
+              }
+            },
             {
               backGroundImage: "/src/assets/project/image/background/背景（和）.jpg",
               backGroundMusic: "ponnu.wav",
@@ -156,7 +181,6 @@ const story: ScenarioList = {
   ]
 }
 
-
 // シナリオ
 let scenario = story.scenarioList[0].scenario;
 
@@ -167,9 +191,6 @@ const [sceneList, setSceneList]: Signal<SceneList> = createSignal(scenario[0]);
 
 // １コマ
 const [scene, setScene]: Signal<SceneModel | ChoicesEvent | EndEvent> = createSignal(sceneList().scene[0]);
-
-// シーンからFlow描写用の差分を生成
-const [sceneChilds, setSceneChilds]: Signal<SceneChild[]> = createSignal(SceneUtil.generateFlowDiff(sceneList()))
 
 const [sceneIndex, setSceneIndex]: Signal<number> = createSignal(0)
 
@@ -184,7 +205,6 @@ const isEndEvent = (obj: any): obj is EndEvent =>
   && obj !== null
   && typeof (obj as EndEvent).nextScenario === "string";
 
-  
 const handleSceneIndexChange = (index: number) => {
   setSceneIndex(index)
   idx = index;
@@ -192,11 +212,7 @@ const handleSceneIndexChange = (index: number) => {
 }
 
 const handleSetScene = () => {
-  if (sceneList().scene.length > (idx + 1)) {
-    idx++;
-  } else {
-    idx = 0;
-  }
+  idx += sceneList().scene.length > (idx + 1) ? 1 : 0
 
   setScene(sceneList().scene[idx]);
 

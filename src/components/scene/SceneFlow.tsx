@@ -15,18 +15,12 @@ export type SceneFlowPropType = ParentProps & {
 const [sceneChilds, setSceneChilds]: Store<SceneList> = createStore([]);
 
 const handleChageScene = (items: SceneList) => {
-  console.log(items)
-
   // シーンからFlow描写用の差分を生成
   setSceneChilds(SceneUtil.generateFlowDiff(items))
 }
 
 const SceneFlow: Component<SceneFlowPropType> = (props: SceneFlowPropType) => {
   createEffect(() => handleChageScene(props.flowItems));
-
-  
-
-      
 
   const handleClickStage = (e: MouseEvent, arg: SceneChild) => {
     const selectedIndex = sceneChilds.findIndex((x: SceneChild) => x.sceneIndex === arg.sceneIndex)

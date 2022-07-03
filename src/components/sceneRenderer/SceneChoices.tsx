@@ -47,7 +47,6 @@ export type SceneChoicesType = ParentProps & {
 }
 
 const SceneChoices: Component<SceneChoicesType> = (props: SceneChoicesType) => {
-  console.log(props.choicesList.length)
   return (
     <Show
       when={props.choicesList.length !== 0 && props.choicesList[0].length !== 0}
