@@ -12,7 +12,7 @@ const PaletteClass = css`
   top: 0;
   border-radius: 6px;
   background-color: #404040;
-
+  overflow-y: auto;
   box-shadow:
     0 0 2px 2px rgba(0, 0, 0, .2),
     0 0 3px 3px rgba(0, 0, 0, .1),
