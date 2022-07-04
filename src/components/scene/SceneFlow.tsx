@@ -52,6 +52,7 @@ const SceneFlow: Component<SceneFlowPropType> = (props: SceneFlowPropType) => {
                   <Switch>
                     <Match when={events.sceneType === 'Text'}>
                       <div class={styles.flow_item_text}>
+                        <label>{events.sceneObject.speaker}</label>
                         <span>
                         <For each={events.sceneObject.textList} fallback={<div>Loading...</div>}>
                           {(text) => (<>{text}<br /></>)}
@@ -62,7 +63,6 @@ const SceneFlow: Component<SceneFlowPropType> = (props: SceneFlowPropType) => {
                     <Match when={events.sceneType === 'Image'}>
                       <div class={styles.flow_item_asset}>
                         <div class={styles.flow_item_action_btn}>
-                          {/* <img src={PoppoIcon} alt="" /> */}
                           <Switch>
                             <Match when={events.sceneAction === 'add'}>
                               <span class="material-symbols-outlined" data-action-type={'add'}>add</span>
@@ -87,7 +87,6 @@ const SceneFlow: Component<SceneFlowPropType> = (props: SceneFlowPropType) => {
                     <Match when={events.sceneType === 'Music'}>
                       <div class={styles.flow_item_asset}>
                         <div class={styles.flow_item_action_btn}>
-                          {/* <img src={PoppoIcon} alt="" /> */}
                           <Switch>
                             <Match when={events.sceneAction === 'add'}>
                               <span class="material-symbols-outlined" data-action-type={'add'}>add</span>
