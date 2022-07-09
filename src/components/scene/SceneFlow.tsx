@@ -45,7 +45,9 @@ const SceneFlow: Component<SceneFlowPropType> = (props: SceneFlowPropType) => {
 
         <For each={sceneChilds} fallback={<div>Loading...</div>}>
           {(child: SceneChild) => (
-            <div class={styles.flow_item_stage} data-stage-active={child.sceneIndex === props.selectedSceneIndex} onClick={(e) => handleClickStage(e, child)}>
+            <div class={styles.flow_item_stage}
+                 data-stage-active={child.sceneIndex === props.selectedSceneIndex}
+                 onClick={(e) => handleClickStage(e, child)}>
               
               <For each={child.sceneEvent} fallback={<div>Loading...</div>}>
                 {(events: SceneEvent) => (
@@ -77,7 +79,6 @@ const SceneFlow: Component<SceneFlowPropType> = (props: SceneFlowPropType) => {
                         </div>
                         <div class={styles.flow_item}>
                           <div class={styles.flow_item_left}>
-                            {/* <img src={PoppoIcon} alt="" /> */}
                             <span class="material-symbols-outlined">wallpaper</span>
                           </div>
                           <div class={styles.flow_item_right}>{events.sceneObject.backGroundImage?.split('/').slice(-1)[0]}</div>
@@ -101,7 +102,6 @@ const SceneFlow: Component<SceneFlowPropType> = (props: SceneFlowPropType) => {
                         </div>
                         <div class={styles.flow_item}>
                           <div class={styles.flow_item_left}>
-                            {/* <img src={PoppoIcon} alt="" /> */}
                             <span class="material-symbols-outlined">music_note</span>
                           </div>
                           <div class={styles.flow_item_right}>{events.sceneObject.backGroundMusic?.split('/').slice(-1)[0]}</div>
@@ -113,7 +113,6 @@ const SceneFlow: Component<SceneFlowPropType> = (props: SceneFlowPropType) => {
                         {(character: string) => (
                           <div class={styles.flow_item_asset}>
                             <div class={styles.flow_item_action_btn}>
-                              {/* <img src={PoppoIcon} alt="" /> */}
                               <Switch>
                                 <Match when={events.sceneAction === 'add'}>
                                   <span class="material-symbols-outlined" data-action-type={'add'}>add</span>
