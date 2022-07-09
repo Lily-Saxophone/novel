@@ -173,7 +173,6 @@
 
 .flow_item_action_btn>span {
   padding: 2px;
-  transition: .6s;
   border-radius: 25px;
   color: #404040bf;
 }
@@ -188,10 +187,6 @@
 
 .flow_item_action_btn>span[data-action-type="change"] {
   background-color: #d2a07b;
-}
-
-.flow_item_action_btn>span:hover {
-  transform: rotate(360deg);
 }
 
 .flow_item {
