@@ -127,7 +127,6 @@ const SceneFlow: Component<SceneFlowPropType> = (props: SceneFlowPropType) => {
                             </div>
                             <div class={styles.flow_item}>
                               <div class={styles.flow_item_left}>
-                                {/* <img src={PoppoIcon} alt="" /> */}
                                 <span class="material-symbols-outlined">person</span>
                               </div>
                               <div class={styles.flow_item_right}>{character.split('/').slice(-1)[0]}</div>
@@ -139,11 +138,6 @@ const SceneFlow: Component<SceneFlowPropType> = (props: SceneFlowPropType) => {
                   </Switch>
                 )}
               </For>
-              <Show when={child.sceneIndex === props.selectedSceneIndex}>
-                <div class={styles.flow_item_add_stage_btn}>
-                  <span class="material-symbols-outlined" data-action-type={'add'}>add</span>
-                </div>
-              </Show>
             </div>
           )}
           </For>
