@@ -13,6 +13,8 @@ import SceneChoices from './sceneChoices';
 import type { SceneModel } from '../../models/scene/SceneModel';
 import type { ChoicesEvent } from '../../models/scene/ChoicesEvent';
 import type { EndEvent } from '../../models/scene/EndEvent';
+import { ChoicesModel } from '../../models/scene/ChoicesModel';
+import SceneUtil from '../../utils/scene/sceneUtil';
 import { Portal } from 'solid-js/web';
 
 const SceneRendererClass = css`
@@ -35,27 +37,16 @@ const [sceneText, setSceneText]: Signal<SceneText> = createSignal({ speaker: "",
 const [characterList, setCharacterList]: Signal<Array<string>> = createSignal([]);
 const [backGroundImage, setBackGroundImage]: Signal<string> = createSignal("");
 const [backGroundMusic, setBackGroundMusic]: Signal<string> = createSignal("");
-const [choicesList, setChoicesList]: Signal<Array<Array<string>>> = createSignal([]);
-
-const isSceneModel = (obj: any): obj is SceneModel =>
-  typeof obj === "object"
-  && obj !== null
-  && typeof (obj as SceneModel).backGroundImage === "string"
-  && typeof (obj as SceneModel).backGroundMusic === "string";
-
-const isEndEvent = (obj: any): obj is EndEvent =>
-  typeof obj === "object"
-  && obj !== null
-  && typeof (obj as EndEvent).nextScenario === "string";
+const [choicesList, setChoicesList]: Signal<Array<ChoicesModel>> = createSignal([]);
 
 const handleSetScene = (scene: SceneModel | ChoicesEvent | EndEvent) => {
-  if (isSceneModel(scene)) {
+  if (SceneUtil.isSceneModel(scene)) {
     setSceneText(scene.sceneText);
     setCharacterList(scene.characterList);
     setBackGroundImage(scene.backGroundImage);
     setBackGroundMusic(scene.backGroundMusic);
 
-  } else if (isEndEvent(scene)) {
+  } else if (SceneUtil.isEndEvent(scene)) {
     // none
 
   } else {

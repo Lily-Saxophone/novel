@@ -9,6 +9,7 @@ import { SceneList } from '../../models/scene/SceneList';
 import { ChoicesEvent } from '../../models/scene/ChoicesEvent';
 import { EndEvent } from '../../models/scene/EndEvent';
 import { ScenarioList } from '../../models/scenario/ScenarioList';
+import SceneUtil from '../../utils/scene/sceneUtil';
 import _ from 'lodash';
 
 // ストーリー（物語全体）
@@ -76,7 +77,11 @@ const story: ScenarioList = {
               }
             },
             {
-              choicesList: [["b", "シナリオsecond、scene未選択ルート"], ["c", "シナリオsecond、シーンbルート"], ["b", "ダイナミック琉球"]]
+              choicesList: [
+                { choicesKey: "b", choiceSceneName: "ぽんぬ、FXに手を出す", choicesLabal: "シナリオsecond、scene未選択ルート" },
+                { choicesKey: "c", choiceSceneName: "ぽんぬ、遂に株を買う", choicesLabal: "シナリオsecond、シーンbルート" },
+                { choicesKey: "b", choiceSceneName: "銀行にログイン出来ないんぬ...", choicesLabal: "ダイナミック琉球" }
+              ]
             }
           ]
         },
@@ -99,8 +104,10 @@ const story: ScenarioList = {
               }
             },
             {
-              nextScenario: "second",
-              nextScene: ""
+              nextScenarioKey: "second",
+              nextScenarioName: "第二章",
+              nextSceneKey: "",
+              nextSceneName: "木村圭佑逮捕"
             }
           ]
         },
@@ -123,8 +130,10 @@ const story: ScenarioList = {
               }
             },
             {
-              nextScenario: "second",
-              nextScene: "b"
+              nextScenarioKey: "second",
+              nextScenarioName: "第二章",
+              nextSceneKey: "b",
+              nextSceneName: "木村圭佑逮捕"
             }
           ]
         }
@@ -149,8 +158,10 @@ const story: ScenarioList = {
               }
             },
             {
-              nextScenario: "first",
-              nextScene: "a"
+              nextScenarioKey: "first",
+              nextScenarioName: "第一章",
+              nextSceneKey: "a",
+              nextSceneName: "木村圭佑逮捕"
             }
           ]
         },
@@ -171,8 +182,10 @@ const story: ScenarioList = {
               }
             },
             {
-              nextScenario: "first",
-              nextScene: "b"
+              nextScenarioKey: "first",
+              nextScenarioName: "第一章",
+              nextSceneKey: "b",
+              nextSceneName: "木村圭佑逮捕"
             }
           ]
         }
@@ -194,17 +207,6 @@ const [scene, setScene]: Signal<SceneModel | ChoicesEvent | EndEvent> = createSi
 
 const [sceneIndex, setSceneIndex]: Signal<number> = createSignal(0)
 
-const isSceneModel = (obj: any): obj is SceneModel =>
-  typeof obj === "object"
-  && obj !== null
-  && typeof (obj as SceneModel).backGroundImage === "string"
-  && typeof (obj as SceneModel).backGroundMusic === "string";
-
-const isEndEvent = (obj: any): obj is EndEvent =>
-  typeof obj === "object"
-  && obj !== null
-  && typeof (obj as EndEvent).nextScenario === "string";
-
 const handleSceneIndexChange = (index: number) => {
   setSceneIndex(index)
   idx = index;
@@ -216,8 +218,8 @@ const handleSetScene = () => {
 
   setScene(sceneList().scene[idx]);
 
-  if (isEndEvent(scene())) {
-    nextScenario((scene() as EndEvent).nextScenario, (scene() as EndEvent).nextScene);
+  if (SceneUtil.isEndEvent(scene())) {
+    nextScenario((scene() as EndEvent).nextScenarioKey, (scene() as EndEvent).nextSceneKey);
   }
 
   handleSceneIndexChange(idx)

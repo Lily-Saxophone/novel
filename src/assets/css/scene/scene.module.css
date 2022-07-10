@@ -1,5 +1,7 @@
 :root {
   --space-size_1: 13px;
+  --space-size_2: 15px;
+  --space-size_3: 17px;
 }
 
 .my_masonry_grid {
@@ -72,7 +74,7 @@
   width: 100%;
   height: auto;
   background-color: #808080;
-  margin: 1.4rem 0;
+  margin: .5rem 0;
   padding: calc(var(--space-size_1) / 2) 0;
   box-shadow: -3px 0 4px 2px rgb(0 0 0 / 10%);
   z-index: 1;
@@ -83,21 +85,21 @@
   background-color: #55706d;
 }
 
-.flow_item_stage[data-stage-type]::before {
-  width: 5px;
-  height: 100%;
-  content: '';
+.flow_item_stage[data-stage-type="Choices"]::before,
+.flow_item_stage[data-stage-type="End"]::before {
   position: absolute;
   top: 0;
   left: 0;
-  box-shadow: -3px 0 4px 2px rgb(0 0 0 / 10%);
+  width: 5px;
+  height: 100%;
+  content: '';
 }
 
-.flow_item_stage[data-stage-type="choices"]::before {
+.flow_item_stage[data-stage-type="Choices"]::before {
   background-color: #d69f6d;
 }
 
-.flow_item_stage[data-stage-type="end"]::before {
+.flow_item_stage[data-stage-type="End"]::before {
   background-color: #7849cf;
 }
 
@@ -151,7 +153,11 @@
   position: relative;
 }
 
-.arrow {
+.flow_item_stage[data-stage-type="Choices"] .flow_item_asset {
+  margin-bottom: var(--space-size_3);
+}
+
+.flow_item_choice_border {
   position: absolute;
   width: 35px;
   height: 25px;
@@ -187,6 +193,10 @@
 
 .flow_item_action_btn>span[data-action-type="change"] {
   background-color: #d2a07b;
+}
+
+.flow_item_action_btn>span[data-action-type="forward"] {
+  background-color: #855ce2;
 }
 
 .flow_item {

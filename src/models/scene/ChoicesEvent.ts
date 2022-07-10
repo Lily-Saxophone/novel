@@ -1,3 +1,5 @@
+import { ChoicesModel } from "./ChoicesModel"
+
 export type ChoicesEvent = {
-  choicesList: Array<Array<string>>
+  choicesList: Array<ChoicesModel>
 }

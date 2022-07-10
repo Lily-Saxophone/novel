@@ -1,7 +1,9 @@
+import { ChoicesEvent } from "./ChoicesEvent";
+import { EndEvent } from "./EndEvent";
 import { SceneEvent } from "./SceneEvent";
 
 export type SceneChild = {
-  sceneIndex: number,
-  sceneEvent: Array<SceneEvent>,
-  isActive?: boolean
+  childIndex: number,
+  childEvent: Array<SceneEvent> | ChoicesEvent | EndEvent,
+  childType: 'Scene' | 'Choices' | 'End'
 }

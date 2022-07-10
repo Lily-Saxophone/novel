@@ -1,5 +1,6 @@
 import { Component, For, JSX, ParentProps, Show } from 'solid-js';
 import { css } from "solid-styled-components";
+import { ChoicesModel } from '../../models/scene/ChoicesModel';
 
 const SceneChoicesClass = css`
   width: 100%;
@@ -42,27 +43,27 @@ const backGroundClass = css`
 `;
 
 export type SceneChoicesType = ParentProps & {
-  choicesList: Array<Array<string>>
+  choicesList: Array<ChoicesModel>
   onClick?: JSX.EventHandlerUnion<HTMLDivElement, MouseEvent>,
 }
 
 const SceneChoices: Component<SceneChoicesType> = (props: SceneChoicesType) => {
   return (
     <Show
-      when={props.choicesList.length !== 0 && props.choicesList[0].length !== 0}
+      when={props.choicesList.length !== 0 && props.choicesList[0].choicesKey !== undefined}
       fallback={() => <></>}>
 
       <div class={SceneChoicesClass}>
         <div class={ChoicesContainerClass}>
           <For each={props.choicesList} fallback={<div>Loading Failed.</div>}>
-            {(item) => (
-              <div class={ChoicesItemClass} data-key={item[0]} onClick={props.onClick}>
-                {item[1]}
+            {(item: ChoicesModel) => (
+              <div class={ChoicesItemClass} data-key={item.choicesKey} onClick={props.onClick}>
+                {item.choicesLabal}
               </div>
             )}
           </For>
         </div>
-        <div class={backGroundClass} onClick={() => { console.log("ooooooo"); }}></div>
+        <div class={backGroundClass} onClick={() => {  }}></div>
       </div>
     </Show>
   );
