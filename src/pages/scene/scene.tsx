@@ -11,6 +11,7 @@ import { EndEvent } from '../../models/scene/EndEvent';
 import { ScenarioList } from '../../models/scenario/ScenarioList';
 import SceneUtil from '../../utils/scene/sceneUtil';
 import _ from 'lodash';
+import SceneDetail from '../../components/sceneDetail/SceneDetail';
 
 // ストーリー（物語全体）
 const story: ScenarioList = {
@@ -233,7 +234,7 @@ const handleChoicesClick = (event: any) => {
     setSceneList(wkSceneList);
     setScene({ choicesList: [] });
     setScene(sceneList().scene[idx]);
-    
+
     handleSceneIndexChange(idx)
   }
 }
@@ -267,7 +268,7 @@ const [data, setData]: Signal<PalletType[]> = createSignal([
   { title: "Main", content: <SceneRenderer scene={scene()} onSceneClick={handleSetScene} onChoicesClick={handleChoicesClick} />, width: "calc(51vw - 10px)", height: "calc(58vh - 10px  - 13px)" },
   { title: "Flow", content: <SceneFlow onSceneIndexChange={handleSceneIndexChange} selectedSceneIndex={sceneIndex()} flowItems={sceneList()} />, width: "calc(25vw - 10px)", height: "calc(93vh - 13px)" },
   { title: "Media", content: <></>, width: "calc(22.5vw - 10px)", height: "46.5vh" },
-  { title: "Mitei", content: <></>, width: "calc(51vw - 10px)", height: "35vh" },
+  { title: "Detail", content: <SceneDetail></SceneDetail>, width: "calc(51vw - 10px)", height: "35vh" },
 ]);
 
 const Scene: Component = () => {
