@@ -71,7 +71,9 @@ const SideBar: Component<SideBarType> = (props: SideBarType) => {
 
   return (
     <div class={SideBarClass} style={'width:' + width + '%'}>
-      <ul>
+      <ul
+        onclick={(e) => changeMenuItem(e)}
+      >
         {props.children}
       </ul>
     </div>
