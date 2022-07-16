@@ -73,10 +73,10 @@
 .flow_item_stage {
   width: 100%;
   height: auto;
-  background-color: #808080;
+  background-color: #404040;
   margin: .5rem 0;
   padding: calc(var(--space-size_1) / 2) 0;
-  box-shadow: -3px 0 4px 2px rgb(0 0 0 / 10%);
+  box-shadow: -3px 0 5px 2px rgb(0 0 0 / 30%);
   z-index: 1;
   position: relative;
 }
@@ -116,13 +116,13 @@
 .flow_item_text {
   width: calc(100% - var(--space-size_1) * 2);
   height: auto;
-  background-color: #404040bf;
+  background-color: #737373bf;
   border-radius: 6px;
   font-family: 'ヒラギノ角ゴ ProN W3';
   font-size: .8rem;
   padding: 1px 0;
   margin: .5em var(--space-size_1);
-  box-shadow: -3px 0 4px 2px rgb(0 0 0 / 10%);
+  box-shadow: 1px 0 4px 2px rgb(0 0 0 / 20%);
   position: relative;
 }
 
@@ -133,9 +133,10 @@
   width: 20%;
   border-radius: 6px;
   display: block;
-  background-color: #737373;
+  background-color: #404040;
   text-align: center;
   font-size: .7rem;
+  border: solid 1.2px #94a1a0;
 }
 
 .flow_item_text span {
@@ -146,7 +147,7 @@
 
 .flow_item_asset {
   width: calc(100% - var(--space-size_1) * 2);
-  height: 30px;
+  height: 25px;
   display: flex;
   justify-content: space-around;
   margin: .3em var(--space-size_1);
@@ -159,36 +160,35 @@
 
 .flow_item_choice_border {
   position: absolute;
-  width: 35px;
+  width: 30px;
   height: 25px;
   top: -.3em;
-  left: 1.3em;
+  left: .8em;
   border-left: 2px solid #cacac9;
   border-bottom: 2px solid #cacac9;
   border-radius: 0 0 0 6px;
 }
 
 .flow_item_action_btn {
-  width: 18%;
+  width: 13%;
   height: 100%;
-  margin-left: -10px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .flow_item_action_btn>span {
-  padding: 2px;
+  padding: 0px;
   border-radius: 25px;
   color: #404040bf;
 }
 
 .flow_item_action_btn>span[data-action-type="add"] {
-  background-color: #5bce7c;
+  background-color: #68ae71;
 }
 
 .flow_item_action_btn>span[data-action-type="remove"] {
-  background-color: #d33d51;
+  background-color: #ad5a61;
 }
 
 .flow_item_action_btn>span[data-action-type="change"] {
@@ -200,37 +200,56 @@
 }
 
 .flow_item {
-  width: 82%;
+  width: 88%;
   height: 100%;
   display: flex;
 }
 
 .flow_item_left {
-  width: 15%;
+  width: 10%;
   height: 100%;
   border-radius: 6px 0 0 6px;
   box-shadow: -3px 0 4px 2px rgb(0 0 0 / 10%);
-  background-color: #c05f4c;
+  background-color: #404040;
   display: flex;
   justify-content: center;
   align-items: center;
+  border: solid 1.2px #94a1a0;
+  border-right-width: 0px;
 }
 
 .flow_item_left>span {
   display: block;
-  font-size: 2rem;
+  font-size: 1.7rem;
+}
+
+.flow_item_left>span[data-scene-type="Image"] {
+  color: #d9c741;
+}
+
+.flow_item_left>span[data-scene-type="Music"] {
+  color: #009dbd;
+}
+
+.flow_item_left>span[data-scene-type="Character"] {
+  color: #c7544d;
+}
+
+.flow_item_left>span[data-scene-type="Choices"] {
+  color: #2e906d;
 }
 
 .flow_item_right {
-  width: 85%;
+  width: 90%;
   height: 100%;
-  background-color: #ca7e7f;
+  background-color: #404040;
   box-shadow: 3px 0 4px 2px rgb(0 0 0 / 10%);
   border-radius: 0 6px 6px 0;
   font-family: 'ヒラギノ角ゴ ProN W3';
   font-size: .9rem;
-  line-height: 230%;
+  line-height: 200%;
   padding-left: 8px;
+  border: solid 1.2px #94a1a0;
 }
 
 .flow_item_add_stage_btn {
