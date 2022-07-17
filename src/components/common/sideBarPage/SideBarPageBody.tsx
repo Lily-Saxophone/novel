@@ -15,7 +15,7 @@ export type SideBarPageBodyType = ParentProps & {
 
 const SideBarPageBody: Component<SideBarPageBodyType> = (props: SideBarPageBodyType) => {
   return (
-    <div class={SideBarPageBodyClass} style={'width:' + props.width + '%'}>
+    <div class={SideBarPageBodyClass} style={`width:${props.width}%;`}>
       {props.children}
     </div>
   );

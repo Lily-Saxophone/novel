@@ -2,14 +2,11 @@ import { Component, createSignal, For, ParentProps, Setter, Show, Signal } from 
 import { css } from "solid-styled-components";
 
 const SelectItemListClass = css`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
+  margin-bottom: 5px;
   
   .select_items {
     width: 200px;
-    height: 25px;
+    height: 20px;
     position: relative;
     user-select: none;
   }
@@ -18,12 +15,13 @@ const SelectItemListClass = css`
     width: 100%;
     height: 100%;
     border-bottom: solid 1px white;
-    font-size: 1rem;
-    margin: 5px;
+    font-size: .7rem;
+    line-height: 200%;
+    position: relative;
 
     &_opener:before {
       position: absolute;
-      top: 12px;
+      top: 8px;
       right: 5px;
       width: 0;
       height: 0;
@@ -52,8 +50,20 @@ const SelectItemListClass = css`
     }
     
     &_options {
-      margin-top: 5px;
-      margin-left: 10px;
+      width: 100%;
+      padding-top: 5px;
+      background-color: #404040;
+      position: absolute;
+      z-index: 99;
+
+      & > div {
+        transition: .6s;
+        padding-left: 10px;
+      }
+
+      & > div:hover {
+        background-color: #606060;
+      }
     }
   }
 `;
@@ -63,7 +73,8 @@ type ItemType = { itemKey: string, itemName: string }
 export type SelectItemListType = ParentProps & {
   itemList: ItemType[]
   setSelectedItemKey: Setter<string>,
-  defaultValue?: string
+  defaultValue?: string,
+  width: number
 }
 
 const SelectItemList: Component<SelectItemListType> = (props: SelectItemListType) => {
@@ -80,7 +91,7 @@ const SelectItemList: Component<SelectItemListType> = (props: SelectItemListType
 
   return (
     <div class={SelectItemListClass}>
-      <div class='select_items'>
+      <div class='select_items' style={`width:${props.width}px;`}>
         <div class='select_list' onClick={() => setIsOpen(!isOpen())}>
           <i class='select_list_opener' data-is-open={isOpen()}></i>
           <label class='selected_item_label'>{selectedItemName()}</label>
