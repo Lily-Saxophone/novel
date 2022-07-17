@@ -39,7 +39,6 @@ const SceneFlow: Component<SceneFlowPropType> = (props: SceneFlowPropType) => {
 
   return (
     <>
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
       <div class={styles.flow_container} id="js-flow_container">
         <div class={styles.flow_line}></div>
         {[...Array(1)].map(() => (<div class={styles.flow_item_stage_dummy}></div>))}
@@ -82,7 +81,7 @@ const SceneFlow: Component<SceneFlowPropType> = (props: SceneFlowPropType) => {
                         </div>
                         <div class={styles.flow_item}>
                           <div class={styles.flow_item_left}>
-                            <span class="material-symbols-outlined">wallpaper</span>
+                            <span class="material-symbols-outlined" data-scene-type={events.sceneType}>wallpaper</span>
                           </div>
                           <div class={styles.flow_item_right}>{events.sceneObject.backGroundImage?.split('/').slice(-1)[0]}</div>
                         </div>
@@ -105,7 +104,7 @@ const SceneFlow: Component<SceneFlowPropType> = (props: SceneFlowPropType) => {
                         </div>
                         <div class={styles.flow_item}>
                           <div class={styles.flow_item_left}>
-                            <span class="material-symbols-outlined">music_note</span>
+                            <span class="material-symbols-outlined" data-scene-type={events.sceneType}>music_note</span>
                           </div>
                           <div class={styles.flow_item_right}>{events.sceneObject.backGroundMusic?.split('/').slice(-1)[0]}</div>
                         </div>
@@ -130,7 +129,7 @@ const SceneFlow: Component<SceneFlowPropType> = (props: SceneFlowPropType) => {
                             </div>
                             <div class={styles.flow_item}>
                               <div class={styles.flow_item_left}>
-                                <span class="material-symbols-outlined">person</span>
+                                <span class="material-symbols-outlined" data-scene-type={events.sceneType}>person</span>
                               </div>
                               <div class={styles.flow_item_right}>{character.split('/').slice(-1)[0]}</div>
                             </div>
@@ -158,7 +157,9 @@ const SceneFlow: Component<SceneFlowPropType> = (props: SceneFlowPropType) => {
                       </div>
                       <div class={styles.flow_item}>
                         <div class={styles.flow_item_left}>
-                          <span class="material-symbols-outlined">import_contacts</span>
+                          <span class="material-symbols-outlined" data-scene-type={child.childType}>
+                            import_contacts
+                          </span>
                         </div>
                         <div class={styles.flow_item_right}>
                           {`ルート： ${choice.choiceSceneName}`}
@@ -176,7 +177,9 @@ const SceneFlow: Component<SceneFlowPropType> = (props: SceneFlowPropType) => {
                   </div>
                   <div class={styles.flow_item}>
                     <div class={styles.flow_item_left}>
-                      <span class="material-symbols-outlined">import_contacts</span>
+                      <span class="material-symbols-outlined" data-scene-type={child.childType}>
+                        import_contacts
+                      </span>
                     </div>
                     <div class={styles.flow_item_right}>
                       {`シナリオ： ${child.childEvent.nextScenarioName} / ${child.childEvent.nextSceneName}`}

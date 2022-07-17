@@ -17,31 +17,30 @@ const SideBarClass = css`
     overflow-y: scroll;
     max-height: 100%;
     cursor: default;
+  
+    li {
+      text-align: center;
+      color: #cccccc;
+      max-width: 100%;
+      height: fit-content;
+      transition-duration: 0.5s;
 
-    :hover {
-      transition: 0.5s;
-      background-color: #4d4d4d;
-    }
+      &:hover {
+        background-color: #4d4d4d;
+      }
 
-  }
-
-  .isSelected {
-    background-color: #4d4d4d;
-  }
-
-  li {
-    text-align: center;
-    color: #cccccc;
-    max-width: 100%;
-    height: fit-content;
-
-    span {
-      display: block;
-      max-width: 85%;
-      margin: auto;
-      height: 100%;
-      padding: 0.8rem 0;
-      border-bottom: solid 0.5px #cccccc;
+      .isSelected {
+        background-color: #4d4d4d;
+      }
+  
+      span {
+        display: block;
+        max-width: 85%;
+        margin: auto;
+        height: 100%;
+        padding: 0.8rem 0;
+        border-bottom: solid 0.5px #cccccc;
+      }
     }
   }
 `;

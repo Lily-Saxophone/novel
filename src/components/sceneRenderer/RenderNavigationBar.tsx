@@ -34,29 +34,23 @@ const RenderNavigationBar: Component<RenderNavigationBarType> = (props: RenderNa
   return (
     <div class={RenderNavigationBarClass}>
       <div class={VolumeNavClass}>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
         <span class="material-symbols-outlined">
           volume_up
         </span>
       </div>
       <div class={PlayNavClass}>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
         <span class="material-symbols-outlined" style='margin: 0 5px;'>
           fast_rewind
         </span>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
         <span class="material-symbols-outlined" style='margin: 0 5px;'>
           replay
         </span>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
         <span class="material-symbols-outlined" style='margin: 0 5px;'>
           stop
         </span >
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
         <span class="material-symbols-outlined" style='color: green; margin: 0 5px;'>
           play_arrow
         </span>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
         <span class="material-symbols-outlined" style='margin: 0 5px;'>
           fast_forward
         </span>

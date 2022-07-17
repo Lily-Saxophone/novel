@@ -208,9 +208,13 @@ const [scene, setScene]: Signal<SceneModel | ChoicesEvent | EndEvent> = createSi
 
 const [sceneIndex, setSceneIndex]: Signal<number> = createSignal(0)
 
-const handleSceneIndexChange = (index: number) => {
-  setSceneIndex(index)
-  idx = index;
+const handleSceneIndexChange = (index?: number) => {
+  if (index !== undefined) {
+    setSceneIndex(index)
+    idx = index;
+  } else {
+    idx += sceneList().scene.length > (idx + 1) ? 1 : 0
+  }
   setScene(sceneList().scene[idx]);
 }
 
@@ -218,6 +222,15 @@ const handleSetScene = () => {
   idx += sceneList().scene.length > (idx + 1) ? 1 : 0
 
   setScene(sceneList().scene[idx]);
+
+  // console.log(!SceneUtil.isChoicesEvent(scene()))
+  // console.log(!_.isEmpty((scene() as ChoicesEvent).choicesList))
+  // if (!SceneUtil.isChoicesEvent(scene())) {
+  //   if (!_.isEmpty((scene() as ChoicesEvent).choicesList)) {
+  //     setScene({ choicesList: [] });
+  //     setScene(sceneList().scene[idx]);
+  //   }
+  // }
 
   if (SceneUtil.isEndEvent(scene())) {
     nextScenario((scene() as EndEvent).nextScenarioKey, (scene() as EndEvent).nextSceneKey);
