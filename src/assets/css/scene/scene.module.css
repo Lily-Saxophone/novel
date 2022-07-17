@@ -251,6 +251,8 @@
   line-height: 200%;
   padding-left: 8px;
   border: solid 1.2px #94a1a0;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .flow_item_add_stage_btn {
