@@ -28,10 +28,6 @@ const SideBarClass = css`
       &:hover {
         background-color: #4d4d4d;
       }
-
-      .isSelected {
-        background-color: #4d4d4d;
-      }
   
       span {
         display: block;
@@ -41,6 +37,10 @@ const SideBarClass = css`
         padding: 0.8rem 0;
         border-bottom: solid 0.5px #cccccc;
       }
+    }
+
+    .isSelected {
+      background-color: #4d4d4d;
     }
   }
 `;
