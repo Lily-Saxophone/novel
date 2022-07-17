@@ -235,7 +235,8 @@
   color: #c7544d;
 }
 
-.flow_item_left>span[data-scene-type="Choices"] {
+.flow_item_left>span[data-scene-type="Choices"],
+.flow_item_left>span[data-scene-type="End"] {
   color: #2e906d;
 }
 

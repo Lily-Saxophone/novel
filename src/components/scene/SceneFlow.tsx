@@ -157,7 +157,9 @@ const SceneFlow: Component<SceneFlowPropType> = (props: SceneFlowPropType) => {
                       </div>
                       <div class={styles.flow_item}>
                         <div class={styles.flow_item_left}>
-                          <span class="material-symbols-outlined" data-scene-type={child.childType}>import_contacts</span>
+                          <span class="material-symbols-outlined" data-scene-type={child.childType}>
+                            import_contacts
+                          </span>
                         </div>
                         <div class={styles.flow_item_right}>
                           {`ルート： ${choice.choiceSceneName}`}
@@ -175,7 +177,9 @@ const SceneFlow: Component<SceneFlowPropType> = (props: SceneFlowPropType) => {
                   </div>
                   <div class={styles.flow_item}>
                     <div class={styles.flow_item_left}>
-                      <span class="material-symbols-outlined">import_contacts</span>
+                      <span class="material-symbols-outlined" data-scene-type={child.childType}>
+                        import_contacts
+                      </span>
                     </div>
                     <div class={styles.flow_item_right}>
                       {`シナリオ： ${child.childEvent.nextScenarioName} / ${child.childEvent.nextSceneName}`}
