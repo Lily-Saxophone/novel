@@ -3,7 +3,6 @@ import { css } from "solid-styled-components";
 
 const SideBarPageBodyClass = css`
   z-index: 10;
-  padding: 1vw;
   height: 100%;
   color: #cccccc;
   background-color: #404040;
