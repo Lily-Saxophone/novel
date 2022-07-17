@@ -2,7 +2,8 @@ import { Component, createSignal, For, ParentProps, Setter, Show, Signal } from 
 import { css } from "solid-styled-components";
 
 const SelectItemListClass = css`
-  margin-bottom: 5px;
+  margin: 5px;
+  margin-top: 0;
   
   .select_items {
     width: 200px;
@@ -74,12 +75,13 @@ export type SelectItemListType = ParentProps & {
   itemList: ItemType[]
   setSelectedItemKey: Setter<string>,
   defaultValue?: string,
-  width: number
+  width?: number
 }
 
 const SelectItemList: Component<SelectItemListType> = (props: SelectItemListType) => {
   
   const defaultValue = props.defaultValue ?? '全て'
+  const width = props.width ?? 200
 
   const handleItemClick = (key: string, index: number) => {
     setSelectedItemName(props.itemList.find(x => x.itemKey == key)?.itemName ?? defaultValue)
@@ -91,7 +93,7 @@ const SelectItemList: Component<SelectItemListType> = (props: SelectItemListType
 
   return (
     <div class={SelectItemListClass}>
-      <div class='select_items' style={`width:${props.width}px;`}>
+      <div class='select_items' style={`width:${width}px;`}>
         <div class='select_list' onClick={() => setIsOpen(!isOpen())}>
           <i class='select_list_opener' data-is-open={isOpen()}></i>
           <label class='selected_item_label'>{selectedItemName()}</label>
