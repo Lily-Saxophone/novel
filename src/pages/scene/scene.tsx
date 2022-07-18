@@ -12,6 +12,7 @@ import { ScenarioList } from '../../models/scenario/ScenarioList';
 import SceneUtil from '../../utils/scene/sceneUtil';
 import _ from 'lodash';
 import SceneDetail from '../../components/sceneDetail/SceneDetail';
+import SceneScenario from '../../components/sceneScenario/SceneScenario';
 
 // ストーリー（物語全体）
 const story: ScenarioList = {
@@ -277,7 +278,7 @@ const nextScenario = (scenarioKey: string, sceneKey: string) => {
 }
 
 const [data, setData]: Signal<PalletType[]> = createSignal([
-  { title: "Motion", content: <></>, width: "calc(22.5vw - 10px)", height: "calc(46.5vh - 10px - 13px)" },
+  { title: "Scenario", content: <SceneScenario />, width: "calc(22.5vw - 10px)", height: "calc(46.5vh - 10px - 13px)" },
   { title: "Main", content: <SceneRenderer scene={scene()} onSceneClick={handleSetScene} onChoicesClick={handleChoicesClick} />, width: "calc(51vw - 10px)", height: "calc(58vh - 10px  - 13px)" },
   { title: "Flow", content: <SceneFlow onSceneIndexChange={handleSceneIndexChange} selectedSceneIndex={sceneIndex()} flowItems={sceneList()} />, width: "calc(25vw - 10px)", height: "calc(93vh - 13px)" },
   { title: "Media", content: <></>, width: "calc(22.5vw - 10px)", height: "46.5vh" },
