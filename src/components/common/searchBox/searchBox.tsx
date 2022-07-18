@@ -16,7 +16,7 @@ const SearchBoxClass = css`
   .search_box {
     width: 100%;
     height: 100%;
-    border-bottom: solid 1px white;
+    border-bottom: solid 1px #C5C5C5;
     font-size: .7rem;
     line-height: 200%;
     position: relative;

@@ -15,7 +15,7 @@ const SelectItemListClass = css`
   .select_list {
     width: 100%;
     height: 100%;
-    border-bottom: solid 1px white;
+    border-bottom: solid 1px #C5C5C5;
     font-size: .7rem;
     line-height: 200%;
     position: relative;
@@ -80,15 +80,17 @@ export type SelectItemListType = ParentProps & {
 
 const SelectItemList: Component<SelectItemListType> = (props: SelectItemListType) => {
   
-  const defaultValue = props.defaultValue ?? '全て'
+  const defaultValue = props.defaultValue ?? 'AllItem'
   const width = props.width ?? 200
 
-  const handleItemClick = (key: string, index: number) => {
-    setSelectedItemName(props.itemList.find(x => x.itemKey == key)?.itemName ?? defaultValue)
+  const defaultName = props.itemList.find(x => x.itemKey == defaultValue)?.itemName
+  props.setSelectedItemKey(defaultValue)
+  
+  const handleItemClick = (key: string) => {
+    setSelectedItemName(props.itemList.find(x => x.itemKey == key)?.itemName ?? '')
     props.setSelectedItemKey(key)
   }
-
-  const [ selectedItemName, setSelectedItemName ]: Signal<string> = createSignal(defaultValue)
+  const [ selectedItemName, setSelectedItemName ]: Signal<string> = createSignal(defaultName ?? '')
   const [ isOpen, setIsOpen ]: Signal<boolean> = createSignal(false)
 
   return (
@@ -103,7 +105,7 @@ const SelectItemList: Component<SelectItemListType> = (props: SelectItemListType
                 {(item: ItemType, index) => (
                   <div data-item-idex={index()}
                       data-item-key={item.itemKey}
-                      onClick={() => handleItemClick(item.itemKey, index())}>
+                      onClick={() => handleItemClick(item.itemKey)}>
                     {item.itemName}
                   </div>
                 )}
