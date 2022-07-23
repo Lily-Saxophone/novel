@@ -45,13 +45,13 @@ export type SearchBoxType = ParentProps & {
   setText: Setter<string>,
   onSubmitButtonClick: () => void,
   defaultValue?: string,
-  width?: number
+  width?: string
 }
 
 const SearchBox: Component<SearchBoxType> = (props: SearchBoxType) => {
   
   const defaultValue = props.defaultValue ?? ''
-  const width = props.width ?? 150
+  const width = props.width ?? '6rem'
 
   const handleChangeText = (e: KeyboardEvent) => {
     props.setText((e.target as HTMLDivElement).innerText)
@@ -68,7 +68,7 @@ const SearchBox: Component<SearchBoxType> = (props: SearchBoxType) => {
 
   return (
     <div class={SearchBoxClass}>
-      <div class='search_box_wrapper' style={`width:${width}px;`}>
+      <div class='search_box_wrapper' style={`width:${width};`}>
         <div class='search_box'>
           <div
             class='searchInput'

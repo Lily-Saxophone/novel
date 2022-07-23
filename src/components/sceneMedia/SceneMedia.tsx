@@ -202,13 +202,13 @@ const SceneMedia: Component<SceneMediaType> = (props: SceneMediaType) => {
           itemList={itemList}
           setSelectedItemKey={setSelectedGroupKey}
           defaultValue={'AllItem'} 
-          width={190} />
+          width={'10rem'} />
 
       <SearchBox
         setText={setSearchText}
         onSubmitButtonClick={handleSearchSubmit}
         defaultValue={''}
-        width={120} />
+        width={'7rem'} />
 
       <div class='left_sidebar'>
         <LeftSideBarPage

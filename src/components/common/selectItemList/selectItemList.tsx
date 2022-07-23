@@ -75,13 +75,13 @@ export type SelectItemListType = ParentProps & {
   itemList: ItemType[]
   setSelectedItemKey: Setter<string>,
   defaultValue?: string,
-  width?: number
+  width?: string
 }
 
 const SelectItemList: Component<SelectItemListType> = (props: SelectItemListType) => {
   
   const defaultValue = props.defaultValue ?? 'AllItem'
-  const width = props.width ?? 200
+  const width = props.width ?? '10rem'
 
   const defaultName = props.itemList.find(x => x.itemKey == defaultValue)?.itemName
   props.setSelectedItemKey(defaultValue)
@@ -95,7 +95,7 @@ const SelectItemList: Component<SelectItemListType> = (props: SelectItemListType
 
   return (
     <div class={SelectItemListClass}>
-      <div class='select_items' style={`width:${width}px;`}>
+      <div class='select_items' style={`width:${width};`}>
         <div class='select_list' onClick={() => setIsOpen(!isOpen())}>
           <i class='select_list_opener' data-is-open={isOpen()}></i>
           <label class='selected_item_label'>{selectedItemName()}</label>

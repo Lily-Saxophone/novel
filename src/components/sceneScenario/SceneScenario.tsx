@@ -37,6 +37,7 @@ const SceneScenarioClass = css`
 
         .scene_thumbnail {
           width: 35%;
+          min-width: 35%;
           height: 100%;
   
           img {
@@ -55,7 +56,7 @@ const SceneScenarioClass = css`
   
           .scene_title {
             width: 100%;
-            max-width: 15em;
+            max-width: 10rem;
             font-size: .75rem;
             font-weight: bold;
             margin-bottom: 3px;
@@ -201,13 +202,13 @@ const SceneScenario: Component<SceneScenarioType> = (props: SceneScenarioType) =
           itemList={itemList}
           setSelectedItemKey={setSelectedGroupKey}
           defaultValue={'AllItem'} 
-          width={190} />
+          width={'10rem'} />
 
       <SearchBox
         setText={setSearchText}
         onSubmitButtonClick={handleSearchSubmit}
         defaultValue={''}
-        width={120} />
+        width={'7rem'} />
 
       <div class='left_sidebar'>
         <LeftSideBarPage
