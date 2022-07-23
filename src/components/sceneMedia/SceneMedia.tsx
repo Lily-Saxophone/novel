@@ -30,20 +30,17 @@ const SceneMediaClass = css`
     .characters {
       display: flex;
       flex-wrap: wrap;
-      justify-content: start;
+      justify-content: space-around;
+      
+      &::after {
+        content: "";
+        flex: auto;
+      }
 
       .character_wrapper {
         width: calc(85px + 1.3px * 2);
         height: calc(85px + 1.3px * 2);
         padding: 7px;
-
-        &::after {
-          display: block;
-          content:"";
-          width: calc(85px + 1.3px * 2);
-          height: calc(85px + 1.3px * 2);
-          padding: 7px;
-        }
 
         &[data-is-active='true'] {
           background-color: #606060;
