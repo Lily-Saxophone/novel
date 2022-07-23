@@ -1,11 +1,12 @@
 import { Accessor, Component, createEffect, For, Match, ParentProps, Show, Switch } from 'solid-js';
-import { createStore, Store } from "solid-js/store"; 
+import { createStore, Store } from "solid-js/store";
 import styles from '../../assets/css/scene/scene.module.css';
-import type { SceneChild } from 'models/scene/SceneChild';
-import type { SceneEvent } from 'models/scene/SceneEvent';
-import { SceneList } from 'models/scene/SceneList';
+import type { SceneChild } from '../../models/scene/SceneChild';
+import type { SceneEvent } from '../../models/scene/SceneEvent';
+import { SceneList } from '../../models/scene/SceneList';
 import SceneUtil from '../../utils/scene/sceneUtil';
-import { ChoicesModel } from 'models/scene/ChoicesModel';
+import { ChoicesModel } from '../../models/scene/ChoicesModel';
+import { SceneCharacter } from '../../models/scene/SceneCharacter';
 
 export type SceneFlowPropType = ParentProps & {
   onSceneIndexChange: (idx: number) => void,
@@ -24,7 +25,7 @@ const handleSceneIndexChange = (index: number) => {
   // 選択した要素を中央にスクロール
   const container = document.getElementById("js-flow_container");
   const target = container?.querySelectorAll("[data-stage-active]")[index];
-  target?.scrollIntoView({behavior: 'smooth', block: 'center'});
+  target?.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
 const SceneFlow: Component<SceneFlowPropType> = (props: SceneFlowPropType) => {
@@ -44,75 +45,27 @@ const SceneFlow: Component<SceneFlowPropType> = (props: SceneFlowPropType) => {
         {[...Array(1)].map(() => (<div class={styles.flow_item_stage_dummy}></div>))}
 
         <For each={sceneChilds} fallback={<div>Loading...</div>}>
-        {(child: SceneChild) => (
-          <div class={styles.flow_item_stage}
-                data-stage-type={child.childType}
-                data-stage-active={child.childIndex === props.selectedSceneIndex}
-                onClick={(e) => handleClickStage(e, child)}>
-            <Switch>
-              <Match when={child.childType === 'Scene'}>
-                <For each={child.childEvent} fallback={<div>Loading...</div>}>
-                {(events: SceneEvent) => (
-                  <Switch>
-                    <Match when={events.sceneType === 'Text'}>
-                      <div class={styles.flow_item_text}>
-                        <label>{events.sceneObject.speaker}</label>
-                        <span>
-                        <For each={events.sceneObject.textList} fallback={<div>Loading...</div>}>
-                          {(text) => (<>{text}<br /></>)}
-                        </For>
-                        </span>
-                      </div>
-                    </Match>
-                    <Match when={events.sceneType === 'Image'}>
-                      <div class={styles.flow_item_asset}>
-                        <div class={styles.flow_item_action_btn}>
-                          <Switch>
-                            <Match when={events.sceneAction === 'add'}>
-                              <span class="material-symbols-outlined" data-action-type={'add'}>add</span>
-                            </Match>
-                            <Match when={events.sceneAction === 'change'}>
-                              <span class="material-symbols-outlined" data-action-type={'change'}>cached</span>
-                            </Match>
-                            <Match when={events.sceneAction === 'remove'}>
-                              <span class="material-symbols-outlined" data-action-type={'remove'}>remove</span>
-                            </Match>
-                          </Switch>
-                        </div>
-                        <div class={styles.flow_item}>
-                          <div class={styles.flow_item_left}>
-                            <span class="material-symbols-outlined" data-scene-type={events.sceneType}>wallpaper</span>
+          {(child: SceneChild) => (
+            <div class={styles.flow_item_stage}
+              data-stage-type={child.childType}
+              data-stage-active={child.childIndex === props.selectedSceneIndex}
+              onClick={(e) => handleClickStage(e, child)}>
+              <Switch>
+                <Match when={child.childType === 'Scene'}>
+                  <For each={child.childEvent} fallback={<div>Loading...</div>}>
+                    {(events: SceneEvent) => (
+                      <Switch>
+                        <Match when={events.sceneType === 'Text'}>
+                          <div class={styles.flow_item_text}>
+                            <label>{events.sceneObject.speaker}</label>
+                            <span>
+                              <For each={events.sceneObject.textList} fallback={<div>Loading...</div>}>
+                                {(text) => (<>{text}<br /></>)}
+                              </For>
+                            </span>
                           </div>
-                          <div class={styles.flow_item_right}>{events.sceneObject.backGroundImage?.split('/').slice(-1)[0]}</div>
-                        </div>
-                      </div>
-                    </Match>
-                    <Match when={events.sceneType === 'Music'}>
-                      <div class={styles.flow_item_asset}>
-                        <div class={styles.flow_item_action_btn}>
-                          <Switch>
-                            <Match when={events.sceneAction === 'add'}>
-                              <span class="material-symbols-outlined" data-action-type={'add'}>add</span>
-                            </Match>
-                            <Match when={events.sceneAction === 'change'}>
-                              <span class="material-symbols-outlined" data-action-type={'change'}>cached</span>
-                            </Match>
-                            <Match when={events.sceneAction === 'remove'}>
-                              <span class="material-symbols-outlined" data-action-type={'remove'}>remove</span>
-                            </Match>
-                          </Switch>
-                        </div>
-                        <div class={styles.flow_item}>
-                          <div class={styles.flow_item_left}>
-                            <span class="material-symbols-outlined" data-scene-type={events.sceneType}>music_note</span>
-                          </div>
-                          <div class={styles.flow_item_right}>{events.sceneObject.backGroundMusic?.split('/').slice(-1)[0]}</div>
-                        </div>
-                      </div>
-                    </Match>
-                    <Match when={events.sceneType === 'Character'}>
-                      <For each={events.sceneObject.characterList} fallback={<div>Loading...</div>}>
-                        {(character: string) => (
+                        </Match>
+                        <Match when={events.sceneType === 'Image'}>
                           <div class={styles.flow_item_asset}>
                             <div class={styles.flow_item_action_btn}>
                               <Switch>
@@ -129,67 +82,115 @@ const SceneFlow: Component<SceneFlowPropType> = (props: SceneFlowPropType) => {
                             </div>
                             <div class={styles.flow_item}>
                               <div class={styles.flow_item_left}>
-                                <span class="material-symbols-outlined" data-scene-type={events.sceneType}>person</span>
+                                <span class="material-symbols-outlined" data-scene-type={events.sceneType}>wallpaper</span>
                               </div>
-                              <div class={styles.flow_item_right}>{character.split('/').slice(-1)[0]}</div>
+                              <div class={styles.flow_item_right}>{events.sceneObject.backGroundImage?.split('/').slice(-1)[0]}</div>
                             </div>
                           </div>
-                        )}
-                      </For>
-                    </Match>
-                  </Switch>
-                )}
-                </For>
-              </Match>
-              <Match when={child.childType === 'Choices' && SceneUtil.isChoicesEvent(child.childEvent)}>
-                <For each={child.childEvent.choicesList} fallback={<div>Loading...</div>}>
-                {(choice: ChoicesModel, index: Accessor<number>) => (
-                  <>
-                    <div class={styles.flow_item_text}>
-                      <label>{`選択肢${index() + 1}`}</label>
-                      <span>
-                        {choice.choicesLabal}
-                      </span>
-                    </div>
-                    <div class={styles.flow_item_asset}>
-                      <div class={styles.flow_item_action_btn}>
-                        <div class={styles.flow_item_choice_border}></div>
-                      </div>
-                      <div class={styles.flow_item}>
-                        <div class={styles.flow_item_left}>
-                          <span class="material-symbols-outlined" data-scene-type={child.childType}>
-                            import_contacts
+                        </Match>
+                        <Match when={events.sceneType === 'Music'}>
+                          <div class={styles.flow_item_asset}>
+                            <div class={styles.flow_item_action_btn}>
+                              <Switch>
+                                <Match when={events.sceneAction === 'add'}>
+                                  <span class="material-symbols-outlined" data-action-type={'add'}>add</span>
+                                </Match>
+                                <Match when={events.sceneAction === 'change'}>
+                                  <span class="material-symbols-outlined" data-action-type={'change'}>cached</span>
+                                </Match>
+                                <Match when={events.sceneAction === 'remove'}>
+                                  <span class="material-symbols-outlined" data-action-type={'remove'}>remove</span>
+                                </Match>
+                              </Switch>
+                            </div>
+                            <div class={styles.flow_item}>
+                              <div class={styles.flow_item_left}>
+                                <span class="material-symbols-outlined" data-scene-type={events.sceneType}>music_note</span>
+                              </div>
+                              <div class={styles.flow_item_right}>{events.sceneObject.backGroundMusic?.split('/').slice(-1)[0]}</div>
+                            </div>
+                          </div>
+                        </Match>
+                        <Match when={events.sceneType === 'Character'}>
+                          <For each={events.sceneObject.characterList} fallback={<div>Loading...</div>}>
+                            {(character: SceneCharacter) => (
+                              <div class={styles.flow_item_asset}>
+                                <div class={styles.flow_item_action_btn}>
+                                  <Switch>
+                                    <Match when={events.sceneAction === 'add'}>
+                                      <span class="material-symbols-outlined" data-action-type={'add'}>add</span>
+                                    </Match>
+                                    <Match when={events.sceneAction === 'change'}>
+                                      <span class="material-symbols-outlined" data-action-type={'change'}>cached</span>
+                                    </Match>
+                                    <Match when={events.sceneAction === 'remove'}>
+                                      <span class="material-symbols-outlined" data-action-type={'remove'}>remove</span>
+                                    </Match>
+                                  </Switch>
+                                </div>
+                                <div class={styles.flow_item}>
+                                  <div class={styles.flow_item_left}>
+                                    <span class="material-symbols-outlined" data-scene-type={events.sceneType}>person</span>
+                                  </div>
+                                  <div class={styles.flow_item_right}>{character.characterSrc.split('/').slice(-1)[0]}</div>
+                                </div>
+                              </div>
+                            )}
+                          </For>
+                        </Match>
+                      </Switch>
+                    )}
+                  </For>
+                </Match>
+                <Match when={child.childType === 'Choices' && SceneUtil.isChoicesEvent(child.childEvent)}>
+                  <For each={child.childEvent.choicesList} fallback={<div>Loading...</div>}>
+                    {(choice: ChoicesModel, index: Accessor<number>) => (
+                      <>
+                        <div class={styles.flow_item_text}>
+                          <label>{`選択肢${index() + 1}`}</label>
+                          <span>
+                            {choice.choicesLabal}
                           </span>
                         </div>
-                        <div class={styles.flow_item_right}>
-                          {`ルート： ${choice.choiceSceneName}`}
+                        <div class={styles.flow_item_asset}>
+                          <div class={styles.flow_item_action_btn}>
+                            <div class={styles.flow_item_choice_border}></div>
+                          </div>
+                          <div class={styles.flow_item}>
+                            <div class={styles.flow_item_left}>
+                              <span class="material-symbols-outlined" data-scene-type={child.childType}>
+                                import_contacts
+                              </span>
+                            </div>
+                            <div class={styles.flow_item_right}>
+                              {`ルート： ${choice.choiceSceneName}`}
+                            </div>
+                          </div>
                         </div>
+                      </>
+                    )}
+                  </For>
+                </Match>
+                <Match when={child.childType === 'End' && SceneUtil.isEndEvent(child.childEvent)}>
+                  <div class={styles.flow_item_asset}>
+                    <div class={styles.flow_item_action_btn}>
+                      <span class="material-symbols-outlined" data-action-type={'forward'}>arrow_forward</span>
+                    </div>
+                    <div class={styles.flow_item}>
+                      <div class={styles.flow_item_left}>
+                        <span class="material-symbols-outlined" data-scene-type={child.childType}>
+                          import_contacts
+                        </span>
+                      </div>
+                      <div class={styles.flow_item_right}>
+                        {`シナリオ： ${child.childEvent.nextScenarioName} / ${child.childEvent.nextSceneName}`}
                       </div>
                     </div>
-                  </>
-                )}
-                </For>
-              </Match>
-              <Match when={child.childType === 'End' && SceneUtil.isEndEvent(child.childEvent)}>
-                <div class={styles.flow_item_asset}>
-                  <div class={styles.flow_item_action_btn}>
-                    <span class="material-symbols-outlined" data-action-type={'forward'}>arrow_forward</span>
                   </div>
-                  <div class={styles.flow_item}>
-                    <div class={styles.flow_item_left}>
-                      <span class="material-symbols-outlined" data-scene-type={child.childType}>
-                        import_contacts
-                      </span>
-                    </div>
-                    <div class={styles.flow_item_right}>
-                      {`シナリオ： ${child.childEvent.nextScenarioName} / ${child.childEvent.nextSceneName}`}
-                    </div>
-                  </div>
-                </div>
-              </Match>
-            </Switch>
-          </div>
-        )}
+                </Match>
+              </Switch>
+            </div>
+          )}
         </For>
         {[...Array(2)].map(() => (<div class={styles.flow_item_stage_dummy}></div>))}
       </div>

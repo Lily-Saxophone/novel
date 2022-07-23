@@ -1,12 +1,12 @@
-import { Component, createEffect, createSignal, ParentProps, Signal } from 'solid-js';
+import { Component, JSX, ParentProps } from 'solid-js';
 import { css } from "solid-styled-components";
-import ImageBox from './ImageBox';
-import FileSelector from './FileSelector';
 import DetailScene from './DetailScene';
 import DetailItem from './DetailItem';
-import CustomTextArea from './CustomTextArea';
 import DetailText from './DetailText';
 import DetailCharacter from './DetailCharacter';
+import { SceneModel } from '../../models/scene/SceneModel';
+import { ChoicesEvent } from '../../models/scene/ChoicesEvent';
+import { EndEvent } from '../../models/scene/EndEvent';
 
 const BasicSettingsClass = css`
   width: 100%;
@@ -17,7 +17,8 @@ const BasicSettingsClass = css`
   `;
 
 export type BasicSettingsType = ParentProps & {
-
+  scene: SceneModel | ChoicesEvent | EndEvent,
+  onSceneUpdate?: JSX.EventHandlerUnion<HTMLDivElement, MouseEvent>,
 }
 
 const BasicSettings: Component<BasicSettingsType> = (props: BasicSettingsType) => {
@@ -46,13 +47,13 @@ const BasicSettings: Component<BasicSettingsType> = (props: BasicSettingsType) =
         />
       </DetailItem>
       <DetailItem title='キャラクター'>
-        <DetailCharacter characterList={characterList} />
+        <DetailCharacter characterList={(props.scene as SceneModel).characterList} />
       </DetailItem>
       <DetailItem title='シーン'>
         <DetailScene
           backGroundName=''
-          backGroundSrc='/src/assets/project/image/background/背景（和）.jpg'
-          bgmSrc='audio/background/2-0005684112.flac'
+          backGroundSrc={(props.scene as SceneModel).backGroundImage}
+          bgmSrc={(props.scene as SceneModel).backGroundMusic}
           motionSrc='effect/scene/切り替えアニメーション１'
           seSrc=''
         />

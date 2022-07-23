@@ -1,4 +1,7 @@
-import { Component, createEffect, createSignal, ParentProps, Signal } from 'solid-js';
+import { ChoicesEvent } from '../../models/scene/ChoicesEvent';
+import { EndEvent } from '../../models/scene/EndEvent';
+import { SceneModel } from '../../models/scene/SceneModel';
+import { Component, JSX, ParentProps } from 'solid-js';
 import { css } from "solid-styled-components";
 import LeftSideBarPage from '../../components/common/sideBarPage/LeftSideBarPage';
 import BasicSettings from './BasicSettings';
@@ -9,7 +12,8 @@ const SceneDetailClass = css`
 `;
 
 export type SceneDetailType = ParentProps & {
-
+  scene: SceneModel | ChoicesEvent | EndEvent,
+  onSceneUpdate?: JSX.EventHandlerUnion<HTMLDivElement, MouseEvent>,
 }
 
 const SceneDetail: Component<SceneDetailType> = (props: SceneDetailType) => {
@@ -20,7 +24,7 @@ const SceneDetail: Component<SceneDetailType> = (props: SceneDetailType) => {
         itemList={[
           {
             title: '基本設定',
-            contents: <BasicSettings />
+            contents: <BasicSettings scene={props.scene} onSceneUpdate={props.onSceneUpdate} />
           },
         ]}
       />

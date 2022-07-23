@@ -15,7 +15,7 @@ import type { ChoicesEvent } from '../../models/scene/ChoicesEvent';
 import type { EndEvent } from '../../models/scene/EndEvent';
 import { ChoicesModel } from '../../models/scene/ChoicesModel';
 import SceneUtil from '../../utils/scene/sceneUtil';
-import { Portal } from 'solid-js/web';
+import { SceneCharacter } from '../../models/scene/SceneCharacter';
 
 const SceneRendererClass = css`
   width: inherit;
@@ -34,7 +34,7 @@ export type SceneRendererType = ParentProps & {
 }
 
 const [sceneText, setSceneText]: Signal<SceneText> = createSignal({ speaker: "", textList: [] });
-const [characterList, setCharacterList]: Signal<Array<string>> = createSignal([]);
+const [characterList, setCharacterList]: Signal<Array<SceneCharacter>> = createSignal([]);
 const [backGroundImage, setBackGroundImage]: Signal<string> = createSignal("");
 const [backGroundMusic, setBackGroundMusic]: Signal<string> = createSignal("");
 const [choicesList, setChoicesList]: Signal<Array<ChoicesModel>> = createSignal([]);
@@ -68,9 +68,9 @@ const SceneRenderer: Component<SceneRendererType> = (props: SceneRendererType) =
         </TextLayer>
 
         <CharacterLayer>
-          <Character characterImage={characterList()[0]} />
-          <Character characterImage={characterList()[1]} />
-          <Character characterImage={characterList()[2]} />
+          <Character characterImage={characterList()[0].characterSrc} />
+          <Character characterImage={characterList()[1].characterSrc} />
+          <Character characterImage={characterList()[2].characterSrc} />
         </CharacterLayer>
 
         <BackGroundLayer

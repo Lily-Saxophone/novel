@@ -30,8 +30,21 @@ const story: ScenarioList = {
               backGroundImage: "/src/assets/project/image/background/背景（和）.jpg",
               backGroundMusic: "",
               characterList: [
-                "/src/assets/project/image/character/星野・ニャー/シガレット喫煙背景なし.png"
-              ],
+                {
+                  characterName: "",
+                  characterSrc: "",
+                  characterEffect: ""
+                },
+                {
+                  characterName: "星野・ニャー",
+                  characterSrc: "/src/assets/project/image/character/星野・ニャー/シガレット喫煙背景なし.png",
+                  characterEffect: ""
+                },
+                {
+                  characterName: "",
+                  characterSrc: "",
+                  characterEffect: ""
+                },],
               sceneText: {
                 speaker: "？？？？？",
                 textList: [
@@ -44,7 +57,23 @@ const story: ScenarioList = {
               backGroundImage: "/src/assets/project/image/character/星野・ニャー/風呂絵.png",
               backGroundMusic: "",
               // backGroundMusic: "/src/assets/project/audio/background/2-0005684112.flac",
-              characterList: [],
+              characterList: [
+                {
+                  characterName: "",
+                  characterSrc: "",
+                  characterEffect: ""
+                },
+                {
+                  characterName: "",
+                  characterSrc: "",
+                  characterEffect: ""
+                },
+                {
+                  characterName: "",
+                  characterSrc: "",
+                  characterEffect: ""
+                },
+              ],
               sceneText: {
                 speaker: "ニャー",
                 textList: [
@@ -57,8 +86,21 @@ const story: ScenarioList = {
               backGroundImage: "/src/assets/project/image/background/背景（和）.jpg",
               backGroundMusic: "",
               characterList: [
-                "/src/assets/project/image/character/星野・ニャー/シガレット喫煙背景なし.png"
-              ],
+                {
+                  characterName: "",
+                  characterSrc: "",
+                  characterEffect: ""
+                },
+                {
+                  characterName: "星野・ニャー",
+                  characterSrc: "/src/assets/project/image/character/星野・ニャー/シガレット喫煙背景なし.png",
+                  characterEffect: ""
+                },
+                {
+                  characterName: "",
+                  characterSrc: "",
+                  characterEffect: ""
+                },],
               sceneText: {
                 speaker: "？？？？？",
                 textList: [
@@ -71,7 +113,23 @@ const story: ScenarioList = {
               backGroundImage: "/src/assets/project/image/character/星野・ニャー/風呂絵.png",
               backGroundMusic: "",
               // backGroundMusic: "/src/assets/project/audio/background/2-0005684112.flac",
-              characterList: [],
+              characterList: [
+                {
+                  characterName: "",
+                  characterSrc: "",
+                  characterEffect: ""
+                },
+                {
+                  characterName: "",
+                  characterSrc: "",
+                  characterEffect: ""
+                },
+                {
+                  characterName: "",
+                  characterSrc: "",
+                  characterEffect: ""
+                },
+              ],
               sceneText: {
                 speaker: "ニャー",
                 textList: [
@@ -98,8 +156,21 @@ const story: ScenarioList = {
               backGroundImage: "/src/assets/project/image/background/背景（和）.jpg",
               backGroundMusic: "",
               characterList: [
-                "/src/assets/project/image/character/星野・ニャー/シガレット喫煙背景なし.png"
-              ],
+                {
+                  characterName: "",
+                  characterSrc: "",
+                  characterEffect: ""
+                },
+                {
+                  characterName: "星野・ニャー",
+                  characterSrc: "/src/assets/project/image/character/星野・ニャー/シガレット喫煙背景なし.png",
+                  characterEffect: ""
+                },
+                {
+                  characterName: "",
+                  characterSrc: "",
+                  characterEffect: ""
+                },],
               sceneText: {
                 speaker: "？？？？？",
                 textList: [
@@ -124,8 +195,21 @@ const story: ScenarioList = {
               backGroundImage: "/src/assets/project/image/background/背景（和）.jpg",
               backGroundMusic: "",
               characterList: [
-                "/src/assets/project/image/character/星野・ニャー/シガレット喫煙背景なし.png"
-              ],
+                {
+                  characterName: "",
+                  characterSrc: "",
+                  characterEffect: ""
+                },
+                {
+                  characterName: "星野・ニャー",
+                  characterSrc: "/src/assets/project/image/character/星野・ニャー/シガレット喫煙背景なし.png",
+                  characterEffect: ""
+                },
+                {
+                  characterName: "",
+                  characterSrc: "",
+                  characterEffect: ""
+                },],
               sceneText: {
                 speaker: "？？？？？",
                 textList: [
@@ -153,7 +237,23 @@ const story: ScenarioList = {
             {
               backGroundImage: "/src/assets/project/image/character/星野・ニャー/風呂絵.png",
               backGroundMusic: "",
-              characterList: [],
+              characterList: [
+                {
+                  characterName: "",
+                  characterSrc: "",
+                  characterEffect: ""
+                },
+                {
+                  characterName: "",
+                  characterSrc: "",
+                  characterEffect: ""
+                },
+                {
+                  characterName: "",
+                  characterSrc: "",
+                  characterEffect: ""
+                },
+              ],
               sceneText: {
                 speaker: "？？？？？",
                 textList: [
@@ -176,7 +276,21 @@ const story: ScenarioList = {
               backGroundImage: "/src/assets/project/image/background/背景（和）.jpg",
               backGroundMusic: "",
               characterList: [
-                "/src/assets/project/image/character/星野・ニャー/シガレット喫煙背景なし.png"
+                {
+                  characterName: "",
+                  characterSrc: "",
+                  characterEffect: ""
+                },
+                {
+                  characterName: "星野・ニャー",
+                  characterSrc: "/src/assets/project/image/character/星野・ニャー/シガレット喫煙背景なし.png",
+                  characterEffect: ""
+                },
+                {
+                  characterName: "",
+                  characterSrc: "",
+                  characterEffect: ""
+                },
               ],
               sceneText: {
                 speaker: "？？？？？",
@@ -280,7 +394,7 @@ const nextScenario = (scenarioKey: string, sceneKey: string) => {
 }
 
 const [data, setData]: Signal<PalletType[]> = createSignal([
-  { 
+  {
     headerContent: { title: 'Scenario' },
     content: <SceneScenario />,
     width: "calc(22.5vw - 10px)",
@@ -305,7 +419,10 @@ const [data, setData]: Signal<PalletType[]> = createSignal([
   },
   {
     headerContent: { title: 'Detail' },
-    content: <SceneDetail></SceneDetail>,
+    content: <SceneDetail
+      scene={scene()}
+      onSceneUpdate={handleSetScene}
+    />,
     width: "calc(51vw - 10px)",
     height: "35vh"
   }
