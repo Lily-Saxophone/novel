@@ -6,7 +6,7 @@ const SideBarPageBodyClass = css`
   height: 100%;
   color: #cccccc;
   background-color: #404040;
-
+  overflow-y: auto;
 `;
 
 export type SideBarPageBodyType = ParentProps & {

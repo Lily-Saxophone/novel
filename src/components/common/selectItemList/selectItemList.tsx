@@ -48,6 +48,18 @@ const SelectItemListClass = css`
 
     .selected_item_label {
       margin-left: 10px;
+      display: block;
+
+      &[contenteditable] {
+        position: relative;
+        padding-left: 3px;
+        font-size: .8rem;
+        text-align: left;
+  
+        &:focus {
+          outline: 0px solid transparent;
+        }
+      }
     }
     
     &_options {
@@ -73,23 +85,45 @@ type ItemType = { itemKey: string, itemName: string }
 
 export type SelectItemListType = ParentProps & {
   itemList: ItemType[]
-  setSelectedItemKey: Setter<string>,
-  defaultValue?: string,
-  width?: string
+  setSelectedItem: Setter<{key: string, value: string}>,
+  defaultValue?: {key: string, value: string},
+  width?: string,
+  hasCusutom?: boolean,
+  viewCustomLabel?: string
 }
 
 const SelectItemList: Component<SelectItemListType> = (props: SelectItemListType) => {
   
-  const defaultValue = props.defaultValue ?? 'AllItem'
-  const width = props.width ?? '10rem'
+  const defaultCustomLabel = props.viewCustomLabel ?? 'カスタム'
+  if (props.hasCusutom)
+    props.itemList.push({ itemKey: 'custom', itemName: defaultCustomLabel })
 
-  const defaultName = props.itemList.find(x => x.itemKey == defaultValue)?.itemName
-  props.setSelectedItemKey(defaultValue)
+  const defaultValue = props.defaultValue ?? { key: 'AllItem', value: '' }
+  const width = props.width ?? '10rem'
+  const defaultName = props.itemList.find(x => x.itemKey == defaultValue.key)?.itemName
+  props.setSelectedItem(defaultValue)
   
-  const handleItemClick = (key: string) => {
-    setSelectedItemName(props.itemList.find(x => x.itemKey == key)?.itemName ?? '')
-    props.setSelectedItemKey(key)
+  let selectedItemKey = ''
+  const [ isEditable, setIsEditable ]: Signal<boolean> = createSignal(false)
+  const handleItemClick = (obj: {key: string, value: string}) => {
+    setSelectedItemName(props.itemList.find(x => x.itemKey == obj.key)?.itemName ?? '')
+
+    selectedItemKey = obj.key
+    setIsEditable(obj.key === 'custom')
+    if (!isEditable())
+      props.setSelectedItem({key: obj.key, value: obj.value})
   }
+
+  const handleChangeText = (e: KeyboardEvent) => {
+    if (e.key === 'Enter')
+      e.preventDefault()
+    
+    if (isEditable()) {
+      const text = (e.target as HTMLDivElement).innerText
+      props.setSelectedItem({key: selectedItemKey, value: text})
+    }
+  }
+  
   const [ selectedItemName, setSelectedItemName ]: Signal<string> = createSignal(defaultName ?? '')
   const [ isOpen, setIsOpen ]: Signal<boolean> = createSignal(false)
 
@@ -98,14 +132,19 @@ const SelectItemList: Component<SelectItemListType> = (props: SelectItemListType
       <div class='select_items' style={`width:${width};`}>
         <div class='select_list' onClick={() => setIsOpen(!isOpen())}>
           <i class='select_list_opener' data-is-open={isOpen()}></i>
-          <label class='selected_item_label'>{selectedItemName()}</label>
+          <label
+            class='selected_item_label' 
+            contentEditable={isEditable()}
+            onKeyUp={(e) => handleChangeText(e)}>
+              {selectedItemName()}
+            </label>
           <Show when={isOpen()}>
             <div class='select_list_options'>
               <For each={props.itemList} fallback={<div>Loading...</div>}>
                 {(item: ItemType, index) => (
                   <div data-item-idex={index()}
                       data-item-key={item.itemKey}
-                      onClick={() => handleItemClick(item.itemKey)}>
+                      onClick={() => handleItemClick({ key: item.itemKey, value: item.itemName })}>
                     {item.itemName}
                   </div>
                 )}

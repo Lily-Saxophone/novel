@@ -25,7 +25,6 @@ const SceneMediaClass = css`
   .left_sidebar {
     width: 100%;
     height: 100%;
-    overflow-y: auto;
 
     .characters {
       display: flex;
@@ -35,6 +34,9 @@ const SceneMediaClass = css`
       &::after {
         content: "";
         flex: auto;
+        width: calc(85px + 1.3px * 2);
+        height: calc(85px + 1.3px * 2);
+        padding: 7px;
       }
 
       .character_wrapper {
@@ -182,14 +184,14 @@ export type SceneMediaType = ParentProps & {
 
 const SceneMedia: Component<SceneMediaType> = (props: SceneMediaType) => {
 
-  const [ selectedGroupKey, setSelectedGroupKey ]: Signal<string> = createSignal('')
+  const [ selectedGroup, setSelectedGroup ]: Signal<{key: string, value: string}> = createSignal({key: '', value: ''})
   const [ searchText, setSearchText ]: Signal<string> = createSignal('')
   createEffect(() => {
-    console.log(`SelectedCharacterGroup: [${selectedGroupKey()}]`)
-    if (selectedGroupKey() === 'AllItem') {
+    console.log(`SelectedCharacterGroup: [${selectedGroup()}]`)
+    if (selectedGroup().key === 'AllItem') {
       setViewCharacterList(characterList)
     } else {
-      setViewCharacterList(characterList.filter(f => f.characterGroup === selectedGroupKey()))
+      setViewCharacterList(characterList.filter(f => f.characterGroup === selectedGroup().key))
     }
   })
 
@@ -204,8 +206,7 @@ const SceneMedia: Component<SceneMediaType> = (props: SceneMediaType) => {
 
         <SelectItemList 
             itemList={itemList}
-            setSelectedItemKey={setSelectedGroupKey}
-            defaultValue={'AllItem'} 
+            setSelectedItem={setSelectedGroup}
             width={'10rem'} />
 
         <SearchBox

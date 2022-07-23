@@ -72,7 +72,7 @@ const SearchBox: Component<SearchBoxType> = (props: SearchBoxType) => {
           <div
             class='searchInput'
             contentEditable={true}
-            onKeyPress={(e) => handleChangeText(e)}>
+            onKeyUp={(e) => handleChangeText(e)}>
             {defaultValue}
           </div>
           <i class="material-symbols-outlined"

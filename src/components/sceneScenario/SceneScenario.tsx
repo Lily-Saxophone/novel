@@ -27,7 +27,16 @@ const SceneScenarioClass = css`
     height: 100%;
 
     .scenes {
-      overflow-y: auto;
+      display: flex;
+      flex-wrap: wrap;
+
+      &::after {
+        content: "";
+        flex: auto;
+        width: 100%;
+        height: 65px;
+        padding: 7px;
+      }
 
       .scene_wrapper {
         width: 100%;
@@ -61,7 +70,7 @@ const SceneScenarioClass = css`
   
           .scene_title {
             width: 100%;
-            max-width: 10rem;
+            max-width: 9rem;
             font-size: .75rem;
             font-weight: bold;
             margin-bottom: 3px;
@@ -185,14 +194,14 @@ export type SceneScenarioType = ParentProps & {
 
 const SceneScenario: Component<SceneScenarioType> = (props: SceneScenarioType) => {
 
-  const [ selectedGroupKey, setSelectedGroupKey ]: Signal<string> = createSignal('')
+  const [ selectedGroup, setSelectedGroup ]: Signal<{key: string, value: string}> = createSignal({key: '', value: ''})
   const [ searchText, setSearchText ]: Signal<string> = createSignal('')
   createEffect(() => {
-    console.log(`SelectedSceneGroup: [${selectedGroupKey()}]`)
-    if (selectedGroupKey() === 'AllItem') {
+    console.log(`SelectedGroup: [`, selectedGroup(), ']')
+    if (selectedGroup().key === 'AllItem') {
       setviewSceneList(sceneList)
     } else {
-      setviewSceneList(sceneList.filter(f => f.sceneGroup === selectedGroupKey()))
+      setviewSceneList(sceneList.filter(f => f.sceneGroup === selectedGroup().key))
     }
   })
 
@@ -204,10 +213,9 @@ const SceneScenario: Component<SceneScenarioType> = (props: SceneScenarioType) =
     <div class={SceneScenarioClass}>
       <div class='topbar_content'>
         <span>{'グループ： '}</span>
-        <SelectItemList 
+        <SelectItemList
             itemList={itemList}
-            setSelectedItemKey={setSelectedGroupKey}
-            defaultValue={'AllItem'} 
+            setSelectedItem={setSelectedGroup}
             width={'10rem'} />
 
         <SearchBox
