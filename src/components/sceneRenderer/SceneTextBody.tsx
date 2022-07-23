@@ -1,4 +1,4 @@
-import { Component, For, JSX, ParentProps } from 'solid-js';
+import { Component, ParentProps } from 'solid-js';
 import { css } from "solid-styled-components";
 
 const SceneTextBodyClass = css`
@@ -22,13 +22,6 @@ const SceneTextBody: Component<SceneTextBodyType> = (props: SceneTextBodyType) =
   return (
     <div class={SceneTextBodyClass}>
       {props.text}
-      {/* <For each={props.textList} fallback={<div>Loading...</div>}>
-        {(item) => (
-          <>
-            {item}<br />
-          </>
-        )}
-      </For> */}
     </div>
   );
 };

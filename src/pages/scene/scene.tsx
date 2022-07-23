@@ -377,6 +377,11 @@ const nextScenario = (scenarioKey: string, sceneKey: string) => {
   }
 }
 
+// Detail用イベントハンドラー
+const DetailChange = (item: SceneModel) => {
+  setScene({ ...item })
+}
+
 const [data, setData]: Signal<PalletType[]> = createSignal([
   {
     headerContent: { title: 'Scenario' },
@@ -405,7 +410,7 @@ const [data, setData]: Signal<PalletType[]> = createSignal([
     headerContent: { title: 'Detail' },
     content: <SceneDetail
       scene={scene()}
-      onSceneUpdate={handleSetScene}
+      onSceneUpdate={DetailChange}
     />,
     width: "calc(51vw - 10px)",
     height: "35vh"

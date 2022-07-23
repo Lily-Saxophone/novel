@@ -1,4 +1,4 @@
-import { Component, ParentProps } from 'solid-js';
+import { Component, createEffect, JSX, ParentProps } from 'solid-js';
 import { css } from "solid-styled-components";
 
 const TextAreaClass = css`
@@ -34,14 +34,30 @@ const TextAreaClass = css`
 `;
 
 export type CustomTextAreaType = ParentProps & {
-  // some props
+  onSceneUpdate: (text: string | null) => void
 }
 
 const CustomTextArea: Component<CustomTextAreaType> = (props: CustomTextAreaType) => {
+  const render = (): JSX.Element => {
+    return (
+      <textarea
+        ref={(e) => {
+          e.value = props.children as string;
+        }}
+        class={TextAreaClass}
+        onKeyUp={(e) => props.onSceneUpdate(e.currentTarget.value)}
+      >
+        {props.children}
+      </textarea>
+    );
+  }
+  createEffect(() => {
+    render()
+  });
   return (
-    <textarea class={TextAreaClass}>
-      {props.children}
-    </textarea>
+    <>
+      {render()}
+    </>
   );
 };
 
