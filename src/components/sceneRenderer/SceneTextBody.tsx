@@ -11,6 +11,7 @@ position: absolute;
   color: #514d48;
   word-break: break-all;
   overflow: hidden;
+  white-space: pre-wrap;
 `;
 
 export type SceneTextBodyType = ParentProps & {

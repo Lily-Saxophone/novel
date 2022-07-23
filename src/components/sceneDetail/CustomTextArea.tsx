@@ -9,6 +9,7 @@ const TextAreaClass = css`
   border-radius: 5px;
   border: none;
   font-size: 0.8rem;
+  white-space: pre-wrap;
 
   &:hover {
     transition: 0.3s;
