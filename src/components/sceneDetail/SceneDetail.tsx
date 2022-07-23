@@ -1,10 +1,11 @@
 import { ChoicesEvent } from '../../models/scene/ChoicesEvent';
 import { EndEvent } from '../../models/scene/EndEvent';
 import { SceneModel } from '../../models/scene/SceneModel';
-import { Component, JSX, ParentProps } from 'solid-js';
+import { Component, JSX, Match, ParentProps, Switch } from 'solid-js';
 import { css } from "solid-styled-components";
 import LeftSideBarPage from '../../components/common/sideBarPage/LeftSideBarPage';
 import BasicSettings from './BasicSettings';
+import SceneUtil from '../../utils/scene/sceneUtil';
 
 const SceneDetailClass = css`
   width: 100%;
@@ -24,7 +25,18 @@ const SceneDetail: Component<SceneDetailType> = (props: SceneDetailType) => {
         itemList={[
           {
             title: '基本設定',
-            contents: <BasicSettings scene={props.scene} onSceneUpdate={props.onSceneUpdate} />
+            contents: (
+              <Switch fallback={<>error</>}>
+                <Match when={SceneUtil.isSceneModel(props.scene)}>
+                  <BasicSettings scene={props.scene} onSceneUpdate={props.onSceneUpdate} />
+                </Match>
+                <Match when={SceneUtil.isChoicesEvent(props.scene)}>
+                  <div>シーンイベント</div>
+                </Match>
+                <Match when={SceneUtil.isEndEvent(props.scene)}>
+                  <div>エンドイベント</div>
+                </Match>
+              </Switch>)
           },
         ]}
       />

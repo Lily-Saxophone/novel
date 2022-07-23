@@ -33,7 +33,7 @@ export type SceneRendererType = ParentProps & {
   content?: JSX.Element
 }
 
-const [sceneText, setSceneText]: Signal<SceneText> = createSignal({ speaker: "", textList: [] });
+const [sceneText, setSceneText]: Signal<SceneText> = createSignal({ speaker: "", text: "" });
 const [characterList, setCharacterList]: Signal<Array<SceneCharacter>> = createSignal([]);
 const [backGroundImage, setBackGroundImage]: Signal<string> = createSignal("");
 const [backGroundMusic, setBackGroundMusic]: Signal<string> = createSignal("");
@@ -64,7 +64,7 @@ const SceneRenderer: Component<SceneRendererType> = (props: SceneRendererType) =
         onSceneClick={props.onSceneClick}>
         <TextLayer>
           <SceneTextHeader speaker={sceneText().speaker} />
-          <SceneTextBody textList={sceneText().textList} />
+          <SceneTextBody text={sceneText().text} />
         </TextLayer>
 
         <CharacterLayer>

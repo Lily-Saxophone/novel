@@ -14,19 +14,20 @@ position: absolute;
 `;
 
 export type SceneTextBodyType = ParentProps & {
-  textList: Array<string>
+  text: string
 }
 
 const SceneTextBody: Component<SceneTextBodyType> = (props: SceneTextBodyType) => {
   return (
     <div class={SceneTextBodyClass}>
-      <For each={props.textList} fallback={<div>Loading...</div>}>
+      {props.text}
+      {/* <For each={props.textList} fallback={<div>Loading...</div>}>
         {(item) => (
           <>
             {item}<br />
           </>
         )}
-      </For>
+      </For> */}
     </div>
   );
 };

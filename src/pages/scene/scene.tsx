@@ -47,10 +47,8 @@ const story: ScenarioList = {
                 },],
               sceneText: {
                 speaker: "？？？？？",
-                textList: [
-                  "ちょっと、あんた！",
-                  "せっかく私が声を掛けてあげてるんだからすぐに反応しなさいよ！"
-                ]
+                text: `ちょっと、あんた！
+せっかく私が声を掛けてあげてるんだからすぐに反応しなさいよ！`
               }
             },
             {
@@ -76,10 +74,8 @@ const story: ScenarioList = {
               ],
               sceneText: {
                 speaker: "ニャー",
-                textList: [
-                  "なになに、けいちゃん。",
-                  "もしかして興奮しちゃったのかな？"
-                ]
+                text: `なになに、けいちゃん。
+もしかして興奮しちゃったのかな？`
               }
             },
             {
@@ -103,10 +99,8 @@ const story: ScenarioList = {
                 },],
               sceneText: {
                 speaker: "？？？？？",
-                textList: [
-                  "ちょっと、あんた！",
-                  "せっかく私が声を掛けてあげてるんだからすぐに反応しなさいよ！"
-                ]
+                text: `ちょっと、あんた！
+せっかく私が声を掛けてあげてるんだからすぐに反応しなさいよ！`
               }
             },
             {
@@ -132,10 +126,8 @@ const story: ScenarioList = {
               ],
               sceneText: {
                 speaker: "ニャー",
-                textList: [
-                  "なになに、けいちゃん。",
-                  "もしかして興奮しちゃったのかな？"
-                ]
+                text: `なになに、けいちゃん。
+もしかして興奮しちゃったのかな？`
               }
             },
             {
@@ -173,9 +165,7 @@ const story: ScenarioList = {
                 },],
               sceneText: {
                 speaker: "？？？？？",
-                textList: [
-                  "シナリオsecond、シーン未選択ルートへ遷移します"
-                ]
+                text: "シナリオsecond、シーン未選択ルートへ遷移します"
               }
             },
             {
@@ -212,9 +202,7 @@ const story: ScenarioList = {
                 },],
               sceneText: {
                 speaker: "？？？？？",
-                textList: [
-                  "シナリオsecond、シーンbルートへ遷移します"
-                ]
+                text: "シナリオsecond、シーンbルートへ遷移します"
               }
             },
             {
@@ -256,9 +244,7 @@ const story: ScenarioList = {
               ],
               sceneText: {
                 speaker: "？？？？？",
-                textList: [
-                  "シナリオsecond、シーンaです"
-                ]
+                text: "シナリオsecond、シーンaです"
               }
             },
             {
@@ -294,9 +280,7 @@ const story: ScenarioList = {
               ],
               sceneText: {
                 speaker: "？？？？？",
-                textList: [
-                  "シナリオsecond、シーンbです"
-                ]
+                text: "シナリオsecond、シーンbです"
               }
             },
             {

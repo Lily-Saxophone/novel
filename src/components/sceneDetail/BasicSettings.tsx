@@ -22,28 +22,11 @@ export type BasicSettingsType = ParentProps & {
 }
 
 const BasicSettings: Component<BasicSettingsType> = (props: BasicSettingsType) => {
-  const characterList = [
-    {
-      characterName: '',
-      characterSrc: '',
-      characterEffect: ''
-    },
-    {
-      characterName: '星野・ニャー',
-      characterSrc: '/src/assets/project/image/character/星野・ニャー/シガレット喫煙背景なし.png',
-      characterEffect: 'blur1'
-    },
-    {
-      characterName: '',
-      characterSrc: '',
-      characterEffect: ''
-    },
-  ]
   return (
     <div class={BasicSettingsClass}>
       <DetailItem title='テキスト'>
         <DetailText
-          sceneText=''
+          sceneText={(props.scene as SceneModel)?.sceneText?.text}
         />
       </DetailItem>
       <DetailItem title='キャラクター'>

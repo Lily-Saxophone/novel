@@ -21,7 +21,7 @@ export type DetailCharacterType = ParentProps & {
 const DetailCharacter: Component<DetailCharacterType> = (props: DetailCharacterType) => {
   return (
     <div class={ImageBoxContainerClass}>
-      <For each={props.characterList} fallback={<>error</>}>
+      <For each={props.characterList} fallback={<ImageBox imageName='' src='' />}>
         {(item: characterType) => (
           <div>
             <ImageBox
