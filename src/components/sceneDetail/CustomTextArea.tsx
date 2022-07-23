@@ -38,6 +38,17 @@ export type CustomTextAreaType = ParentProps & {
 }
 
 const CustomTextArea: Component<CustomTextAreaType> = (props: CustomTextAreaType) => {
+  // テキストエリアの行数制限（４行）
+  const checkRowsCount = (e: KeyboardEvent & { currentTarget: HTMLTextAreaElement; target: Element; }) => {
+    if (e.key === 'Enter') {
+      if (e.currentTarget.value.match(/\n/g) !== null) {
+        if (e.currentTarget.value.match(/\n/g)!.length >= 4) {
+          e.preventDefault()
+        }
+      }
+    }
+  }
+
   const render = (): JSX.Element => {
     return (
       <textarea
@@ -45,15 +56,18 @@ const CustomTextArea: Component<CustomTextAreaType> = (props: CustomTextAreaType
           e.value = props.children as string;
         }}
         class={TextAreaClass}
-        onKeyUp={(e) => props.onSceneUpdate(e.currentTarget.value)}
+        onKeyDown={e => checkRowsCount(e)}
+        onFocusOut={(e) => props.onSceneUpdate(e.currentTarget.value)}
       >
         {props.children}
       </textarea>
     );
   }
+
   createEffect(() => {
     render()
   });
+
   return (
     <>
       {render()}
