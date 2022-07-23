@@ -33,7 +33,6 @@ const SceneMediaClass = css`
       
       &::after {
         content: "";
-        flex: auto;
         width: calc(85px + 1.3px * 2);
         height: calc(85px + 1.3px * 2);
         padding: 7px;

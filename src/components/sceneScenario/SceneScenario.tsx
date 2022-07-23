@@ -32,7 +32,6 @@ const SceneScenarioClass = css`
 
       &::after {
         content: "";
-        flex: auto;
         width: 100%;
         height: 65px;
         padding: 7px;
@@ -216,6 +215,7 @@ const SceneScenario: Component<SceneScenarioType> = (props: SceneScenarioType) =
         <SelectItemList
             itemList={itemList}
             setSelectedItem={setSelectedGroup}
+            hasCustom={true}
             width={'10rem'} />
 
         <SearchBox
