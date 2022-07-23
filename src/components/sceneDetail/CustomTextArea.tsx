@@ -3,6 +3,7 @@ import { css } from "solid-styled-components";
 
 const TextAreaClass = css`
   object-fit: contain;
+	width: calc(100% - 10px);
   height: calc(7.5vh - 10px);
   padding: 5px;
   background-color: #737373;
@@ -11,6 +12,15 @@ const TextAreaClass = css`
   font-size: 0.8rem;
   white-space: pre-wrap;
 
+  // TextAreaのCSSリセット
+  -moz-appearance: none;
+	-webkit-appearance: none;
+	appearance: none;
+	background-image: none;
+	color: inherit;
+	font-family: inherit;
+  resize: none;
+
   &:hover {
     transition: 0.3s;
     box-shadow: 1px 0 4px 2px rgb(0 0 0 / 20%);
@@ -18,6 +28,7 @@ const TextAreaClass = css`
 
   &:focus {
     outline: none;
+    border: none;
     box-shadow: 1px 0 4px 2px rgb(0 0 0 / 20%);
   }
 `;
@@ -28,9 +39,9 @@ export type CustomTextAreaType = ParentProps & {
 
 const CustomTextArea: Component<CustomTextAreaType> = (props: CustomTextAreaType) => {
   return (
-    <div class={TextAreaClass} contenteditable={true}>
+    <textarea class={TextAreaClass}>
       {props.children}
-    </div>
+    </textarea>
   );
 };
 
