@@ -36,12 +36,12 @@ const SelectItemListClass = css`
 
     &_opener[data-is-open='true']:before {
       border-right: 6px solid transparent;
-      border-bottom: 6px solid #ffffff;
+      border-bottom: 6px solid #C5C5C5;
       border-left: 6px solid transparent;
     }
     
     &_opener[data-is-open='false']:before {
-      border-top: 6px solid #ffffff;
+      border-top: 6px solid #C5C5C5;
       border-right: 6px solid transparent;
       border-left: 6px solid transparent;
     }
