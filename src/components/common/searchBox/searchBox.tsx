@@ -53,14 +53,16 @@ const SearchBox: Component<SearchBoxType> = (props: SearchBoxType) => {
   const width = props.width ?? '6rem'
 
   const handleChangeText = (e: KeyboardEvent) => {
-    props.setText((e.target as HTMLDivElement).innerText)
-    if (e.key === 'Enter') {
+    const text = (e.target as HTMLDivElement).innerText
+    if (e.key !== 'Enter') {
+      props.setText(text)
+    } else {
       e.preventDefault()
+      props.setText(text.replace('\n', ''))
       props.onSubmitButtonClick()
     }
   }
 
-  // BUG: Submit時だけ1文字前の状態が取得される
   const handleButtonClick = () => {
     props.onSubmitButtonClick()
   }
