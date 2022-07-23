@@ -10,7 +10,6 @@ const SearchBoxClass = css`
     height: 20px;
     position: relative;
     user-select: none;
-    backgroud-color: red;
   }
   
   .search_box {

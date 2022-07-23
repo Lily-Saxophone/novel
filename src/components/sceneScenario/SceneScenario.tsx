@@ -7,15 +7,19 @@ import SearchBox from '../../components/common/searchBox/searchBox';
 const SceneScenarioClass = css`
   width: 100%;
   height: 100%;
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
   overflow-y: hidden;
 
-  &> span {
-    font-size: .7rem;
-    display: inline-block;
-    margin: auto 5px;
+  .topbar_content {
+    margin: 4px 0;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+
+    &> span {
+      font-size: .7rem;
+      display: inline-block;
+      margin: auto 5px;
+    }
   }
 
   .left_sidebar {
@@ -23,6 +27,7 @@ const SceneScenarioClass = css`
     height: 100%;
 
     .scenes {
+      overflow-y: auto;
 
       .scene_wrapper {
         width: 100%;
@@ -197,18 +202,20 @@ const SceneScenario: Component<SceneScenarioType> = (props: SceneScenarioType) =
 
   return (
     <div class={SceneScenarioClass}>
-      <span>{'グループ： '}</span>
-      <SelectItemList 
-          itemList={itemList}
-          setSelectedItemKey={setSelectedGroupKey}
-          defaultValue={'AllItem'} 
-          width={'10rem'} />
+      <div class='topbar_content'>
+        <span>{'グループ： '}</span>
+        <SelectItemList 
+            itemList={itemList}
+            setSelectedItemKey={setSelectedGroupKey}
+            defaultValue={'AllItem'} 
+            width={'10rem'} />
 
-      <SearchBox
-        setText={setSearchText}
-        onSubmitButtonClick={handleSearchSubmit}
-        defaultValue={''}
-        width={'7rem'} />
+        <SearchBox
+          setText={setSearchText}
+          onSubmitButtonClick={handleSearchSubmit}
+          defaultValue={''}
+          width={'7rem'} />
+      </div>
 
       <div class='left_sidebar'>
         <LeftSideBarPage

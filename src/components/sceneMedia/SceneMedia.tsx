@@ -7,20 +7,25 @@ import SearchBox from '../common/searchBox/searchBox';
 const SceneMediaClass = css`
   width: 100%;
   height: 100%;
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
   overflow-y: hidden;
 
-  &> span {
-    font-size: .7rem;
-    display: inline-block;
-    margin: auto 5px;
+  .topbar_content {
+    margin: 4px 0;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+
+    &> span {
+      font-size: .7rem;
+      display: inline-block;
+      margin: auto 5px;
+    }
   }
 
   .left_sidebar {
     width: 100%;
     height: 100%;
+    overflow-y: auto;
 
     .characters {
       display: flex;
@@ -197,18 +202,21 @@ const SceneMedia: Component<SceneMediaType> = (props: SceneMediaType) => {
 
   return (
     <div class={SceneMediaClass}>
-      <span>{'グループ： '}</span>
-      <SelectItemList 
-          itemList={itemList}
-          setSelectedItemKey={setSelectedGroupKey}
-          defaultValue={'AllItem'} 
-          width={'10rem'} />
+      <div class='topbar_content'>
+        <span>{'グループ： '}</span>
 
-      <SearchBox
-        setText={setSearchText}
-        onSubmitButtonClick={handleSearchSubmit}
-        defaultValue={''}
-        width={'7rem'} />
+        <SelectItemList 
+            itemList={itemList}
+            setSelectedItemKey={setSelectedGroupKey}
+            defaultValue={'AllItem'} 
+            width={'10rem'} />
+
+        <SearchBox
+          setText={setSearchText}
+          onSubmitButtonClick={handleSearchSubmit}
+          defaultValue={''}
+          width={'7rem'} />
+      </div>
 
       <div class='left_sidebar'>
         <LeftSideBarPage
