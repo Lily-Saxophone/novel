@@ -115,11 +115,13 @@ const SelectItemList: Component<SelectItemListType> = (props: SelectItemListType
   }
 
   const handleChangeText = (e: KeyboardEvent) => {
-    if (e.key === 'Enter')
+    let text = (e.target as HTMLDivElement).innerText
+    if (e.key === 'Enter') {
       e.preventDefault()
+      text = text.replace('\n', '')
+    }
 
     if (isEditable()) {
-      const text = (e.target as HTMLDivElement).innerText
       props.setSelectedItem({ key: selectedItemKey, value: text })
     }
   }
@@ -130,7 +132,7 @@ const SelectItemList: Component<SelectItemListType> = (props: SelectItemListType
   return (
     <div class={SelectItemListClass}>
       <div class='select_items' style={`width:${width};`}>
-        <div class='select_list' onClick={() => setIsOpen(!isOpen())}>
+        <div class='select_list' onClick={() => setIsOpen(!isEditable() && !isOpen())}>
           <i class='select_list_opener' data-is-open={isOpen()}></i>
           <label
             class='selected_item_label'
