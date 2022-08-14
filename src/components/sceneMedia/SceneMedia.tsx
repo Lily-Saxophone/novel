@@ -135,7 +135,7 @@ const itemList = [
 
 const [viewCharacterList, setViewCharacterList]: Signal<{ characterKey: string, characterImage: string, characterName: string, characterGroup: string }[]> = createSignal(characterList)
 
-const characters = () => {  
+const characters = () => {
   const [selectedCharacterKey, setSelectedCharacterKey]: Signal<string> = createSignal(characterList[0].characterKey)
 
   const handleCharacterClick = (key: string) => {
