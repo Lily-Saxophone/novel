@@ -1,0 +1,78 @@
+
+{
+  "scenarioKey": "second",
+  "scenario": [
+    {
+      "sceneKey": "a",
+      "scene": [
+        {
+          "backGroundImage": "/src/assets/project/image/character/星野・ニャー/風呂絵.png",
+          "backGroundMusic": "",
+          "characterList": [
+            {
+              "characterName": "",
+              "characterSrc": "",
+              "characterEffect": ""
+            },
+            {
+              "characterName": "",
+              "characterSrc": "",
+              "characterEffect": ""
+            },
+            {
+              "characterName": "",
+              "characterSrc": "",
+              "characterEffect": ""
+            }
+          ],
+          "sceneText": {
+            "speaker": "？？？？？",
+            "text": "シナリオsecond、シーンaです"
+          }
+        },
+        {
+          "nextScenarioKey": "first",
+          "nextScenarioName": "第一章",
+          "nextSceneKey": "a",
+          "nextSceneName": "木村圭佑逮捕"
+        }
+      ]
+    },
+    {
+      "sceneKey": "b",
+      "scene": [
+        {
+          "backGroundImage": "/src/assets/project/image/background/背景（和）.jpg",
+          "backGroundMusic": "",
+          "characterList": [
+            {
+              "characterName": "",
+              "characterSrc": "",
+              "characterEffect": ""
+            },
+            {
+              "characterName": "星野・ニャー",
+              "characterSrc": "/src/assets/project/image/character/星野・ニャー/シガレット喫煙背景なし.png",
+              "characterEffect": ""
+            },
+            {
+              "characterName": "",
+              "characterSrc": "",
+              "characterEffect": ""
+            }
+          ],
+          "sceneText": {
+            "speaker": "？？？？？",
+            "text": "シナリオsecond、シーンbです"
+          }
+        },
+        {
+          "nextScenarioKey": "first",
+          "nextScenarioName": "第一章",
+          "nextSceneKey": "b",
+          "nextSceneName": "木村圭佑逮捕"
+        }
+      ]
+    }
+  ]
+}

@@ -4,6 +4,7 @@ import { Component } from 'solid-js';
 import styles from '../assets/css/layout.module.css';
 import appRoutes from '../routes';
 import TitleLogo from '../assets/image/AppName.svg';
+import  StoryProvider from '../providers/storyProvider';
 
 const layoutRoutes = (): RouteDefinition[] => {
   let routes: RouteDefinition[] = [];
@@ -17,14 +18,16 @@ const layoutRoutes = (): RouteDefinition[] => {
 const Layout: Component = () => {
   const Routes = useRoutes(layoutRoutes());
   return (
-    <div class={styles.Layout}>
-      <header class={styles.header}>
-        <img src={TitleLogo}></img>
-      </header>
-      <div class={styles.container}>
-        <Routes />
+    <StoryProvider story={0}>
+      <div class={styles.Layout}>
+        <header class={styles.header}>
+          <img src={TitleLogo}></img>
+        </header>
+        <div class={styles.container}>
+          <Routes />
+        </div>
       </div>
-    </div>
+    </StoryProvider>
   );
 };
 

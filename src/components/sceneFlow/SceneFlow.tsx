@@ -7,6 +7,7 @@ import { SceneList } from '../../models/scene/SceneList';
 import SceneUtil from '../../utils/scene/sceneUtil';
 import { ChoicesModel } from '../../models/scene/ChoicesModel';
 import { SceneCharacter } from '../../models/scene/SceneCharacter';
+import { useStory } from '../../providers/storyProvider';
 
 export type SceneFlowPropType = ParentProps & {
   onSceneIndexChange: (idx: number) => void,
@@ -28,6 +29,7 @@ const handleSceneIndexChange = (index: number) => {
   target?.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
+
 const SceneFlow: Component<SceneFlowPropType> = (props: SceneFlowPropType) => {
   createEffect(() => handleChageScene(props.flowItems));
   createEffect(() => handleSceneIndexChange(props.selectedSceneIndex));
@@ -37,7 +39,10 @@ const SceneFlow: Component<SceneFlowPropType> = (props: SceneFlowPropType) => {
     props.onSceneIndexChange(selectedIndex);
     handleSceneIndexChange(selectedIndex);
   }
-
+  
+  // const [ stroy, { increment, decrement } ] = useStory()
+  const aaa = useStory()
+  console.log(aaa)
   return (
     <>
       <div class={styles.flow_container} id="js-flow_container">
@@ -56,7 +61,7 @@ const SceneFlow: Component<SceneFlowPropType> = (props: SceneFlowPropType) => {
                     {(events: SceneEvent) => (
                       <Switch>
                         <Match when={events.sceneType === 'Text'}>
-                          <div class={styles.flow_item_text}>
+                          <div class={styles.flow_item_text} onClick={() => console.log(stroy)}>
                             <label>{events.sceneObject.speaker}</label>
                             <span>
                               <For each={events.sceneObject.textList} fallback={<div>Loading...</div>}>
