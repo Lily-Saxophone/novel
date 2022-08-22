@@ -3,6 +3,7 @@ import { css } from "solid-styled-components";
 import LeftSideBarPage from '../common/sideBarPage/LeftSideBarPage';
 import SelectItemList from '../common/selectItemList/selectItemList';
 import SearchBox from '../common/searchBox/searchBox';
+import VerticalTabPage from '../../components/common/verticalTabPage/VerticalTabPage';
 
 const SceneMediaClass = css`
   width: 100%;
@@ -30,7 +31,7 @@ const SceneMediaClass = css`
       display: flex;
       flex-wrap: wrap;
       justify-content: space-around;
-      
+
       &::after {
         content: "";
         width: calc(85px + 1.3px * 2);
@@ -50,7 +51,7 @@ const SceneMediaClass = css`
         .character_thumbnail {
           width: 100%;
           display: flex;
-  
+
           img {
             width: 100%;
             border-radius: 6px;
@@ -62,6 +63,24 @@ const SceneMediaClass = css`
     }
   }
 `;
+
+const musicList = [
+  {
+    musicKey: 'musicA-1',
+    musicPath: '',
+    musicName: 'ぽんぬの囁き'
+  },
+  {
+    musicKey: 'musicA-1',
+    musicPath: '',
+    musicName: 'ぽんぬの嘆き'
+  },
+  {
+    musicKey: 'musicA-1',
+    musicPath: '',
+    musicName: 'ぽんぬの叫び'
+  }
+]
 
 const characterList = [
   {
@@ -133,6 +152,32 @@ const itemList = [
   },
 ]
 
+const [viewMusicList, setViewMusicList]: Signal<{ musicKey: string, musicPath: string, musicName: string }[]> = createSignal(musicList)
+
+const music = () => {
+  const [selectedMusicKey, setSelectedMusicKey]: Signal<string> = createSignal(musicList[0].musicKey)
+
+  const handlemusicClick = (key: string) => {
+    setSelectedMusicKey(key)
+    console.log(`SelectedSceneKey: [${key}]`)
+  }
+
+  return (
+    <div class='music'>
+      <For each={viewMusicList()} fallback={<div>No Items...</div>}>
+        {music => (
+          <div class='music_wrapper' data-is-active={music.musicKey === selectedMusicKey()} onClick={() => handlemusicClick(music.musicKey)}>
+            <div class='music_thumbnail'>
+              {/* <img src={music.musicImage} alt="" /> */}
+            </div>
+          </div>
+        )}
+      </For>
+    </div>
+  )
+}
+
+
 const [viewCharacterList, setViewCharacterList]: Signal<{ characterKey: string, characterImage: string, characterName: string, characterGroup: string }[]> = createSignal(characterList)
 
 const characters = () => {
@@ -158,7 +203,7 @@ const characters = () => {
   )
 }
 
-const scenarioList = [
+const characterPageItemList = [
   {
     title: 'ぽんぬ',
     contents: characters()
@@ -178,7 +223,7 @@ const scenarioList = [
 ]
 
 export type SceneMediaType = ParentProps & {
-  
+
 }
 
 const SceneMedia: Component<SceneMediaType> = (props: SceneMediaType) => {
@@ -198,12 +243,12 @@ const SceneMedia: Component<SceneMediaType> = (props: SceneMediaType) => {
     console.log(`SubmitSearch: [${searchText()}]`)
   }
 
-  return (
-    <div class={SceneMediaClass}>
+  const characterPage = (
+    <>
       <div class='topbar_content'>
         <span>{'グループ： '}</span>
 
-        <SelectItemList 
+        <SelectItemList
             itemList={itemList}
             setSelectedItem={setSelectedGroup}
             width={'10rem'} />
@@ -218,9 +263,43 @@ const SceneMedia: Component<SceneMediaType> = (props: SceneMediaType) => {
       <div class='left_sidebar'>
         <LeftSideBarPage
           menuWidth={25}
-          itemList={scenarioList}
+          itemList={characterPageItemList}
         />
       </div>
+    </>
+  )
+
+  const musicPage = (
+    <></>
+  )
+
+  const motionPage = (
+    <></>
+  )
+
+  const tabItemList = [
+    {
+      icon: <span class="material-symbols-outlined">person</span>,
+      title: 'キャラクター',
+      content: characterPage
+    },
+    {
+      icon: <span class="material-symbols-outlined">music_note</span>,
+      title: '音楽・SE',
+      content: musicPage
+    },
+    {
+      icon: <span class="material-symbols-outlined">sensors</span>,
+      title: 'モーション',
+      content: motionPage
+    },
+  ]
+
+  return (
+    <div class={SceneMediaClass}>
+      <VerticalTabPage itemList={tabItemList}>
+
+      </VerticalTabPage>
     </div>
   );
 };
