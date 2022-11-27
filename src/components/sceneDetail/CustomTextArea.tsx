@@ -1,4 +1,4 @@
-import { Component, ParentProps } from 'solid-js';
+import { Component, createEffect, JSX, ParentProps } from 'solid-js';
 import { css } from "solid-styled-components";
 
 const TextAreaClass = css`
@@ -34,14 +34,44 @@ const TextAreaClass = css`
 `;
 
 export type CustomTextAreaType = ParentProps & {
-  // some props
+  onSceneUpdate: (text: string | null) => void
 }
 
 const CustomTextArea: Component<CustomTextAreaType> = (props: CustomTextAreaType) => {
+  // テキストエリアの行数制限（４行）
+  const checkRowsCount = (e: KeyboardEvent & { currentTarget: HTMLTextAreaElement; target: Element; }) => {
+    if (e.key === 'Enter') {
+      if (e.currentTarget.value.match(/\n/g) !== null) {
+        if (e.currentTarget.value.match(/\n/g)!.length >= 4) {
+          e.preventDefault()
+        }
+      }
+    }
+  }
+
+  const render = (): JSX.Element => {
+    return (
+      <textarea
+        ref={(e) => {
+          e.value = props.children as string;
+        }}
+        class={TextAreaClass}
+        onKeyDown={e => checkRowsCount(e)}
+        onFocusOut={(e) => props.onSceneUpdate(e.currentTarget.value)}
+      >
+        {props.children}
+      </textarea>
+    );
+  }
+
+  createEffect(() => {
+    render()
+  });
+
   return (
-    <textarea class={TextAreaClass}>
-      {props.children}
-    </textarea>
+    <>
+      {render()}
+    </>
   );
 };
 

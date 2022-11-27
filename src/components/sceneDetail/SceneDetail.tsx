@@ -1,7 +1,7 @@
 import { ChoicesEvent } from '../../models/scene/ChoicesEvent';
 import { EndEvent } from '../../models/scene/EndEvent';
 import { SceneModel } from '../../models/scene/SceneModel';
-import { Component, JSX, Match, ParentProps, Switch } from 'solid-js';
+import { Component, Match, ParentProps, Switch } from 'solid-js';
 import { css } from "solid-styled-components";
 import LeftSideBarPage from '../../components/common/sideBarPage/LeftSideBarPage';
 import BasicSettings from './BasicSettings';
@@ -14,10 +14,11 @@ const SceneDetailClass = css`
 
 export type SceneDetailType = ParentProps & {
   scene: SceneModel | ChoicesEvent | EndEvent,
-  onSceneUpdate?: JSX.EventHandlerUnion<HTMLDivElement, MouseEvent>,
+  onSceneUpdate: (scene: SceneModel) => void
 }
 
 const SceneDetail: Component<SceneDetailType> = (props: SceneDetailType) => {
+
   return (
     <div class={SceneDetailClass}>
       <LeftSideBarPage

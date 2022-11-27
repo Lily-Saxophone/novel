@@ -1,4 +1,4 @@
-import { Component, createEffect, createSignal, JSX, JSXElement, ParentProps, Signal } from 'solid-js';
+import { Component, createEffect, createSignal, JSX, ParentProps, Signal } from 'solid-js';
 import { css } from "solid-styled-components";
 import Render from './Render';
 import RenderNavigationBar from './RenderNavigationBar';
@@ -34,15 +34,31 @@ export type SceneRendererType = ParentProps & {
 }
 
 const [sceneText, setSceneText]: Signal<SceneText> = createSignal({ speaker: "", text: "" });
-const [characterList, setCharacterList]: Signal<Array<SceneCharacter>> = createSignal([]);
+const [characterList, setCharacterList]: Signal<Array<SceneCharacter>> = createSignal([
+  {
+    characterName: '',
+    characterSrc: '',
+    characterEffect: '',
+  },
+  {
+    characterName: '',
+    characterSrc: '',
+    characterEffect: '',
+  },
+  {
+    characterName: '',
+    characterSrc: '',
+    characterEffect: '',
+  },
+]);
 const [backGroundImage, setBackGroundImage]: Signal<string> = createSignal("");
 const [backGroundMusic, setBackGroundMusic]: Signal<string> = createSignal("");
 const [choicesList, setChoicesList]: Signal<Array<ChoicesModel>> = createSignal([]);
 
 const handleSetScene = (scene: SceneModel | ChoicesEvent | EndEvent) => {
   if (SceneUtil.isSceneModel(scene)) {
-    setSceneText(scene.sceneText);
-    setCharacterList(scene.characterList);
+    setSceneText({ ...scene.sceneText });
+    setCharacterList({ ...scene.characterList });
     setBackGroundImage(scene.backGroundImage);
     setBackGroundMusic(scene.backGroundMusic);
 

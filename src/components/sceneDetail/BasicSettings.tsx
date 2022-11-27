@@ -1,4 +1,4 @@
-import { Component, JSX, ParentProps } from 'solid-js';
+import { Component, ParentProps, } from 'solid-js';
 import { css } from "solid-styled-components";
 import DetailScene from './DetailScene';
 import DetailItem from './DetailItem';
@@ -18,15 +18,24 @@ const BasicSettingsClass = css`
 
 export type BasicSettingsType = ParentProps & {
   scene: SceneModel | ChoicesEvent | EndEvent,
-  onSceneUpdate?: JSX.EventHandlerUnion<HTMLDivElement, MouseEvent>,
+  onSceneUpdate: (scene: SceneModel) => void
 }
 
 const BasicSettings: Component<BasicSettingsType> = (props: BasicSettingsType) => {
+  const updateScene = (text: string | null) => {
+    let scene: SceneModel = props.scene as SceneModel;
+    if (text !== null) {
+      scene.sceneText.text = text;
+      props.onSceneUpdate(scene);
+    }
+  }
+
   return (
     <div class={BasicSettingsClass}>
       <DetailItem title='テキスト'>
         <DetailText
-          sceneText={(props.scene as SceneModel)?.sceneText?.text}
+          sceneText={{ ...(props.scene as SceneModel)?.sceneText }.text}
+          onSceneUpdate={updateScene}
         />
       </DetailItem>
       <DetailItem title='キャラクター'>

@@ -1,9 +1,8 @@
 import SelectItemList from '../../components/common/selectItemList/selectItemList';
-import { Component, createEffect, createSignal, ParentProps, Signal } from 'solid-js';
+import { Component, createSignal, ParentProps, Signal } from 'solid-js';
 import { css } from "solid-styled-components";
 import CustomTextArea from './CustomTextArea';
 import FileSelector from './FileSelector';
-import ImageBox from './ImageBox';
 
 const TextPropertyClass = css`
   margin-bottom: 5px;
@@ -14,6 +13,7 @@ const TextPropertyClass = css`
 
 export type DetailTextType = ParentProps & {
   sceneText?: string,
+  onSceneUpdate: (text: string | null) => void
 }
 
 type selectedListType = {
@@ -77,8 +77,6 @@ const DetailText: Component<DetailTextType> = (props: DetailTextType) => {
 
   const [selectedGroupKey, setSelectedGroupKey]: Signal<selectedListType> = createSignal({ key: '', value: '' })
 
-
-
   return (
     <>
       <div class={TextPropertyClass}>
@@ -104,7 +102,7 @@ const DetailText: Component<DetailTextType> = (props: DetailTextType) => {
           <FileSelector default='テキストエフェクトなし' fileName='' />
         </div>
       </div>
-      <CustomTextArea>
+      <CustomTextArea onSceneUpdate={props.onSceneUpdate}>
         {props.sceneText === '' ? 'テキストを入力してください' : props.sceneText}
       </CustomTextArea>
     </>
