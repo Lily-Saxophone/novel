@@ -1,6 +1,6 @@
-import { SceneList } from '../../models/slide/SceneList';
+import { Scene } from '../../models/slide/Scene';
 
 export type ScenarioModel = {
   scenarioKey: string,
-  scenario: Array<SceneList>
+  scenario: Array<Scene>
 }

@@ -3,11 +3,11 @@ import type { SlideChild } from '../../models/slide/SlideChild';
 import type { ChoicesEvent } from '../../models/slide/ChoicesEvent';
 import type { EndEvent } from '../../models/slide/EndEvent';
 import type { SlideEvent } from '../../models/slide/SlideEvent';
-import type { SceneList } from  '../../models/slide/SceneList';
+import type { Scene } from  '../../models/slide/Scene';
 import _ from 'lodash';
 
 type SlideUtilType = {
-    generateFlowDiff: (arg: SceneList) => SlideChild[],
+    generateFlowDiff: (arg: Scene) => SlideChild[],
     isSlideModel: (obj: any) => obj is SlideModel,
     isChoicesEvent: (obj: any) => obj is ChoicesEvent,
     isEndEvent: (obj: any) => obj is EndEvent
@@ -33,7 +33,7 @@ const SlideUtil: SlideUtilType = {
         && typeof (obj as EndEvent).nextScenarioKey === 'string'
         && typeof (obj as EndEvent).nextSlideKey === 'string',
     
-    generateFlowDiff: (scenario: SceneList): SlideChild[] => {
+    generateFlowDiff: (scenario: Scene): SlideChild[] => {
 
         const slideChilds: SlideChild[] = []
         _.forEach(scenario.slide, (s: SlideModel | ChoicesEvent | EndEvent, index: number) => {

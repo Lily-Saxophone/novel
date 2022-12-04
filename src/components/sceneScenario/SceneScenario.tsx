@@ -92,7 +92,7 @@ const SceneScenarioClass = css`
   }
 `;
 
-const sceneList = [
+const scene = [
   {
     sceneKey: 'SceneA-1',
     sceneTitle: 'ルート１ - 木村の演奏会 -',
@@ -139,10 +139,10 @@ const itemList = [
 ]
 
 
-const [viewSceneList, setviewSceneList]: Signal<{ sceneKey: string, sceneTitle: string, sceneDetail: string, sceneGroup: string }[]> = createSignal(sceneList)
+const [viewScene, setviewScene]: Signal<{ sceneKey: string, sceneTitle: string, sceneDetail: string, sceneGroup: string }[]> = createSignal(scene)
 
 const scenes = () => {
-  const [selectedSceneKey, setSelectedSceneKey]: Signal<string> = createSignal(sceneList[0].sceneKey)
+  const [selectedSceneKey, setSelectedSceneKey]: Signal<string> = createSignal(scene[0].sceneKey)
 
   const handleSlideClick = (key: string) => {
     setSelectedSceneKey(key)
@@ -151,7 +151,7 @@ const scenes = () => {
 
   return (
     <div class='scenes'>
-      <For each={viewSceneList()} fallback={<div>No Items...</div>}>
+      <For each={viewScene()} fallback={<div>No Items...</div>}>
         {scene => (
           <div class='scene_wrapper' data-is-active={scene.sceneKey === selectedSceneKey()} onClick={() => handleSlideClick(scene.sceneKey)}>
             <div class='scene_thumbnail'>
@@ -198,9 +198,9 @@ const SceneScenario: Component<SceneScenarioType> = (props: SceneScenarioType) =
   createEffect(() => {
     console.log(`SelectedGroup: [`, selectedGroup(), ']')
     if (selectedGroup().key === 'AllItem') {
-      setviewSceneList(sceneList)
+      setviewScene(scene)
     } else {
-      setviewSceneList(sceneList.filter(f => f.sceneGroup === selectedGroup().key))
+      setviewScene(scene.filter(f => f.sceneGroup === selectedGroup().key))
     }
   })
 

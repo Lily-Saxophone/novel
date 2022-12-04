@@ -3,7 +3,7 @@ import { createStore, Store } from "solid-js/store";
 import styles from '../../assets/css/scene/scene.module.css';
 import type { SlideChild } from '../../models/slide/SlideChild';
 import type { SlideEvent } from '../../models/slide/SlideEvent';
-import { SceneList } from '../../models/slide/SceneList';
+import { Scene } from '../../models/slide/Scene';
 import SlideUtil from '../../utils/slide/slideUtil';
 import { ChoicesModel } from '../../models/slide/ChoicesModel';
 import { SlideCharacter } from '../../models/slide/SlideCharacter';
@@ -12,12 +12,12 @@ import { useStory } from '../../providers/storyProvider';
 export type SceneFlowPropType = ParentProps & {
   onSlideIndexChange: (idx: number) => void,
   selectedSlideIndex: number,
-  flowItems: SceneList
+  flowItems: Scene
 }
 
-const [slideChilds, setSlideChilds]: Store<SceneList> = createStore([]);
+const [slideChilds, setSlideChilds]: Store<Scene> = createStore([]);
 
-const handleChageSlide = (items: SceneList) => {
+const handleChageSlide = (items: Scene) => {
   // シーンからFlow描写用の差分を生成
   setSlideChilds(SlideUtil.generateFlowDiff(items))
 }

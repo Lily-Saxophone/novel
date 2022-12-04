@@ -5,7 +5,7 @@ import styles from '../../assets/css/scene/scene.module.css';
 import Palette, { PalletType } from '../../components/palette/Palette';
 import SceneFlow from '../../components/sceneFlow/SceneFlow';
 import type { SlideModel } from '../../models/slide/SlideModel';
-import { SceneList } from '../../models/slide/SceneList';
+import { Scene } from '../../models/slide/Scene';
 import { ChoicesEvent } from '../../models/slide/ChoicesEvent';
 import { EndEvent } from '../../models/slide/EndEvent';
 import { Story } from '../../models/scenario/ScenarioList';
@@ -26,10 +26,10 @@ let scenario = story.story[0].scenario;
 let idx: number = 0;
 
 // シーン
-const [sceneList, setSceneList]: Signal<SceneList> = createSignal(scenario[0]);
+const [scene, setScene]: Signal<Scene> = createSignal(scenario[0]);
 
 // １コマ
-const [slide, setSlide]: Signal<SlideModel | ChoicesEvent | EndEvent> = createSignal(sceneList().slide[0]);
+const [slide, setSlide]: Signal<SlideModel | ChoicesEvent | EndEvent> = createSignal(scene().slide[0]);
 
 const [slideIndex, setSlideIndex]: Signal<number> = createSignal(0)
 
@@ -66,10 +66,10 @@ const handleSetSlide = () => {
 
 // 選択肢クリック時イベント（選択肢のキーから該当のシーンへ遷移）
 const handleChoicesClick = (event: any) => {
-  let wkSceneList = getSceneList((event.currentTarget as HTMLDivElement).dataset.key);
-  if (wkSceneList !== undefined) {
+  let wkScene = getScene((event.currentTarget as HTMLDivElement).dataset.key);
+  if (wkScene !== undefined) {
     idx = 0;
-    setSceneList(wkSceneList);
+    setScene(wkScene);
     setSlide({ choicesList: [] });
     setSlide(slide().slide[idx]);
 
@@ -78,7 +78,7 @@ const handleChoicesClick = (event: any) => {
 }
 
 // keyからシーン取得
-const getSceneList = (slideKey: string | undefined): SceneList | undefined => {
+const getScene = (slideKey: string | undefined): Scene | undefined => {
   if (slideKey !== "") {
     return scenario.find(element => element.slideKey === slideKey);
   } else {
@@ -88,14 +88,14 @@ const getSceneList = (slideKey: string | undefined): SceneList | undefined => {
 
 // 次のシナリオへ遷移
 const nextScenario = (scenarioKey: string, slideKey: string) => {
-  let wkScenario: SceneList[] | undefined = story.story.find(element => element.scenarioKey === scenarioKey)?.scenario;
+  let wkScenario: Scene[] | undefined = story.story.find(element => element.scenarioKey === scenarioKey)?.scenario;
   if (wkScenario !== undefined) {
     scenario = wkScenario;
 
-    let wkSceneList = getSceneList(slideKey);
-    if (wkSceneList !== undefined) {
+    let wkScene = getScene(slideKey);
+    if (wkScene !== undefined) {
       idx = 0;
-      setSceneList(wkSceneList);
+      setScene(wkScene);
       setSlide(slide().slide[idx]);
     }
   }
@@ -141,7 +141,7 @@ const [data, setData]: Signal<PalletType[]> = createSignal([
   }
 ]);
 
-const Scene: Component = () => {
+const SceneX: Component = () => {
 
   return (
     <Masonry
@@ -159,4 +159,4 @@ const Scene: Component = () => {
   );
 };
 
-export default Scene;
+export default SceneX;
