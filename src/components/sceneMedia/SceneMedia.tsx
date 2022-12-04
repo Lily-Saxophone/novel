@@ -159,7 +159,7 @@ const music = () => {
 
   const handlemusicClick = (key: string) => {
     setSelectedMusicKey(key)
-    console.log(`SelectedSceneKey: [${key}]`)
+    console.log(`SelectedSlideKey: [${key}]`)
   }
 
   return (
@@ -185,7 +185,7 @@ const characters = () => {
 
   const handleCharacterClick = (key: string) => {
     setSelectedCharacterKey(key)
-    console.log(`SelectedSceneKey: [${key}]`)
+    console.log(`SelectedSlideKey: [${key}]`)
   }
 
   return (

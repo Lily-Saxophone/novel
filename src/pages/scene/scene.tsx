@@ -1,27 +1,27 @@
-import SceneRenderer from '../../components/sceneRenderer/SceneRenderer';
+import SlideRenderer from '../../components/sceneRenderer/SlideRenderer';
 import { Component, createSignal, Signal } from 'solid-js';
 import Masonry from "solid-masonry";
 import styles from '../../assets/css/scene/scene.module.css';
 import Palette, { PalletType } from '../../components/palette/Palette';
 import SceneFlow from '../../components/sceneFlow/SceneFlow';
-import type { SceneModel } from '../../models/scene/SceneModel';
-import { SceneList } from '../../models/scene/SceneList';
-import { ChoicesEvent } from '../../models/scene/ChoicesEvent';
-import { EndEvent } from '../../models/scene/EndEvent';
-import { ScenarioList } from '../../models/scenario/ScenarioList';
-import SceneUtil from '../../utils/scene/sceneUtil';
+import type { SlideModel } from '../../models/slide/SlideModel';
+import { SceneList } from '../../models/slide/SceneList';
+import { ChoicesEvent } from '../../models/slide/ChoicesEvent';
+import { EndEvent } from '../../models/slide/EndEvent';
+import { Story } from '../../models/scenario/ScenarioList';
+import SlideUtil from '../../utils/slide/slideUtil';
 import _ from 'lodash';
-import SceneDetail from '../../components/sceneDetail/SceneDetail';
+import SceneSlide from '../../components/sceneSlide/SceneSlide';
 import SceneScenario from '../../components/sceneScenario/SceneScenario';
 import SceneMedia from '../../components/sceneMedia/SceneMedia';
 import FlowHeaderRightContent from '../../components/sceneFlow/FlowHeaderRightContent';
 import storyJson from '../../assets/project/json/xxx.json'
 
 // ストーリー（物語全体）
-const story: ScenarioList = storyJson
+const story: Story = storyJson
 
-// シナリオ
-let scenario = story.scenarioList[0].scenario;
+// シナリオ（第X章）
+let scenario = story.story[0].scenario;
 
 let idx: number = 0;
 
@@ -29,39 +29,39 @@ let idx: number = 0;
 const [sceneList, setSceneList]: Signal<SceneList> = createSignal(scenario[0]);
 
 // １コマ
-const [scene, setScene]: Signal<SceneModel | ChoicesEvent | EndEvent> = createSignal(sceneList().scene[0]);
+const [slide, setSlide]: Signal<SlideModel | ChoicesEvent | EndEvent> = createSignal(sceneList().slide[0]);
 
-const [sceneIndex, setSceneIndex]: Signal<number> = createSignal(0)
+const [slideIndex, setSlideIndex]: Signal<number> = createSignal(0)
 
-const handleSceneIndexChange = (index?: number) => {
+const handleSlideIndexChange = (index?: number) => {
   if (index !== undefined) {
-    setSceneIndex(index)
+    setSlideIndex(index)
     idx = index;
   } else {
-    idx += sceneList().scene.length > (idx + 1) ? 1 : 0
+    idx += slide().slide.length > (idx + 1) ? 1 : 0
   }
-  setScene(sceneList().scene[idx]);
+  setSlide(slide().slide[idx]);
 }
 
-const handleSetScene = () => {
-  idx += sceneList().scene.length > (idx + 1) ? 1 : 0
+const handleSetSlide = () => {
+  idx += slide().slide.length > (idx + 1) ? 1 : 0
 
-  setScene(sceneList().scene[idx]);
+  setSlide(slide().slide[idx]);
 
-  // console.log(!SceneUtil.isChoicesEvent(scene()))
-  // console.log(!_.isEmpty((scene() as ChoicesEvent).choicesList))
-  // if (!SceneUtil.isChoicesEvent(scene())) {
-  //   if (!_.isEmpty((scene() as ChoicesEvent).choicesList)) {
-  //     setScene({ choicesList: [] });
-  //     setScene(sceneList().scene[idx]);
+  // console.log(!SlideUtil.isChoicesEvent(slide()))
+  // console.log(!_.isEmpty((slide() as ChoicesEvent).choicesList))
+  // if (!SlideUtil.isChoicesEvent(slide())) {
+  //   if (!_.isEmpty((slide() as ChoicesEvent).choicesList)) {
+  //     setSlide({ choicesList: [] });
+  //     setSlide(slide().slide[idx]);
   //   }
   // }
 
-  if (SceneUtil.isEndEvent(scene())) {
-    nextScenario((scene() as EndEvent).nextScenarioKey, (scene() as EndEvent).nextSceneKey);
+  if (SlideUtil.isEndEvent(slide())) {
+    nextScenario((slide() as EndEvent).nextScenarioKey, (slide() as EndEvent).nextSlideKey);
   }
 
-  handleSceneIndexChange(idx)
+  handleSlideIndexChange(idx)
 }
 
 // 選択肢クリック時イベント（選択肢のキーから該当のシーンへ遷移）
@@ -70,40 +70,40 @@ const handleChoicesClick = (event: any) => {
   if (wkSceneList !== undefined) {
     idx = 0;
     setSceneList(wkSceneList);
-    setScene({ choicesList: [] });
-    setScene(sceneList().scene[idx]);
+    setSlide({ choicesList: [] });
+    setSlide(slide().slide[idx]);
 
-    handleSceneIndexChange(idx)
+    handleSlideIndexChange(idx)
   }
 }
 
 // keyからシーン取得
-const getSceneList = (sceneKey: string | undefined): SceneList | undefined => {
-  if (sceneKey !== "") {
-    return scenario.find(element => element.sceneKey === sceneKey);
+const getSceneList = (slideKey: string | undefined): SceneList | undefined => {
+  if (slideKey !== "") {
+    return scenario.find(element => element.slideKey === slideKey);
   } else {
     return scenario[0];
   }
 }
 
 // 次のシナリオへ遷移
-const nextScenario = (scenarioKey: string, sceneKey: string) => {
-  let wkScenario: SceneList[] | undefined = story.scenarioList.find(element => element.scenarioKey === scenarioKey)?.scenario;
+const nextScenario = (scenarioKey: string, slideKey: string) => {
+  let wkScenario: SceneList[] | undefined = story.story.find(element => element.scenarioKey === scenarioKey)?.scenario;
   if (wkScenario !== undefined) {
     scenario = wkScenario;
 
-    let wkSceneList = getSceneList(sceneKey);
+    let wkSceneList = getSceneList(slideKey);
     if (wkSceneList !== undefined) {
       idx = 0;
       setSceneList(wkSceneList);
-      setScene(sceneList().scene[idx]);
+      setSlide(slide().slide[idx]);
     }
   }
 }
 
 // Detail用イベントハンドラー
-const DetailChange = (item: SceneModel) => {
-  setScene({ ...item })
+const DetailChange = (item: SlideModel) => {
+  setSlide({ ...item })
 }
 
 const [data, setData]: Signal<PalletType[]> = createSignal([
@@ -114,13 +114,13 @@ const [data, setData]: Signal<PalletType[]> = createSignal([
     height: "calc(46.5vh - 10px - 13px)"
   },
   {
-    content: <SceneRenderer scene={scene()} onSceneClick={handleSetScene} onChoicesClick={handleChoicesClick} />,
+    content: <SlideRenderer slide={slide()} onSlideClick={handleSetSlide} onChoicesClick={handleChoicesClick} />,
     width: "calc(51vw - 10px)",
     height: "calc(58vh - 10px  - 13px)"
   },
   {
     headerContent: { title: 'Flow', right: <FlowHeaderRightContent /> },
-    content: <SceneFlow onSceneIndexChange={handleSceneIndexChange} selectedSceneIndex={sceneIndex()} flowItems={sceneList()} />,
+    content: <SceneFlow onSlideIndexChange={handleSlideIndexChange} selectedSlideIndex={slideIndex()} flowItems={slide()} />,
     width: "calc(25vw - 10px)",
     height: "calc(93vh - 13px)"
   },
@@ -132,9 +132,9 @@ const [data, setData]: Signal<PalletType[]> = createSignal([
   },
   {
     headerContent: { title: 'Detail' },
-    content: <SceneDetail
-      scene={scene()}
-      onSceneUpdate={DetailChange}
+    content: <SceneSlide
+      slide={slide()}
+      onSlideUpdate={DetailChange}
     />,
     width: "calc(51vw - 10px)",
     height: "35vh"

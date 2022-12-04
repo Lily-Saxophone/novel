@@ -1,7 +1,7 @@
 import { Component, JSX, ParentProps } from 'solid-js';
 import { css } from "solid-styled-components";
-import SceneTextBody from './SceneTextBody';
-import SceneTextHeader from './SceneTextHeader';
+import SlideTextBody from './SlideTextBody';
+import SlideTextHeader from './SlideTextHeader';
 
 const TextLayerClass = css`
   position: absolute;

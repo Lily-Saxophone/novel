@@ -1,5 +1,5 @@
 import { ScenarioModel } from './ScenarioModel';
 
-export type ScenarioList = {
-  scenarioList: Array<ScenarioModel>
+export type Story = {
+  story: Array<ScenarioModel>
 }

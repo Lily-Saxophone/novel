@@ -221,20 +221,20 @@
   font-size: 1.7rem;
 }
 
-.flow_item_left>span[data-scene-type="Image"] {
+.flow_item_left>span[data-slide-type="Image"] {
   color: #d9c741;
 }
 
-.flow_item_left>span[data-scene-type="Music"] {
+.flow_item_left>span[data-slide-type="Music"] {
   color: #009dbd;
 }
 
-.flow_item_left>span[data-scene-type="Character"] {
+.flow_item_left>span[data-slide-type="Character"] {
   color: #c7544d;
 }
 
-.flow_item_left>span[data-scene-type="Choices"],
-.flow_item_left>span[data-scene-type="End"] {
+.flow_item_left>span[data-slide-type="Choices"],
+.flow_item_left>span[data-slide-type="End"] {
   color: #2e906d;
 }
 

@@ -1,30 +1,30 @@
-declare module SceneModule {
-  export interface SceneText {
+declare module SlideModule {
+  export interface SlideText {
     characterName: string,
     textList: Array<string>
   }
 
-  export interface Scene {
+  export interface Slide {
     backGroundImage: string,
     characterList: Array<Map<string, string>>,
-    textList: SceneText
+    textList: SlideText
   }
 
-  export type SceneChild = {
+  export type SlideChild = {
     childId: string,
-    sceneEvent: Array<SceneEvent>,
+    slideEvent: Array<SlideEvent>,
     isActive?: boolean
   }
 
-  export type SceneEvent = {
-    sceneAction?: SceneActions,
-    sceneObject: SceneController | SceneText,
-    sceneType: 'Image' | 'Music' | 'Character' | 'Text'
+  export type SlideEvent = {
+    slideAction?: SlideActions,
+    slideObject: SlideController | SlideText,
+    slideType: 'Image' | 'Music' | 'Character' | 'Text'
   }
 
-  export type SceneActions = string
+  export type SlideActions = string
 
-  export type SceneController = {
+  export type SlideController = {
     backGroundImage?: string,
     backGroundMusic?: string,
     characterList?: Array<string>,

@@ -141,10 +141,10 @@ const itemList = [
 
 const [viewSceneList, setviewSceneList]: Signal<{ sceneKey: string, sceneTitle: string, sceneDetail: string, sceneGroup: string }[]> = createSignal(sceneList)
 
-const scenes = () => {  
+const scenes = () => {
   const [selectedSceneKey, setSelectedSceneKey]: Signal<string> = createSignal(sceneList[0].sceneKey)
 
-  const handleSceneClick = (key: string) => {
+  const handleSlideClick = (key: string) => {
     setSelectedSceneKey(key)
     console.log(`SelectedSceneKey: [${key}]`)
   }
@@ -153,7 +153,7 @@ const scenes = () => {
     <div class='scenes'>
       <For each={viewSceneList()} fallback={<div>No Items...</div>}>
         {scene => (
-          <div class='scene_wrapper' data-is-active={scene.sceneKey === selectedSceneKey()} onClick={() => handleSceneClick(scene.sceneKey)}>
+          <div class='scene_wrapper' data-is-active={scene.sceneKey === selectedSceneKey()} onClick={() => handleSlideClick(scene.sceneKey)}>
             <div class='scene_thumbnail'>
               <img src="https://via.placeholder.com/110x65" alt="" />
             </div>

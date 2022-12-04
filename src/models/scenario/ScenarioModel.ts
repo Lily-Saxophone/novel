@@ -1,4 +1,4 @@
-import { SceneList } from '../../models/scene/SceneList';
+import { SceneList } from '../../models/slide/SceneList';
 
 export type ScenarioModel = {
   scenarioKey: string,

@@ -3,8 +3,8 @@
   "scenarioKey": "second",
   "scenario": [
     {
-      "sceneKey": "a",
-      "scene": [
+      "slideKey": "a",
+      "slide": [
         {
           "backGroundImage": "/src/assets/project/image/character/星野・ニャー/風呂絵.png",
           "backGroundMusic": "",
@@ -25,7 +25,7 @@
               "characterEffect": ""
             }
           ],
-          "sceneText": {
+          "slideText": {
             "speaker": "？？？？？",
             "text": "シナリオsecond、シーンaです"
           }
@@ -33,14 +33,14 @@
         {
           "nextScenarioKey": "first",
           "nextScenarioName": "第一章",
-          "nextSceneKey": "a",
-          "nextSceneName": "木村圭佑逮捕"
+          "nextSlideKey": "a",
+          "nextSlideName": "木村圭佑逮捕"
         }
       ]
     },
     {
-      "sceneKey": "b",
-      "scene": [
+      "slideKey": "b",
+      "slide": [
         {
           "backGroundImage": "/src/assets/project/image/background/背景（和）.jpg",
           "backGroundMusic": "",
@@ -61,7 +61,7 @@
               "characterEffect": ""
             }
           ],
-          "sceneText": {
+          "slideText": {
             "speaker": "？？？？？",
             "text": "シナリオsecond、シーンbです"
           }
@@ -69,8 +69,8 @@
         {
           "nextScenarioKey": "first",
           "nextScenarioName": "第一章",
-          "nextSceneKey": "b",
-          "nextSceneName": "木村圭佑逮捕"
+          "nextSlideKey": "b",
+          "nextSlideName": "木村圭佑逮捕"
         }
       ]
     }

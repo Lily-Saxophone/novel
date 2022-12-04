@@ -11,12 +11,12 @@ const RenderClass = css`
 `;
 
 export type RenderType = ParentProps & {
-  onSceneClick?: JSX.EventHandlerUnion<HTMLDivElement, MouseEvent>
+  onSlideClick?: JSX.EventHandlerUnion<HTMLDivElement, MouseEvent>
 }
 
 const Render: Component<RenderType> = (props: RenderType) => {
   return (
-    <div class={RenderClass} onClick={props.onSceneClick}>
+    <div class={RenderClass} onClick={props.onSlideClick}>
       {props.children}
     </div>
   );
