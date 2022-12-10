@@ -15,12 +15,7 @@ export type SceneFlowPropType = ParentProps & {
   flowItems: Scene
 }
 
-type SlideChild = Scene & {
-  slideIndex: number,
-  slideType: 'Slide' | 'Choices' | 'End'
-}
-
-const [slideChilds, setSlideChilds]: Store<Scene> = createStore([]);
+const [ slideChilds, setSlideChilds ]: Store<Scene> = createStore([]);
 
 const handleChageSlide = (items: Scene) => {
   // シーンからFlow描写用の差分を生成
@@ -38,9 +33,10 @@ const SceneFlow: Component<SceneFlowPropType> = (props: SceneFlowPropType) => {
   createEffect(() => handleChageSlide(props.flowItems));
   createEffect(() => handleSlideIndexChange(props.selectedSlideIndex));
 
-  const handleClickStage = (e: MouseEvent, arg: SlideModel | ChoicesEvent | EndEvent) => {
+  const handleClickStage = (e: MouseEvent) => {
     console.log("aaa", props.flowItems)
-    const selectedIndex = slideChilds.slide.findIndex((x: SlideChild) => x.childIndex === arg.childIndex)
+    // const selectedIndex = slideChilds.slide.findIndex((x: SlideChild) => x.childIndex === arg.childIndex)
+    const selectedIndex: number = Number((e.target as HTMLElement)?.getAttribute("data-stage-index")) ?? 0;
     props.onSlideIndexChange(selectedIndex);
     handleSlideIndexChange(selectedIndex);
   }
@@ -58,7 +54,8 @@ const SceneFlow: Component<SceneFlowPropType> = (props: SceneFlowPropType) => {
                   <div class={styles.flow_item_stage}
                     data-stage-type={"Slide"}
                     data-stage-active={index() === props.selectedSlideIndex}
-                    onClick={(e) => handleClickStage(e, child)}>
+                    data-stage-index={index()}
+                    onClick={(e) => handleClickStage(e)}>
                       {/* <ImageBox
                         imageName={child.characterList[1].characterName}
                         src={child.characterList[1].characterSrc}
@@ -73,7 +70,8 @@ const SceneFlow: Component<SceneFlowPropType> = (props: SceneFlowPropType) => {
                 <div class={styles.flow_item_stage}
                     data-stage-type={"Choices"}
                     data-stage-active={index() === props.selectedSlideIndex}
-                    onClick={(e) => handleClickStage(e, child)}>
+                    data-stage-index={index()}
+                    onClick={(e) => handleClickStage(e)}>
                   <For each={child.choicesList} fallback={<div>Loading...</div>}>
                     {(choice: ChoicesModel, index: Accessor<number>) => (
                       <>
@@ -107,7 +105,8 @@ const SceneFlow: Component<SceneFlowPropType> = (props: SceneFlowPropType) => {
                 <div class={styles.flow_item_stage}
                     data-stage-type={"End"}
                     data-stage-active={index() === props.selectedSlideIndex}
-                    onClick={(e) => handleClickStage(e, child)}>
+                    data-stage-index={index()}
+                    onClick={(e) => handleClickStage(e)}>
                     <div class={styles.flow_item_asset}>
                       <div class={styles.flow_item_action_btn}>
                         <span class="material-symbols-outlined" data-action-type={'forward'}>arrow_forward</span>

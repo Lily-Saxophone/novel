@@ -81,6 +81,10 @@
   position: relative;
 }
 
+.flow_item_stage > div {
+  pointer-events: none;
+}
+
 .flow_item_stage[data-stage-active="true"] {
   background-color: #55706d;
 }
