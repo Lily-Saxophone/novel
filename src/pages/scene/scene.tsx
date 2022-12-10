@@ -8,7 +8,7 @@ import type { SlideModel } from '../../models/slide/SlideModel';
 import { Scene } from '../../models/slide/Scene';
 import { ChoicesEvent } from '../../models/slide/ChoicesEvent';
 import { EndEvent } from '../../models/slide/EndEvent';
-import { Story } from '../../models/scenario/ScenarioList';
+import { Story } from '../../models/scenario/Story';
 import SlideUtil from '../../utils/slide/slideUtil';
 import _ from 'lodash';
 import SceneSlide from '../../components/sceneSlide/SceneSlide';
@@ -18,7 +18,7 @@ import FlowHeaderRightContent from '../../components/sceneFlow/FlowHeaderRightCo
 import storyJson from '../../assets/project/json/xxx.json'
 
 // ストーリー（物語全体）
-const story: Story = storyJson
+const story: Story = storyJson as Story
 
 // シナリオ（第X章）
 let scenario = story.story[0].scenario;
@@ -120,7 +120,7 @@ const [data, setData]: Signal<PalletType[]> = createSignal([
   },
   {
     headerContent: { title: 'Flow', right: <FlowHeaderRightContent /> },
-    content: <SceneFlow onSlideIndexChange={handleSlideIndexChange} selectedSlideIndex={slideIndex()} flowItems={slide()} />,
+    content: <SceneFlow onSlideIndexChange={handleSlideIndexChange} selectedSlideIndex={slideIndex()} flowItems={scene()} />,
     width: "calc(25vw - 10px)",
     height: "calc(93vh - 13px)"
   },
