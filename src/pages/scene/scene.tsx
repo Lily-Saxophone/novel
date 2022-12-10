@@ -64,11 +64,9 @@ const handleSetSlide = () => {
   handleSlideIndexChange(idx)
 }
 
-// 選択肢クリック時イベント（選択肢のキーから該当のシーンへ遷移）
+// 選択肢クリック時イベント（選択肢のキーから該当のシナリオ・シーンへ遷移）
 const handleChoicesClick = (event: any) => {
   setSlide({ choicesList: [] });
-  console.log((event.currentTarget as HTMLDivElement).dataset.scenario);
-  console.log((event.currentTarget as HTMLDivElement).dataset.scene);
   nextScenario((event.currentTarget as HTMLDivElement).dataset.scenario, (event.currentTarget as HTMLDivElement).dataset.scene);
 }
 
@@ -87,7 +85,6 @@ const nextScenario = (scenarioKey: string | undefined, sceneKey: string | undefi
   if (wkScenario !== undefined) {
     scenario = wkScenario;
 
-    console.log(wkScenario);
     let wkScene = getScene(sceneKey);
     if (wkScene !== undefined) {
       idx = 0;
@@ -95,7 +92,6 @@ const nextScenario = (scenarioKey: string | undefined, sceneKey: string | undefi
       setSlide(scene().slide[idx]);
     }
   }
-  console.log("クリック３！");
 }
 
 // Detail用イベントハンドラー
