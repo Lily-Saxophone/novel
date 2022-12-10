@@ -58,7 +58,7 @@ const handleSetSlide = () => {
   // }
 
   if (SlideUtil.isEndEvent(slide())) {
-    nextScenario((slide() as EndEvent).nextScenarioKey, (slide() as EndEvent).nextSlideKey);
+    nextScenario((slide() as EndEvent).nextScenarioKey, (slide() as EndEvent).nextSceneKey);
   }
 
   handleSlideIndexChange(idx)
@@ -66,39 +66,36 @@ const handleSetSlide = () => {
 
 // 選択肢クリック時イベント（選択肢のキーから該当のシーンへ遷移）
 const handleChoicesClick = (event: any) => {
-  let wkScene = getScene((event.currentTarget as HTMLDivElement).dataset.key);
-  if (wkScene !== undefined) {
-    idx = 0;
-    setScene(wkScene);
-    setSlide({ choicesList: [] });
-    setSlide(scene().slide[idx]);
-
-    handleSlideIndexChange(idx)
-  }
+  setSlide({ choicesList: [] });
+  console.log((event.currentTarget as HTMLDivElement).dataset.scenario);
+  console.log((event.currentTarget as HTMLDivElement).dataset.scene);
+  nextScenario((event.currentTarget as HTMLDivElement).dataset.scenario, (event.currentTarget as HTMLDivElement).dataset.scene);
 }
 
 // keyからシーン取得
-const getScene = (slideKey: string | undefined): Scene | undefined => {
-  if (slideKey !== "") {
-    return scenario.find(element => element.slideKey === slideKey);
+const getScene = (sceneKey: string | undefined): Scene | undefined => {
+  if (sceneKey !== "") {
+    return scenario.find((element: { sceneKey: string | undefined }) => element.sceneKey === sceneKey);
   } else {
     return scenario[0];
   }
 }
 
 // 次のシナリオへ遷移
-const nextScenario = (scenarioKey: string, slideKey: string) => {
+const nextScenario = (scenarioKey: string | undefined, sceneKey: string | undefined) => {
   let wkScenario: Scene[] | undefined = story.story.find(element => element.scenarioKey === scenarioKey)?.scenario;
   if (wkScenario !== undefined) {
     scenario = wkScenario;
 
-    let wkScene = getScene(slideKey);
+    console.log(wkScenario);
+    let wkScene = getScene(sceneKey);
     if (wkScene !== undefined) {
       idx = 0;
       setScene(wkScene);
       setSlide(scene().slide[idx]);
     }
   }
+  console.log("クリック３！");
 }
 
 // Detail用イベントハンドラー

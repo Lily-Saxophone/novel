@@ -58,7 +58,7 @@ const handleSetSlide = () => {
   // }
 
   if (SlideUtil.isEndEvent(slide())) {
-    nextScenario((slide() as EndEvent).nextScenarioKey, (slide() as EndEvent).nextSlideKey);
+    nextScenario((slide() as EndEvent).nextScenarioKey, (slide() as EndEvent).nextSceneKey);
   }
 
   handleSlideIndexChange(idx)
@@ -78,21 +78,21 @@ const handleChoicesClick = (event: any) => {
 }
 
 // keyからシーン取得
-const getScene = (slideKey: string | undefined): Scene | undefined => {
-  if (slideKey !== "") {
-    return scenario.find(element => element.slideKey === slideKey);
+const getScene = (sceneKey: string | undefined): Scene | undefined => {
+  if (sceneKey !== "") {
+    return scenario.find(element => element.sceneKey === sceneKey);
   } else {
     return scenario[0];
   }
 }
 
 // 次のシナリオへ遷移
-const nextScenario = (scenarioKey: string, slideKey: string) => {
+const nextScenario = (scenarioKey: string, sceneKey: string) => {
   let wkScenario: Scene[] | undefined = story.story.find(element => element.scenarioKey === scenarioKey)?.scenario;
   if (wkScenario !== undefined) {
     scenario = wkScenario;
 
-    let wkScene = getScene(slideKey);
+    let wkScene = getScene(sceneKey);
     if (wkScene !== undefined) {
       idx = 0;
       setScene(wkScene);

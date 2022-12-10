@@ -3,7 +3,7 @@ import type { SlideChild } from '../../models/slide/SlideChild';
 import type { ChoicesEvent } from '../../models/slide/ChoicesEvent';
 import type { EndEvent } from '../../models/slide/EndEvent';
 import type { SlideEvent } from '../../models/slide/SlideEvent';
-import type { Scene } from  '../../models/slide/Scene';
+import type { Scene } from '../../models/slide/Scene';
 import _ from 'lodash';
 
 type SlideUtilType = {
@@ -31,8 +31,8 @@ const SlideUtil: SlideUtilType = {
         typeof obj === 'object'
         && obj !== null
         && typeof (obj as EndEvent).nextScenarioKey === 'string'
-        && typeof (obj as EndEvent).nextSlideKey === 'string',
-    
+        && typeof (obj as EndEvent).nextSceneKey === 'string',
+
     generateFlowDiff: (scenario: Scene): SlideChild[] => {
 
         const slideChilds: SlideChild[] = []
@@ -58,7 +58,7 @@ const SlideUtil: SlideUtilType = {
                         slideEvents.push(slideEvent)
                     }
                 }
-                
+
                 if (s.backGroundMusic !== base.backGroundMusic) {
                     const slideEvent: SlideEvent = {} as SlideEvent
                     slideEvent.slideType = 'Music'
@@ -80,11 +80,11 @@ const SlideUtil: SlideUtilType = {
                 if (s.characterList !== base.characterList) {
                     if (_.isEmpty(s.characterList)) {
                         _.forEach(base.characterList, (character: string) => {
-                        const slideEvent: SlideEvent = {} as SlideEvent
-                        slideEvent.slideObject = { characterList: [ character ] }
-                        slideEvent.slideType = 'Character'
-                        slideEvent.slideAction = 'remove'
-                        slideEvents.push(slideEvent)
+                            const slideEvent: SlideEvent = {} as SlideEvent
+                            slideEvent.slideObject = { characterList: [character] }
+                            slideEvent.slideType = 'Character'
+                            slideEvent.slideAction = 'remove'
+                            slideEvents.push(slideEvent)
                         })
                     } else {
                         _.forEach(s.characterList, (character: string) => {
@@ -111,11 +111,11 @@ const SlideUtil: SlideUtilType = {
 
                     slideEvents.push(slideEvent)
                 }
-                
+
                 const sortedEvents = _.orderBy(slideEvents, ['slideAction', 'slideType'], ['desc', 'asc'])
                 slideChilds.push({ childIndex: index, childEvent: sortedEvents, childType: 'Slide' })
             } else if (SlideUtil.isChoicesEvent(s)) {
-                const choicesEvent: ChoicesEvent = { choicesList: s.choicesList } 
+                const choicesEvent: ChoicesEvent = { choicesList: s.choicesList }
                 slideChilds.push({ childIndex: index, childEvent: choicesEvent, childType: 'Choices' })
             } else if (SlideUtil.isEndEvent(s)) {
                 slideChilds.push({ childIndex: index, childEvent: s, childType: 'End' })

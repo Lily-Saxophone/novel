@@ -101,7 +101,7 @@ const SlideRenderer: Component<SlideRendererType> = (props: SlideRendererType) =
 
         <SlideChoices
           choicesList={choicesList()}
-          onClick={props.onChoicesClick} />
+          onChoicesClick={props.onChoicesClick} />
 
       </Render>
 

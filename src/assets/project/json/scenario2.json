@@ -1,9 +1,8 @@
-
 {
   "scenarioKey": "second",
   "scenario": [
     {
-      "slideKey": "a",
+      "sceneKey": "a",
       "slide": [
         {
           "backGroundImage": "/src/assets/project/image/character/星野・ニャー/風呂絵.png",
@@ -32,14 +31,14 @@
         },
         {
           "nextScenarioKey": "first",
-          "nextScenarioName": "第一章",
-          "nextSlideKey": "a",
-          "nextSlideName": "木村圭佑逮捕"
+          "nextScenarioTitle": "第一章",
+          "nextSceneKey": "a",
+          "nextSceneTitle": "木村圭佑逮捕"
         }
       ]
     },
     {
-      "slideKey": "b",
+      "sceneKey": "b",
       "slide": [
         {
           "backGroundImage": "/src/assets/project/image/background/背景（和）.jpg",
@@ -68,9 +67,9 @@
         },
         {
           "nextScenarioKey": "first",
-          "nextScenarioName": "第一章",
-          "nextSlideKey": "b",
-          "nextSlideName": "木村圭佑逮捕"
+          "nextScenarioTitle": "第一章",
+          "nextSceneKey": "b",
+          "nextSceneTitle": "木村圭佑逮捕"
         }
       ]
     }

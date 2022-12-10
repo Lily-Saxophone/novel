@@ -3,6 +3,7 @@ import { EndEvent } from "./EndEvent";
 import { SlideModel } from "./SlideModel";
 
 export type Scene = {
-  slideKey: string,
+  sceneKey: string,
+  sceneTitle: string,
   slide: Array<SlideModel | ChoicesEvent | EndEvent>
 }

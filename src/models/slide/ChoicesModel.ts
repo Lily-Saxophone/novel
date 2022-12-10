@@ -1,5 +1,7 @@
 export type ChoicesModel = {
-  choicesKey: string,
-  choiceSlideName: string,
+  nextScenarioKey: string,
+  nextScenarioTitle: string,
+  nextSceneKey: string,
+  nextSceneTitle: string
   choicesLabel: string
 }

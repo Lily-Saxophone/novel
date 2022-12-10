@@ -18,11 +18,13 @@ Story {
 
 ScenarioModel {
     string scenarioKey PK
+    string scenarioTitle
     Array[Scene] scenario
 }
 
 Scene {
-    string slideKey PK
+    string sceneKey PK
+    string sceneTitle
     Array[SlideModel-ChoicesEvent-EndEvent] slide
 }
 
@@ -49,16 +51,18 @@ ChoicesEvent {
 }
 
 ChoicesModel {
-    string choicesKey PK
-    string choiceSlideName
+    string nextScenarioKey FK
+    string nextScenarioTitle
+    string nextSceneKey FK
+    string nextSceneTitle
     string choicesLabel
 }
 
 EndEvent {
     string nextScenarioKey FK
-    string nextScenarioName
-    string nextSlideKey FK
-    string nextSlideName
+    string nextScenarioTitle
+    string nextSceneKey FK
+    string nextSceneTitle
 }
 
 

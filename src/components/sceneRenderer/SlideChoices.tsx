@@ -44,20 +44,20 @@ const backGroundClass = css`
 
 export type SlideChoicesType = ParentProps & {
   choicesList: Array<ChoicesModel>
-  onClick?: JSX.EventHandlerUnion<HTMLDivElement, MouseEvent>,
+  onChoicesClick?: JSX.EventHandlerUnion<HTMLDivElement, MouseEvent>,
 }
 
 const SlideChoices: Component<SlideChoicesType> = (props: SlideChoicesType) => {
   return (
     <Show
-      when={props.choicesList.length !== 0 && props.choicesList[0].choicesKey !== undefined}
+      when={props.choicesList.length !== 0 && props.choicesList[0].nextSceneKey !== undefined}
       fallback={() => <></>}>
 
       <div class={SlideChoicesClass}>
         <div class={ChoicesContainerClass}>
           <For each={props.choicesList} fallback={<div>Loading Failed.</div>}>
             {(item: ChoicesModel) => (
-              <div class={ChoicesItemClass} data-key={item.choicesKey} onClick={props.onClick}>
+              <div class={ChoicesItemClass} data-scenario={item.nextScenarioKey} data-scene={item.nextSceneKey} onClick={props.onChoicesClick}>
                 {item.choicesLabel}
               </div>
             )}

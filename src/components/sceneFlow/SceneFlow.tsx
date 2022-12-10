@@ -169,7 +169,7 @@ const SceneFlow: Component<SceneFlowPropType> = (props: SceneFlowPropType) => {
                               </span>
                             </div>
                             <div class={styles.flow_item_right}>
-                              {`ルート： ${choice.choiceSlideName}`}
+                              {`ルート： ${choice.nextSceneTitle}`}
                             </div>
                           </div>
                         </div>
@@ -189,7 +189,7 @@ const SceneFlow: Component<SceneFlowPropType> = (props: SceneFlowPropType) => {
                         </span>
                       </div>
                       <div class={styles.flow_item_right}>
-                        {`シナリオ： ${child.childEvent.nextScenarioName} / ${child.childEvent.nextSlideName}`}
+                        {`シナリオ： ${child.childEvent.nextScenarioTitle} / ${child.childEvent.nextSceneTitle}`}
                       </div>
                     </div>
                   </div>
