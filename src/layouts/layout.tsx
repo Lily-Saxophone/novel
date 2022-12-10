@@ -22,6 +22,11 @@ const Layout: Component = () => {
       <div class={styles.Layout}>
         <header class={styles.header}>
           <img src={TitleLogo}></img>
+          <nav>
+            <a href="/">Scene</a>
+            <a href="/yamamo">Yamamo</a>
+            <a href="/ponnu">Ponnu</a>
+          </nav>
         </header>
         <div class={styles.container}>
           <Routes />

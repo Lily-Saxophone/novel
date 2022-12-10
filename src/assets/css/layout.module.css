@@ -11,14 +11,29 @@
     grid-row: 1;
     grid-column: 1;
     background-color: #404040;
+    display: flex;
+    position: relative;
 }
 
 .header img {
     max-width: 60%;
     max-height: 60%;
-    padding: 15px;
-    height: auto;
-    width: auto;
+    padding: 12px;
+    position: absolute;
+}
+
+.header nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 30%;
+    margin: 0 auto;
+}
+
+.header nav a {
+    color: #cccccc;
+    text-decoration: none;
+    padding: 10px;
 }
 
 .container {
