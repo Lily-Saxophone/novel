@@ -58,12 +58,12 @@ const SlideChoices: Component<SlideChoicesType> = (props: SlideChoicesType) => {
           <For each={props.choicesList} fallback={<div>Loading Failed.</div>}>
             {(item: ChoicesModel) => (
               <div class={ChoicesItemClass} data-key={item.choicesKey} onClick={props.onClick}>
-                {item.choicesLabal}
+                {item.choicesLabel}
               </div>
             )}
           </For>
         </div>
-        <div class={backGroundClass} onClick={() => {  }}></div>
+        <div class={backGroundClass} onClick={() => { }}></div>
       </div>
     </Show>
   );

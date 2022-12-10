@@ -62,7 +62,7 @@ const SceneFlow: Component<SceneFlowPropType> = (props: SceneFlowPropType) => {
                     {(events: SlideEvent) => (
                       <Switch>
                         <Match when={events.slideType === 'Text'}>
-                          <div class={styles.flow_item_text} onClick={() => {}}>
+                          <div class={styles.flow_item_text} onClick={() => { }}>
                             <label>{events.slideObject.speaker}</label>
                             <span>
                               <For each={events.slideObject.textList} fallback={<div>Loading...</div>}>
@@ -155,7 +155,7 @@ const SceneFlow: Component<SceneFlowPropType> = (props: SceneFlowPropType) => {
                         <div class={styles.flow_item_text}>
                           <label>{`選択肢${index() + 1}`}</label>
                           <span>
-                            {choice.choicesLabal}
+                            {choice.choicesLabel}
                           </span>
                         </div>
                         <div class={styles.flow_item_asset}>
