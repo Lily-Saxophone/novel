@@ -1,4 +1,4 @@
-import Yamamo from './pages/yamamo/yamamo';
+import ScenarioPage from './pages/scenario/scenario';
 import Scene from './pages/scene/Scene';
 
 const appRoutes = [
@@ -7,8 +7,8 @@ const appRoutes = [
     component: Scene,
   },
   {
-    path: "/yamamo",
-    component: Yamamo
+    path: "/scenario",
+    component: ScenarioPage
   }
 ];
 

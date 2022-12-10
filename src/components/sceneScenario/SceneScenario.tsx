@@ -3,6 +3,7 @@ import { css } from "solid-styled-components";
 import LeftSideBarPage from '../common/sideBarPage/LeftSideBarPage';
 import SelectItemList from '../../components/common/selectItemList/selectItemList';
 import SearchBox from '../../components/common/searchBox/searchBox';
+import SmallSceneCard from '../../components/common/item/SmallSceneCard';
 
 const SceneScenarioClass = css`
   width: 100%;
@@ -25,70 +26,6 @@ const SceneScenarioClass = css`
   .left_sidebar {
     width: 100%;
     height: 100%;
-
-    .scenes {
-      display: flex;
-      flex-wrap: wrap;
-
-      &::after {
-        content: "";
-        width: 100%;
-        height: 65px;
-        padding: 7px;
-      }
-
-      .scene_wrapper {
-        width: 100%;
-        height: 65px;
-        display: flex;
-        justify-content: space-around;
-        padding: 7px;
-
-        &[data-is-active='true'] {
-          background-color: #606060;
-        }
-
-        .scene_thumbnail {
-          width: 35%;
-          min-width: 35%;
-          height: 100%;
-  
-          img {
-            width: 100%;
-            border-radius: 6px;
-            border: solid 1.3px #555555;
-            box-shadow: 1px 0 4px 2px rgb(0 0 0 / 20%);
-          }
-        }
-  
-        .scene_description {
-          width: 65%;
-          height: 100%;
-          padding: 7px;
-          margin-left: 7px;
-  
-          .scene_title {
-            width: 100%;
-            max-width: 9rem;
-            font-size: .75rem;
-            font-weight: bold;
-            margin-bottom: 3px;
-            text-overflow: ellipsis;
-            white-space : nowrap;
-            overflow: hidden;
-          }
-  
-          .scene_detail {
-            width: 100%;
-            max-height: 30px;
-            font-size: .6rem;
-            text-overflow: ellipsis;
-            overflow: hidden;
-            word-break: normal;
-          }
-        }
-      }
-    }
   }
 `;
 
@@ -153,14 +90,13 @@ const scenes = () => {
     <div class='scenes'>
       <For each={viewScene()} fallback={<div>No Items...</div>}>
         {scene => (
-          <div class='scene_wrapper' data-is-active={scene.sceneKey === selectedSceneKey()} onClick={() => handleSlideClick(scene.sceneKey)}>
-            <div class='scene_thumbnail'>
-              <img src="https://via.placeholder.com/110x65" alt="" />
-            </div>
-            <div class='scene_description'>
-              <div class='scene_title'>{scene.sceneTitle}</div>
-              <div class='scene_detail'>{scene.sceneDetail}</div>
-            </div>
+          <div style="max-height=65px">
+            <SmallSceneCard
+              backGroundColor={scene.sceneKey === selectedSceneKey() ? "#606060" : "none"}
+              onClick={() => handleSlideClick(scene.sceneKey)}
+              sceneImage="https://via.placeholder.com/110x65"
+              sceneTitle={scene.sceneTitle}
+              sceneDetail={scene.sceneDetail} />
           </div>
         )}
       </For>
@@ -188,13 +124,13 @@ const scenarioList = [
 ]
 
 export type SceneScenarioType = ParentProps & {
-  
+
 }
 
 const SceneScenario: Component<SceneScenarioType> = (props: SceneScenarioType) => {
 
-  const [ selectedGroup, setSelectedGroup ]: Signal<{key: string, value: string}> = createSignal({key: '', value: ''})
-  const [ searchText, setSearchText ]: Signal<string> = createSignal('')
+  const [selectedGroup, setSelectedGroup]: Signal<{ key: string, value: string }> = createSignal({ key: '', value: '' })
+  const [searchText, setSearchText]: Signal<string> = createSignal('')
   createEffect(() => {
     console.log(`SelectedGroup: [`, selectedGroup(), ']')
     if (selectedGroup().key === 'AllItem') {
@@ -213,10 +149,10 @@ const SceneScenario: Component<SceneScenarioType> = (props: SceneScenarioType) =
       <div class='topbar_content'>
         <span>{'グループ： '}</span>
         <SelectItemList
-            itemList={itemList}
-            setSelectedItem={setSelectedGroup}
-            hasCustom={true}
-            width={'10rem'} />
+          itemList={itemList}
+          setSelectedItem={setSelectedGroup}
+          hasCustom={true}
+          width={'10rem'} />
 
         <SearchBox
           setText={setSearchText}

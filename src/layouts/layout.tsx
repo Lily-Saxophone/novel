@@ -4,7 +4,7 @@ import { Component } from 'solid-js';
 import styles from '../assets/css/layout.module.css';
 import appRoutes from '../routes';
 import TitleLogo from '../assets/image/AppName.svg';
-import  StoryProvider from '../providers/storyProvider';
+import StoryProvider from '../providers/storyProvider';
 
 const layoutRoutes = (): RouteDefinition[] => {
   let routes: RouteDefinition[] = [];
@@ -24,7 +24,7 @@ const Layout: Component = () => {
           <img src={TitleLogo}></img>
           <nav>
             <a href="/">Scene</a>
-            <a href="/yamamo">Yamamo</a>
+            <a href="/scenario">Scenario</a>
             <a href="/ponnu">Ponnu</a>
           </nav>
         </header>
