@@ -64,11 +64,7 @@ const SceneFlow: Component<SceneFlowPropType> = (props: SceneFlowPropType) => {
                         <Match when={events.slideType === 'Text'}>
                           <div class={styles.flow_item_text} onClick={() => { }}>
                             <label>{events.slideObject.speaker}</label>
-                            <span>
-                              <For each={events.slideObject.textList} fallback={<div>Loading...</div>}>
-                                {(text) => (<>{text}<br /></>)}
-                              </For>
-                            </span>
+                            <span>{events.slideObject.text}</span>
                           </div>
                         </Match>
                         <Match when={events.slideType === 'Image'}>
@@ -120,27 +116,29 @@ const SceneFlow: Component<SceneFlowPropType> = (props: SceneFlowPropType) => {
                         <Match when={events.slideType === 'Character'}>
                           <For each={events.slideObject.characterList} fallback={<div>Loading...</div>}>
                             {(character: SlideCharacter) => (
-                              <div class={styles.flow_item_asset}>
-                                <div class={styles.flow_item_action_btn}>
-                                  <Switch>
-                                    <Match when={events.slideAction === 'add'}>
-                                      <span class="material-symbols-outlined" data-action-type={'add'}>add</span>
-                                    </Match>
-                                    <Match when={events.slideAction === 'change'}>
-                                      <span class="material-symbols-outlined" data-action-type={'change'}>cached</span>
-                                    </Match>
-                                    <Match when={events.slideAction === 'remove'}>
-                                      <span class="material-symbols-outlined" data-action-type={'remove'}>remove</span>
-                                    </Match>
-                                  </Switch>
-                                </div>
-                                <div class={styles.flow_item}>
-                                  <div class={styles.flow_item_left}>
-                                    <span class="material-symbols-outlined" data-slide-type={events.slideType}>person</span>
+                              <Show when={character.characterName !== ""}>
+                                <div class={styles.flow_item_asset}>
+                                  <div class={styles.flow_item_action_btn}>
+                                    <Switch>
+                                      <Match when={events.slideAction === 'add'}>
+                                        <span class="material-symbols-outlined" data-action-type={'add'}>add</span>
+                                      </Match>
+                                      <Match when={events.slideAction === 'change'}>
+                                        <span class="material-symbols-outlined" data-action-type={'change'}>cached</span>
+                                      </Match>
+                                      <Match when={events.slideAction === 'remove'}>
+                                        <span class="material-symbols-outlined" data-action-type={'remove'}>remove</span>
+                                      </Match>
+                                    </Switch>
                                   </div>
-                                  <div class={styles.flow_item_right}>{character.characterSrc.split('/').slice(-1)[0]}</div>
+                                  <div class={styles.flow_item}>
+                                    <div class={styles.flow_item_left}>
+                                      <span class="material-symbols-outlined" data-slide-type={events.slideType}>person</span>
+                                    </div>
+                                    <div class={styles.flow_item_right}>{character.characterSrc.split('/').slice(-1)[0]}</div>
+                                  </div>
                                 </div>
-                              </div>
+                              </Show>
                             )}
                           </For>
                         </Match>
