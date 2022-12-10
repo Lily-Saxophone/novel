@@ -38,15 +38,15 @@ const handleSlideIndexChange = (index?: number) => {
     setSlideIndex(index)
     idx = index;
   } else {
-    idx += slide().slide.length > (idx + 1) ? 1 : 0
+    idx += scene().slide.length > (idx + 1) ? 1 : 0
   }
-  setSlide(slide().slide[idx]);
+  setSlide(scene().slide[idx]);
 }
 
 const handleSetSlide = () => {
-  idx += slide().slide.length > (idx + 1) ? 1 : 0
+  idx += scene().slide.length > (idx + 1) ? 1 : 0
 
-  setSlide(slide().slide[idx]);
+  setSlide(scene().slide[idx]);
 
   // console.log(!SlideUtil.isChoicesEvent(slide()))
   // console.log(!_.isEmpty((slide() as ChoicesEvent).choicesList))
@@ -71,7 +71,7 @@ const handleChoicesClick = (event: any) => {
     idx = 0;
     setScene(wkScene);
     setSlide({ choicesList: [] });
-    setSlide(slide().slide[idx]);
+    setSlide(scene().slide[idx]);
 
     handleSlideIndexChange(idx)
   }
@@ -96,7 +96,7 @@ const nextScenario = (scenarioKey: string, slideKey: string) => {
     if (wkScene !== undefined) {
       idx = 0;
       setScene(wkScene);
-      setSlide(slide().slide[idx]);
+      setSlide(scene().slide[idx]);
     }
   }
 }
