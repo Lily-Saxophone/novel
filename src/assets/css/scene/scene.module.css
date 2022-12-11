@@ -89,6 +89,10 @@
   background-color: #55706d;
 }
 
+.flow_item_stage[data-stage-type="Slide"] {
+  display: flex;
+}
+
 .flow_item_stage[data-stage-type="Choices"]::before,
 .flow_item_stage[data-stage-type="End"]::before {
   position: absolute;
@@ -115,8 +119,14 @@
   visibility: hidden;
 }
 
+.flow_item_chara_image {
+  width: 25%;
+  display: flex;
+  justify-content: center;
+}
+
 .flow_item_text {
-  width: calc(100% - var(--space-size_1) * 2);
+  width: calc(75% - var(--space-size_1) * 2);
   height: auto;
   background-color: #737373bf;
   border-radius: 6px;

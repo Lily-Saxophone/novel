@@ -56,12 +56,16 @@ const SceneFlow: Component<SceneFlowPropType> = (props: SceneFlowPropType) => {
                     data-stage-active={index() === props.selectedSlideIndex}
                     data-stage-index={index()}
                     onClick={(e) => handleClickStage(e)}>
-                      {/* <ImageBox
-                        imageName={child.characterList[1].characterName}
-                        src={child.characterList[1].characterSrc}
-                      /> */}
+                      <div class={styles.flow_item_chara_image}>
+                        <ImageBox
+                          imageName={child.characterList[1].characterName}
+                          src={child.characterList[1].characterSrc}
+                          width={12}
+                          height={12}
+                        />
+                      </div>
                       <div class={styles.flow_item_text} onClick={() => { }}>
-                        <label>{child.slideText.speaker}</label>
+                        {/* <label>{child.slideText.speaker}</label> */}
                         <span>{child.slideText.text}</span>
                       </div>
                   </div>
