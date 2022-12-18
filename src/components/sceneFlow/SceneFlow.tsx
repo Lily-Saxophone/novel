@@ -52,6 +52,7 @@ const SceneFlow: Component<SceneFlowPropType> = (props: SceneFlowPropType) => {
               <Switch>
                 <Match when={SlideUtil.isSlideModel(child)}>
                   <div class={styles.flow_item_stage}
+                    style={`background-image: url("${child.backGroundImage}")`}
                     data-stage-type={"Slide"}
                     data-stage-active={index() === props.selectedSlideIndex}
                     data-stage-index={index()}
@@ -62,6 +63,7 @@ const SceneFlow: Component<SceneFlowPropType> = (props: SceneFlowPropType) => {
                           src={child.characterList[1].characterSrc}
                           width={12}
                           height={12}
+                          defaultView={<></>}
                         />
                       </div>
                       <div class={styles.flow_item_text} onClick={() => { }}>
@@ -72,6 +74,7 @@ const SceneFlow: Component<SceneFlowPropType> = (props: SceneFlowPropType) => {
                 </Match>
                 <Match when={SlideUtil.isChoicesEvent(child)}>
                 <div class={styles.flow_item_stage}
+                    style={`background-image: url("${child.backGroundImage}")`}
                     data-stage-type={"Choices"}
                     data-stage-active={index() === props.selectedSlideIndex}
                     data-stage-index={index()}
@@ -107,6 +110,7 @@ const SceneFlow: Component<SceneFlowPropType> = (props: SceneFlowPropType) => {
                 </Match>
                 <Match when={SlideUtil.isEndEvent(child)}>
                 <div class={styles.flow_item_stage}
+                    style={`background-image: url("${child.backGroundImage}")`}
                     data-stage-type={"End"}
                     data-stage-active={index() === props.selectedSlideIndex}
                     data-stage-index={index()}

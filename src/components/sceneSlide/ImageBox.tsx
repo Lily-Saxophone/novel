@@ -1,4 +1,4 @@
-import { Component, createEffect, createSignal, ParentProps, Show, Signal } from 'solid-js';
+import { Component, createEffect, createSignal, JSX, ParentProps, Show, Signal } from 'solid-js';
 import { css } from "solid-styled-components";
 import LeftSideBarPage from '../common/sideBarPage/LeftSideBarPage';
 
@@ -52,23 +52,29 @@ export type ImageBoxType = ParentProps & {
   imageName?: string,
   src: string,
   width?: number,
-  height?: number
+  height?: number,
+  defaultView?: JSX.Element
 }
 
 const ImageBox: Component<ImageBoxType> = (props: ImageBoxType) => {
   const width = props.width ?? 16
   const height = props.height ?? 9
 
+  const plusButton = (
+    <div class={ImageBoxClass({ width: width, height: height })}>
+      <Show when={!props.defaultView}
+            fallback={<></>}>
+        <img class={PlusButtonClass} src='/src/assets/image/PlusButton_outline.svg' />
+      </Show>
+    </div>
+  )
+
   return (
 
     <Show
       when={props.src !== '' && 'a' !== undefined}
       // キャラクターなし
-      fallback={
-        <div class={ImageBoxClass({ width: width, height: height })}>
-          <img class={PlusButtonClass} src='/src/assets/image/PlusButton_outline.svg' />
-        </div>
-      }
+      fallback={ plusButton }
     >
       {/* キャラクターあり */}
       <div class={ImageBoxClass({ width: width, height: height })}>

@@ -74,23 +74,44 @@
   width: 100%;
   height: auto;
   background-color: #404040;
-  margin: .5rem 0;
+  background-size: cover;
+  margin: 8px 0;
   padding: calc(var(--space-size_1) / 2) 0;
   box-shadow: -3px 0 5px 2px rgb(0 0 0 / 30%);
   z-index: 1;
   position: relative;
 }
 
+.flow_item_stage::before {
+  content: '';
+  background: inherit;
+  filter: blur(1px);
+  background-blend-mode: overlay;
+  overflow: hidden;
+  position: absolute;
+  top: -0.9px;
+  left: -0.9px;
+  right: -0.9px;
+  bottom: -0.9px;
+  z-index: -1;
+}
+
+.flow_item_stage[data-stage-active="true"]::before {
+  filter: unset;
+  background-blend-mode: unset;
+}
+
 .flow_item_stage > div {
   pointer-events: none;
 }
 
-.flow_item_stage[data-stage-active="true"] {
-  background-color: #55706d;
-}
-
 .flow_item_stage[data-stage-type="Slide"] {
   display: flex;
+}
+
+.flow_item_stage[data-stage-type="Choices"],
+.flow_item_stage[data-stage-type="End"] {
+  padding-left: var(--space-size_2);
 }
 
 .flow_item_stage[data-stage-type="Choices"]::before,
@@ -126,14 +147,14 @@
 }
 
 .flow_item_text {
-  width: calc(75% - var(--space-size_1) * 2);
+  width: calc(78% - var(--space-size_1) * 2);
   height: auto;
-  background-color: #737373bf;
+  background-color: #737373ef;
   border-radius: 6px;
   font-family: 'ヒラギノ角ゴ ProN W3';
   font-size: .8rem;
   padding: 1px 0;
-  margin: .5em var(--space-size_1);
+  /* margin: .5em var(--space-size_1); */
   box-shadow: 1px 0 4px 2px rgb(0 0 0 / 20%);
   position: relative;
 }
@@ -214,7 +235,10 @@
 .flow_item {
   width: 88%;
   height: 100%;
+  margin-right: 10px;
+  margin-top: 3px;
   display: flex;
+  z-index: 1;
 }
 
 .flow_item_left {
