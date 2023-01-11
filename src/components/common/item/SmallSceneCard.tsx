@@ -1,9 +1,12 @@
-import { Component, createEffect, createSignal, For, JSX, JSXElement, onMount, ParentProps, Setter, Signal } from 'solid-js';
+import { Component, createEffect, createRenderEffect, createSignal, For, JSX, JSXElement, onMount, ParentProps, Setter, Signal } from 'solid-js';
 import { css } from "solid-styled-components";
 
-const SmallSceneCardClass = css`
-  width: 100%;
-  height: 100%;
+const SmallSceneCardClass = (props: { backGroundColor: string, width: string, height: string }) => css`
+  background-color: ${props.backGroundColor};
+  min-width: ${props.width};
+  max-width: ${props.width};
+  min-height: ${props.height};
+  max-height: ${props.height};
   display: flex;
   justify-content: space-around;
   padding: 7px;
@@ -50,21 +53,20 @@ const SmallSceneCardClass = css`
   }
 `;
 
-type SceneItem = {
-}
-
 export type SmallSceneCardType = ParentProps & {
   scenarioTitle?: string,
   sceneTitle?: string,
   sceneDetail?: string,
   sceneImage?: string,
   backGroundColor: string,
-  onClick: () => void,
+  onClick?: () => void,
+  width: string,
+  height: string
 }
 
 const SmallSceneCard: Component<SmallSceneCardType> = (props: SmallSceneCardType) => {
   return (
-    <div class={SmallSceneCardClass} style={"background-color:" + props.backGroundColor} onClick={props.onClick}>
+    <div class={SmallSceneCardClass({ ...props })} onClick={props?.onClick}>
       <div class='scene_thumbnail'>
         <img src={props.sceneImage} alt="" />
       </div>

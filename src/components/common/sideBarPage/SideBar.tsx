@@ -17,7 +17,7 @@ const SideBarClass = css`
     overflow-y: scroll;
     max-height: 100%;
     cursor: default;
-  
+
     li {
       text-align: center;
       color: #cccccc;
@@ -28,7 +28,7 @@ const SideBarClass = css`
       &:hover {
         background-color: #4d4d4d;
       }
-  
+
       span {
         display: block;
         max-width: 85%;
@@ -54,11 +54,9 @@ const SideBar: Component<SideBarType> = (props: SideBarType) => {
   const changeMenuItem = (event: MouseEvent & { target: Element; }) => {
     const ul = event?.target?.parentElement?.parentNode;
     const li = ul?.querySelectorAll("li");
-    console.log(ul)
 
     li?.forEach((element) => {
       if (element === event.target.parentElement) {
-        console.log(element)
         element.classList.toggle('isSelected', true);
       } else {
         element.classList.toggle('isSelected', false);

@@ -80,27 +80,22 @@ const nextScenario = (scenarioKey: string | undefined, sceneKey: string | undefi
   }
 }
 
-// Detail用イベントハンドラー
-const DetailChange = (item: SlideModel) => {
-  setSlide({ ...item })
-}
-
-const [data, setData]: Signal<PalletType[]> = createSignal([
-  {
-    headerContent: { title: 'Flow Chart' },
-    content: <ScenarioFlow slide={slide()} onSlideUpdate={handleSetSlide} />,
-    width: "calc(76vw - 15px)",
-    height: "calc(93vh - 18px)"
-  },
-  {
-    headerContent: { title: 'Scenario' },
-    content: <SceneScenario />,
-    width: "calc(22.5vw - 15px)",
-    height: "calc(93vh - 18px)"
-  }
-]);
-
 const ScenarioPage: Component = () => {
+
+  const [data, setData]: Signal<PalletType[]> = createSignal([
+    {
+      headerContent: { title: 'Flow Chart' },
+      content: <ScenarioFlow slide={slide()} onSlideUpdate={handleSetSlide} />,
+      width: "calc(76vw - 15px)",
+      height: "calc(93vh - 18px)"
+    },
+    {
+      headerContent: { title: 'Scenario' },
+      content: <SceneScenario />,
+      width: "calc(22.5vw - 15px)",
+      height: "calc(93vh - 18px)"
+    }
+  ]);
 
   return (
     <Masonry

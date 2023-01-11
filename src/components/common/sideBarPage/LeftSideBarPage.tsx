@@ -1,5 +1,5 @@
-import { Accessor, children, Component, createSignal, For, JSX, JSXElement, ParentProps, Signal } from 'solid-js';
-import { ResolvedJSXElement } from 'solid-js/types/reactive/signal';
+import { Component, createMemo, createSignal, For, JSXElement, ParentProps, Signal } from 'solid-js';
+import { onMount } from 'solid-js';
 import { css } from "solid-styled-components";
 import SideBar from './SideBar';
 import SideBarPageBody from './SideBarPageBody';
@@ -32,8 +32,9 @@ export type LeftSideBarPageType = ParentProps & {
 }
 
 const LeftSideBarPage: Component<LeftSideBarPageType> = (props: LeftSideBarPageType) => {
+  const itemList = createMemo(() => props.itemList)
   // メインコンテンツ
-  const [contents, setContents]: Signal<JSXElement> = createSignal(props.itemList[0]?.contents);
+  const [contents, setContents]: Signal<JSXElement> = createSignal(itemList()[0]?.contents);
 
   // メニューバー幅(%)
   const menuWidth = props.menuWidth === undefined ? 17 : props.menuWidth;
@@ -44,7 +45,7 @@ const LeftSideBarPage: Component<LeftSideBarPageType> = (props: LeftSideBarPageT
   return (
     <div class={SideBarPageClass}>
       <SideBar width={menuWidth}>
-        <For each={props.itemList} fallback={<li></li>}>
+        <For each={itemList()} fallback={<li></li>}>
           {(item, idx) => (
             <li classList={{ isSelected: idx() === 0 }} onClick={() => setContents(item.contents)}>
               <span>{item.title}</span>

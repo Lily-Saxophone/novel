@@ -83,7 +83,7 @@ const scenes = () => {
 
   const handleSlideClick = (key: string) => {
     setSelectedSceneKey(key)
-    console.log(`SelectedSceneKey: [${key}]`)
+    // console.log(`SelectedSceneKey: [${key}]`)
   }
 
   return (
@@ -96,7 +96,9 @@ const scenes = () => {
               onClick={() => handleSlideClick(scene.sceneKey)}
               sceneImage="https://via.placeholder.com/110x65"
               sceneTitle={scene.sceneTitle}
-              sceneDetail={scene.sceneDetail} />
+              sceneDetail={scene.sceneDetail}
+              width="100%"
+              height="65px" />
           </div>
         )}
       </For>
@@ -132,7 +134,7 @@ const SceneScenario: Component<SceneScenarioType> = (props: SceneScenarioType) =
   const [selectedGroup, setSelectedGroup]: Signal<{ key: string, value: string }> = createSignal({ key: '', value: '' })
   const [searchText, setSearchText]: Signal<string> = createSignal('')
   createEffect(() => {
-    console.log(`SelectedGroup: [`, selectedGroup(), ']')
+    // console.log(`SelectedGroup: [`, selectedGroup(), ']')
     if (selectedGroup().key === 'AllItem') {
       setviewScene(scene)
     } else {
@@ -141,7 +143,7 @@ const SceneScenario: Component<SceneScenarioType> = (props: SceneScenarioType) =
   })
 
   const handleSearchSubmit = () => {
-    console.log(`SubmitSearch: [${searchText()}]`)
+    // console.log(`SubmitSearch: [${searchText()}]`)
   }
 
   return (

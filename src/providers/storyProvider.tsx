@@ -1,29 +1,21 @@
-import { ScenarioList } from "../models/scenario/ScenarioList"
+import { Story } from "../models/scenario/Story"
 import { createSignal, createContext, useContext, ParentProps, Component, Signal } from "solid-js"
 import { createStore, Store } from "solid-js/store"
 import { ScenarioModel } from "../models/scenario/Scenario"
 
 export type StoryProviderType = ParentProps & {
-  story?: ScenarioList
+  story?: number
 }
-const StoryContext = createContext({ story: {} })
+const StoryContext = createContext([{ story: {} }, {}])
 
 const models: ScenarioModel[] = []
 
 const StoryProvider: Component<StoryProviderType> = (props: StoryProviderType) => {
   // const [count, setCount] = createSignal(props.story || 0),
-  const [story, setStory]: Signal<ScenarioList> = createSignal({ scenarioList: models })
+  const [story, setStory]: Signal<Story> = createSignal({ story: models })
   const store = [
     story,
-    {
-      increment() {
-        setStory({ scenarioList: models });
-        console.log('inc')
-      },
-      decrement() {
-        setStory({ scenarioList: models });
-      }
-    }
+    {}
   ]
 
   return (
