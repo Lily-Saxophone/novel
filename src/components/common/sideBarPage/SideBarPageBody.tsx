@@ -2,6 +2,7 @@ import { Component, For, JSX, ParentProps } from 'solid-js';
 import { css } from "solid-styled-components";
 
 const SideBarPageBodyClass = css`
+  position: relative;
   z-index: 10;
   height: 100%;
   color: #cccccc;

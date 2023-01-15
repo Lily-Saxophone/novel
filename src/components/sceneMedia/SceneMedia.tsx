@@ -151,87 +151,84 @@ const itemList = [
     itemName: 'モブ'
   },
 ]
-
-const [viewMusicList, setViewMusicList]: Signal<{ musicKey: string, musicPath: string, musicName: string }[]> = createSignal(musicList)
-
-const music = () => {
-  const [selectedMusicKey, setSelectedMusicKey]: Signal<string> = createSignal(musicList[0].musicKey)
-
-  const handlemusicClick = (key: string) => {
-    setSelectedMusicKey(key)
-    console.log(`SelectedSlideKey: [${key}]`)
-  }
-
-  return (
-    <div class='music'>
-      <For each={viewMusicList()} fallback={<div>No Items...</div>}>
-        {music => (
-          <div class='music_wrapper' data-is-active={music.musicKey === selectedMusicKey()} onClick={() => handlemusicClick(music.musicKey)}>
-            <div class='music_thumbnail'>
-              {/* <img src={music.musicImage} alt="" /> */}
-            </div>
-          </div>
-        )}
-      </For>
-    </div>
-  )
-}
-
-
-const [viewCharacterList, setViewCharacterList]: Signal<{ characterKey: string, characterImage: string, characterName: string, characterGroup: string }[]> = createSignal(characterList)
-
-const characters = () => {
-  const [selectedCharacterKey, setSelectedCharacterKey]: Signal<string> = createSignal(characterList[0].characterKey)
-
-  const handleCharacterClick = (key: string) => {
-    setSelectedCharacterKey(key)
-    console.log(`SelectedSlideKey: [${key}]`)
-  }
-
-  return (
-    <div class='characters'>
-      <For each={viewCharacterList()} fallback={<div>No Items...</div>}>
-        {character => (
-          <div class='character_wrapper' data-is-active={character.characterKey === selectedCharacterKey()} onClick={() => handleCharacterClick(character.characterKey)}>
-            <div class='character_thumbnail'>
-              <img src={character.characterImage} alt="" />
-            </div>
-          </div>
-        )}
-      </For>
-    </div>
-  )
-}
-
-const characterPageItemList = [
-  {
-    title: 'ぽんぬ',
-    contents: characters()
-  },
-  {
-    title: '星野・ニャー',
-    contents: <div>コンテンツ２</div>
-  },
-  {
-    title: 'えりちゃん',
-    contents: <div>コンテンツ３</div>
-  },
-  {
-    title: 'しなしな',
-    contents: <div>コンテンツ４</div>
-  },
-]
-
 export type SceneMediaType = ParentProps & {
 
 }
 
 const SceneMedia: Component<SceneMediaType> = (props: SceneMediaType) => {
+  const [viewMusicList, setViewMusicList]: Signal<{ musicKey: string, musicPath: string, musicName: string }[]> = createSignal(musicList)
 
-  const [ selectedGroup, setSelectedGroup ]: Signal<{key: string, value: string}> = createSignal({key: '', value: ''})
-  const [ searchText, setSearchText ]: Signal<string> = createSignal('')
+  const music = () => {
+    const [selectedMusicKey, setSelectedMusicKey]: Signal<string> = createSignal(musicList[0].musicKey)
+
+    const handlemusicClick = (key: string) => {
+      setSelectedMusicKey(key)
+    }
+
+    return (
+      <div class='music'>
+        <For each={viewMusicList()} fallback={<div>No Items...</div>}>
+          {music => (
+            <div class='music_wrapper' data-is-active={music.musicKey === selectedMusicKey()} onClick={() => handlemusicClick(music.musicKey)}>
+              <div class='music_thumbnail'>
+                {/* <img src={music.musicImage} alt="" /> */}
+              </div>
+            </div>
+          )}
+        </For>
+      </div>
+    )
+  }
+
+
+  const [viewCharacterList, setViewCharacterList]: Signal<{ characterKey: string, characterImage: string, characterName: string, characterGroup: string }[]> = createSignal(characterList)
+
+  const characters = () => {
+    const [selectedCharacterKey, setSelectedCharacterKey]: Signal<string> = createSignal(characterList[0].characterKey)
+
+    const handleCharacterClick = (key: string) => {
+      setSelectedCharacterKey(key)
+    }
+
+    return (
+      <div class='characters'>
+        <For each={viewCharacterList()} fallback={<div>No Items...</div>}>
+          {character => (
+            <div class='character_wrapper' data-is-active={character.characterKey === selectedCharacterKey()} onClick={() => handleCharacterClick(character.characterKey)}>
+              <div class='character_thumbnail'>
+                <img src={character.characterImage} alt="" />
+              </div>
+            </div>
+          )}
+        </For>
+      </div>
+    )
+  }
+
+  const characterPageItemList = [
+    {
+      title: 'ぽんぬ',
+      contents: characters()
+    },
+    {
+      title: '星野・ニャー',
+      contents: <div>コンテンツ２</div>
+    },
+    {
+      title: 'えりちゃん',
+      contents: <div>コンテンツ３</div>
+    },
+    {
+      title: 'しなしな',
+      contents: <div>コンテンツ４</div>
+    },
+  ]
+
+
+
+  const [selectedGroup, setSelectedGroup]: Signal<{ key: string, value: string }> = createSignal({ key: '', value: '' })
+  const [searchText, setSearchText]: Signal<string> = createSignal('')
   createEffect(() => {
-    console.log(`SelectedCharacterGroup: [${selectedGroup()}]`)
     if (selectedGroup().key === 'AllItem') {
       setViewCharacterList(characterList)
     } else {
@@ -240,7 +237,6 @@ const SceneMedia: Component<SceneMediaType> = (props: SceneMediaType) => {
   })
 
   const handleSearchSubmit = () => {
-    console.log(`SubmitSearch: [${searchText()}]`)
   }
 
   const characterPage = (
@@ -249,9 +245,9 @@ const SceneMedia: Component<SceneMediaType> = (props: SceneMediaType) => {
         <span>{'グループ： '}</span>
 
         <SelectItemList
-            itemList={itemList}
-            setSelectedItem={setSelectedGroup}
-            width={'10rem'} />
+          itemList={itemList}
+          setSelectedItem={setSelectedGroup}
+          width={'10rem'} />
 
         <SearchBox
           setText={setSearchText}

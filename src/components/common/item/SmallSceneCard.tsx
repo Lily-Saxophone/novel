@@ -1,21 +1,31 @@
-import { Component, createEffect, createRenderEffect, createSignal, For, JSX, JSXElement, onMount, ParentProps, Setter, Signal } from 'solid-js';
+import { Component, createEffect, createRenderEffect, createSignal, For, JSX, JSXElement, onMount, ParentProps, Setter, Show, Signal } from 'solid-js';
 import { css } from "solid-styled-components";
 
 const SmallSceneCardClass = (props: { backGroundColor: string, width: string, height: string }) => css`
   background-color: ${props.backGroundColor};
-  min-width: ${props.width};
-  max-width: ${props.width};
-  min-height: ${props.height};
-  max-height: ${props.height};
-  display: flex;
-  justify-content: space-around;
+  width: fit-content;
+  height: fit-content;
   padding: 7px;
   border-radius: 5px;
 
+  .scenarioTitle {
+    border-bottom: solid 1px #cccccc;
+    margin-bottom: 5px;
+  }
+
+  .flexContainer {
+    min-width: calc(${props.width} - 14px);
+    max-width: calc(${props.width} - 14px);
+    min-height: calc(${props.height} - 14px);
+    max-height: calc(${props.height} - 14px);
+    display: flex;
+    justify-content: space-around;
+  }
+
   .scene_thumbnail {
-    width: 35%;
-    min-width: 35%;
-    height: 100%;
+    width: calc(35% - 14px);
+    min-width: calc(35% - 14px);
+    height: calc(100% - 14px);
 
     img {
       width: 100%;
@@ -67,12 +77,20 @@ export type SmallSceneCardType = ParentProps & {
 const SmallSceneCard: Component<SmallSceneCardType> = (props: SmallSceneCardType) => {
   return (
     <div class={SmallSceneCardClass({ ...props })} onClick={props?.onClick}>
-      <div class='scene_thumbnail'>
-        <img src={props.sceneImage} alt="" />
-      </div>
-      <div class='scene_description'>
-        <div class='scene_title'>{props.sceneTitle}</div>
-        <div class='scene_detail'>{props.sceneDetail}</div>
+      <Show when={props?.scenarioTitle !== undefined && props?.scenarioTitle !== ""} fallback={<></>}>
+        <div class='scenarioTitle'>
+          {props?.scenarioTitle}
+        </div>
+      </Show>
+
+      <div class='flexContainer'>
+        <div class='scene_thumbnail'>
+          <img src={props.sceneImage} alt="" />
+        </div>
+        <div class='scene_description'>
+          <div class='scene_title'>{props.sceneTitle}</div>
+          <div class='scene_detail'>{props.sceneDetail}</div>
+        </div>
       </div>
     </div>
   );
