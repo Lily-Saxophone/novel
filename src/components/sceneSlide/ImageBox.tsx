@@ -5,10 +5,10 @@ import LeftSideBarPage from '../common/sideBarPage/LeftSideBarPage';
 const ImageBoxClass = (props: { width: number, height: number }) => css`
   position: relative;
   overflow: hidden;
-  min-width: calc(${props.width}rem / 2.2);
-  min-height: calc(${props.height}rem / 2.2);
-  max-width: calc(${props.width}rem / 2.2);
-  max-height: calc(${props.height}rem / 2.2);
+  min-width: calc(${props.width + "rem"} / 2.2);
+  min-height: calc(${props.height + "rem"} / 2.2);
+  max-width: calc(${props.width + "rem"} / 2.2);
+  max-height: calc(${props.height + "rem"} / 2.2);
   border-radius: 5px;
   border: solid 1px #cccccc;
   transition-duration: 0.3s;
@@ -63,7 +63,7 @@ const ImageBox: Component<ImageBoxType> = (props: ImageBoxType) => {
   const plusButton = (
     <div class={ImageBoxClass({ width: width, height: height })}>
       <Show when={!props.defaultView}
-            fallback={<></>}>
+        fallback={<></>}>
         <img class={PlusButtonClass} src='/src/assets/image/PlusButton_outline.svg' />
       </Show>
     </div>
@@ -74,7 +74,7 @@ const ImageBox: Component<ImageBoxType> = (props: ImageBoxType) => {
     <Show
       when={props.src !== '' && 'a' !== undefined}
       // キャラクターなし
-      fallback={ plusButton }
+      fallback={plusButton}
     >
       {/* キャラクターあり */}
       <div class={ImageBoxClass({ width: width, height: height })}>

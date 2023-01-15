@@ -22,119 +22,109 @@ const story: Story = storyJson as Story
 
 // シナリオ（第X章）
 let scenario = story.story[0].scenario;
-
 let idx: number = 0;
 
-// シーン
-const [scene, setScene]: Signal<Scene> = createSignal(scenario[0]);
+const SceneX: Component = () => {
+  // シーン
+  const [scene, setScene]: Signal<Scene> = createSignal(scenario[0]);
 
-// １コマ
-const [slide, setSlide]: Signal<SlideModel | ChoicesEvent | EndEvent> = createSignal(scene().slide[0]);
+  // １コマ
+  const [slide, setSlide]: Signal<SlideModel | ChoicesEvent | EndEvent> = createSignal(scene().slide[0]);
 
-const [slideIndex, setSlideIndex]: Signal<number> = createSignal(0)
+  const [slideIndex, setSlideIndex]: Signal<number> = createSignal(0)
 
-const handleSlideIndexChange = (index?: number) => {
-  if (index !== undefined) {
-    setSlideIndex(index)
-    idx = index;
-  } else {
+  const handleSlideIndexChange = (index?: number) => {
+    if (index !== undefined) {
+      setSlideIndex(index)
+      idx = index;
+    } else {
+      idx += scene().slide.length > (idx + 1) ? 1 : 0
+    }
+    setSlide(scene().slide[idx]);
+  }
+
+  const handleSetSlide = () => {
     idx += scene().slide.length > (idx + 1) ? 1 : 0
-  }
-  setSlide(scene().slide[idx]);
-}
 
-const handleSetSlide = () => {
-  idx += scene().slide.length > (idx + 1) ? 1 : 0
+    setSlide(scene().slide[idx]);
 
-  setSlide(scene().slide[idx]);
+    if (SlideUtil.isEndEvent(slide())) {
+      nextScenario((slide() as EndEvent).nextScenarioKey, (slide() as EndEvent).nextSceneKey);
+    }
 
-  // console.log(!SlideUtil.isChoicesEvent(slide()))
-  // console.log(!_.isEmpty((slide() as ChoicesEvent).choicesList))
-  // if (!SlideUtil.isChoicesEvent(slide())) {
-  //   if (!_.isEmpty((slide() as ChoicesEvent).choicesList)) {
-  //     setSlide({ choicesList: [] });
-  //     setSlide(slide().slide[idx]);
-  //   }
-  // }
-
-  if (SlideUtil.isEndEvent(slide())) {
-    nextScenario((slide() as EndEvent).nextScenarioKey, (slide() as EndEvent).nextSceneKey);
+    handleSlideIndexChange(idx)
   }
 
-  handleSlideIndexChange(idx)
-}
-
-// 選択肢クリック時イベント（選択肢のキーから該当のシナリオ・シーンへ遷移）
-const handleChoicesClick = (event: any) => {
-  setSlide({ choicesList: [] });
-  nextScenario((event.currentTarget as HTMLDivElement).dataset.scenario, (event.currentTarget as HTMLDivElement).dataset.scene);
-}
-
-// keyからシーン取得
-const getScene = (sceneKey: string | undefined): Scene | undefined => {
-  if (sceneKey !== "") {
-    return scenario.find((element: { sceneKey: string | undefined }) => element.sceneKey === sceneKey);
-  } else {
-    return scenario[0];
+  // 選択肢クリック時イベント（選択肢のキーから該当のシナリオ・シーンへ遷移）
+  const handleChoicesClick = (event: any) => {
+    setSlide({ choicesList: [] });
+    nextScenario((event.currentTarget as HTMLDivElement).dataset.scenario, (event.currentTarget as HTMLDivElement).dataset.scene);
   }
-}
 
-// 次のシナリオへ遷移
-const nextScenario = (scenarioKey: string | undefined, sceneKey: string | undefined) => {
-  let wkScenario: Scene[] | undefined = story.story.find(element => element.scenarioKey === scenarioKey)?.scenario;
-  if (wkScenario !== undefined) {
-    scenario = wkScenario;
-
-    let wkScene = getScene(sceneKey);
-    if (wkScene !== undefined) {
-      idx = 0;
-      setScene(wkScene);
-      setSlide(scene().slide[idx]);
+  // keyからシーン取得
+  const getScene = (sceneKey: string | undefined): Scene | undefined => {
+    if (sceneKey !== "") {
+      return scenario.find((element: { sceneKey: string | undefined }) => element.sceneKey === sceneKey);
+    } else {
+      return scenario[0];
     }
   }
-}
 
-// Detail用イベントハンドラー
-const DetailChange = (item: SlideModel) => {
-  setSlide({ ...item })
-}
+  // 次のシナリオへ遷移
+  const nextScenario = (scenarioKey: string | undefined, sceneKey: string | undefined) => {
+    let wkScenario: Scene[] | undefined = story.story.find(element => element.scenarioKey === scenarioKey)?.scenario;
+    if (wkScenario !== undefined) {
+      scenario = wkScenario;
 
-const [data, setData]: Signal<PalletType[]> = createSignal([
-  {
-    headerContent: { title: 'Scenario' },
-    content: <SceneScenario />,
-    width: "calc(22.5vw - 10px)",
-    height: "calc(46.5vh - 10px - 13px)"
-  },
-  {
-    content: <SlideRenderer slide={slide()} onSlideClick={handleSetSlide} onChoicesClick={handleChoicesClick} />,
-    width: "calc(51vw - 10px)",
-    height: "calc(58vh - 10px  - 13px)"
-  },
-  {
-    headerContent: { title: 'Flow', right: <FlowHeaderRightContent /> },
-    content: <SceneFlow onSlideIndexChange={handleSlideIndexChange} selectedSlideIndex={slideIndex()} flowItems={scene()} />,
-    width: "calc(25vw - 10px)",
-    height: "calc(93vh - 13px)"
-  },
-  {
-    headerContent: { title: 'Media' },
-    content: <SceneMedia />,
-    width: "calc(22.5vw - 10px)",
-    height: "46.5vh"
-  },
-  {
-    headerContent: { title: 'Detail' },
-    content: <SceneSlide
-      slide={slide()}
-      onSlideUpdate={DetailChange}
-    />,
-    width: "calc(51vw - 10px)",
-    height: "35vh"
+      let wkScene = getScene(sceneKey);
+      if (wkScene !== undefined) {
+        idx = 0;
+        setScene(wkScene);
+        setSlide(scene().slide[idx]);
+      }
+    }
   }
-]);
 
-const SceneX: Component = () => {
+  // Detail用イベントハンドラー
+  const DetailChange = (item: SlideModel) => {
+    setSlide({ ...item })
+  }
+
+  const [data, setData]: Signal<PalletType[]> = createSignal([
+    {
+      headerContent: { title: 'Scenario' },
+      content: <SceneScenario />,
+      width: "calc(22.5vw - 10px)",
+      height: "calc(46.5vh - 10px - 13px)"
+    },
+    {
+      content: <SlideRenderer slide={slide()} onSlideClick={handleSetSlide} onChoicesClick={handleChoicesClick} />,
+      width: "calc(51vw - 10px)",
+      height: "calc(58vh - 10px  - 13px)"
+    },
+    {
+      headerContent: { title: 'Flow', right: <FlowHeaderRightContent /> },
+      content: <SceneFlow onSlideIndexChange={handleSlideIndexChange} selectedSlideIndex={slideIndex()} flowItems={scene()} />,
+      width: "calc(25vw - 10px)",
+      height: "calc(93vh - 13px)"
+    },
+    {
+      headerContent: { title: 'Media' },
+      content: <SceneMedia />,
+      width: "calc(22.5vw - 10px)",
+      height: "46.5vh"
+    },
+    {
+      headerContent: { title: 'Detail' },
+      content: <SceneSlide
+        slide={slide()}
+        onSlideUpdate={DetailChange}
+      />,
+      width: "calc(51vw - 10px)",
+      height: "35vh"
+    }
+  ]);
+
 
   return (
     <Masonry

@@ -76,60 +76,59 @@ const itemList = [
 ]
 
 
-const [viewScene, setviewScene]: Signal<{ sceneKey: string, sceneTitle: string, sceneDetail: string, sceneGroup: string }[]> = createSignal(scene)
-
-const scenes = () => {
-  const [selectedSceneKey, setSelectedSceneKey]: Signal<string> = createSignal(scene[0].sceneKey)
-
-  const handleSlideClick = (key: string) => {
-    setSelectedSceneKey(key)
-    // console.log(`SelectedSceneKey: [${key}]`)
-  }
-
-  return (
-    <div class='scenes'>
-      <For each={viewScene()} fallback={<div>No Items...</div>}>
-        {scene => (
-          <div style="max-height=65px">
-            <SmallSceneCard
-              backGroundColor={scene.sceneKey === selectedSceneKey() ? "#606060" : "none"}
-              onClick={() => handleSlideClick(scene.sceneKey)}
-              sceneImage="https://via.placeholder.com/110x65"
-              sceneTitle={scene.sceneTitle}
-              sceneDetail={scene.sceneDetail}
-              width="100%"
-              height="65px" />
-          </div>
-        )}
-      </For>
-    </div>
-  )
-}
-
-const scenarioList = [
-  {
-    title: '第1章',
-    contents: scenes()
-  },
-  {
-    title: '第2章',
-    contents: <div>コンテンツ２</div>
-  },
-  {
-    title: 'エンディング用',
-    contents: <div>コンテンツ３</div>
-  },
-  {
-    title: '日常(汎用)',
-    contents: <div>コンテンツ４</div>
-  },
-]
-
 export type SceneScenarioType = ParentProps & {
 
 }
 
 const SceneScenario: Component<SceneScenarioType> = (props: SceneScenarioType) => {
+  const [viewScene, setviewScene]: Signal<{ sceneKey: string, sceneTitle: string, sceneDetail: string, sceneGroup: string }[]> = createSignal(scene)
+
+  const scenes = () => {
+    const [selectedSceneKey, setSelectedSceneKey]: Signal<string> = createSignal(scene[0].sceneKey)
+
+    const handleSlideClick = (key: string) => {
+      setSelectedSceneKey(key)
+      // console.log(`SelectedSceneKey: [${key}]`)
+    }
+
+    return (
+      <div class='scenes'>
+        <For each={viewScene()} fallback={<div>No Items...</div>}>
+          {scene => (
+            <div style="max-height=65px">
+              <SmallSceneCard
+                backGroundColor={scene.sceneKey === selectedSceneKey() ? "#606060" : "none"}
+                onClick={() => handleSlideClick(scene.sceneKey)}
+                sceneImage="https://via.placeholder.com/110x65"
+                sceneTitle={scene.sceneTitle}
+                sceneDetail={scene.sceneDetail}
+                width="100%"
+                height="65px" />
+            </div>
+          )}
+        </For>
+      </div>
+    )
+  }
+
+  const scenarioList = [
+    {
+      title: '第1章',
+      contents: scenes()
+    },
+    {
+      title: '第2章',
+      contents: <div>コンテンツ２</div>
+    },
+    {
+      title: 'エンディング用',
+      contents: <div>コンテンツ３</div>
+    },
+    {
+      title: '日常(汎用)',
+      contents: <div>コンテンツ４</div>
+    },
+  ]
 
   const [selectedGroup, setSelectedGroup]: Signal<{ key: string, value: string }> = createSignal({ key: '', value: '' })
   const [searchText, setSearchText]: Signal<string> = createSignal('')
