@@ -37,8 +37,7 @@ const SmallSceneCardClass = (props: { backGroundColor: string, width: string, he
 
   .scene_description {
     width: 65%;
-    height: calc(100% - 7px);
-    padding: 7px;
+    height: 100%;
     margin-left: 7px;
 
     .scene_title {

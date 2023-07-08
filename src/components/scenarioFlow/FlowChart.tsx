@@ -266,14 +266,16 @@ const FlowChart: Component<FlowChartType> = (props: FlowChartType) => {
                             fallback={
                               <img class={PlusButtonClass} src='/src/assets/image/PlusButton_outline.svg' />
                             }>
-                            <SmallSceneCard
-                              backGroundColor={(item as ChoicesCard).toSlide.scenarioTitle !== "" ? "#4f4f4f" : "#333333"}
-                              width="350px"
-                              height="80px"
-                              scenarioTitle={(item as ChoicesCard).toSlide.scenarioTitle}
-                              sceneImage={(item as ChoicesCard).toSlide.sceneImage}
-                              sceneTitle={(item as ChoicesCard).toSlide.sceneTitle}
-                              sceneDetail={(item as ChoicesCard).toSlide.sceneDetail} />
+                            <div class={ShadowClass}>
+                              <SmallSceneCard
+                                backGroundColor={(item as ChoicesCard).toSlide.scenarioTitle !== "" ? "#4f4f4f" : "#333333"}
+                                width="350px"
+                                height="80px"
+                                scenarioTitle={(item as ChoicesCard).toSlide.scenarioTitle}
+                                sceneImage={(item as ChoicesCard).toSlide.sceneImage}
+                                sceneTitle={(item as ChoicesCard).toSlide.sceneTitle}
+                                sceneDetail={(item as ChoicesCard).toSlide.sceneDetail} />
+                            </div>
                           </Show>
                         </ChartEdge>
                       </div>

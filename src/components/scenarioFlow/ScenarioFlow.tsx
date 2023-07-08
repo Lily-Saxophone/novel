@@ -50,7 +50,7 @@ const initFlowEdges: Array<FlowEdge | ChoicesCard[]> = [
       "scenarioTitle": "",
       "sceneTitle": "toタイトル",
       "sceneDetail": "ここに説明文を記載しますきむらきむらきむらきむらきむらきむらきむらきむらきむらきむら",
-      "sceneImage": "https://via.placeholder.com/110x65",
+      "sceneImage": "/src/assets/project/image/background/背景（和）.jpg",
     },
     "fromSlide": [
       {
@@ -58,7 +58,7 @@ const initFlowEdges: Array<FlowEdge | ChoicesCard[]> = [
         "scenarioTitle": "第1章",
         "sceneTitle": "fromタイトル",
         "sceneDetail": "ここに説明文を記載しますきむらきむらきむらきむらきむらきむらきむらきむらきむらきむら",
-        "sceneImage": "https://via.placeholder.com/110x65",
+        "sceneImage": "/src/assets/project/image/background/背景（和）.jpg",
       },
     ]
   },
@@ -68,7 +68,7 @@ const initFlowEdges: Array<FlowEdge | ChoicesCard[]> = [
       "scenarioTitle": "",
       "sceneTitle": "toタイトル",
       "sceneDetail": "ここに説明文を記載しますきむらきむらきむらきむらきむらきむらきむらきむらきむらきむら",
-      "sceneImage": "https://via.placeholder.com/110x65",
+      "sceneImage": "/src/assets/project/image/background/背景（和）.jpg",
     },
     "fromSlide": [
       {
@@ -76,14 +76,14 @@ const initFlowEdges: Array<FlowEdge | ChoicesCard[]> = [
         "scenarioTitle": "第1章",
         "sceneTitle": "fromタイトル",
         "sceneDetail": "ここに説明文を記載しますきむらきむらきむらきむらきむらきむらきむらきむらきむらきむら",
-        "sceneImage": "https://via.placeholder.com/110x65",
+        "sceneImage": "/src/assets/project/image/background/背景（和）.jpg",
       },
       {
         "id": 4,
         "scenarioTitle": "第1章",
         "sceneTitle": "fromタイトル",
         "sceneDetail": "ここに説明文を記載しますきむらきむらきむらきむらきむらきむらきむらきむらきむらきむら",
-        "sceneImage": "https://via.placeholder.com/110x65",
+        "sceneImage": "/src/assets/project/image/background/背景（和）.jpg",
       },
     ]
   },
@@ -93,7 +93,7 @@ const initFlowEdges: Array<FlowEdge | ChoicesCard[]> = [
       "scenarioTitle": "",
       "sceneTitle": "toタイトル",
       "sceneDetail": "ここに説明文を記載しますきむらきむらきむらきむらきむらきむらきむらきむらきむらきむら",
-      "sceneImage": "https://via.placeholder.com/110x65",
+      "sceneImage": "/src/assets/project/image/background/背景（和）.jpg",
     },
     "fromSlide": []
   },
@@ -106,7 +106,7 @@ const initFlowEdges: Array<FlowEdge | ChoicesCard[]> = [
         "scenarioTitle": "",
         "sceneTitle": "toタイトル",
         "sceneDetail": "ここに説明文を記載しますきむらきむらきむらきむらきむらきむらきむらきむらきむらきむら",
-        "sceneImage": "https://via.placeholder.com/110x65",
+        "sceneImage": "/src/assets/project/image/background/背景（和）.jpg",
       },
     },
     {
@@ -117,7 +117,7 @@ const initFlowEdges: Array<FlowEdge | ChoicesCard[]> = [
         "scenarioTitle": "第1章",
         "sceneTitle": "fromタイトル",
         "sceneDetail": "ここに説明文を記載しますきむらきむらきむらきむらきむらきむらきむらきむらきむらきむら",
-        "sceneImage": "https://via.placeholder.com/110x65",
+        "sceneImage": "/src/assets/project/image/background/背景（和）.jpg",
       },
     },
     {
